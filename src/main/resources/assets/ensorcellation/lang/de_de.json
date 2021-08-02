@@ -1,0 +1,112 @@
+{
+  "enchantment.ensorcellation.air_affinity": "Luftaffin",
+  "enchantment.ensorcellation.air_affinity.desc": "Entfernt die Abbaugeschwindigkeitsverlangsamung wenn man nicht auf dem Boden steht.",
+
+  "enchantment.ensorcellation.angler": "Anglerkopfgeld",
+  "enchantment.ensorcellation.angler.desc": "Gibt eine Chance, extra Gegenstände beim Fischen zu erhalten.",
+
+  "enchantment.ensorcellation.bulwark": "Bollwerk",
+  "enchantment.ensorcellation.bulwark.desc": "Verhindert dass der Träger Rückstoß erhält und kann die Waffe des Gegners nutzlos machen",
+
+  "enchantment.ensorcellation.cavalier": "Cavalier",
+  "enchantment.ensorcellation.cavalier.desc": "Erhöht Schaden wenn ein Lebewesen geritten wird.",
+
+  "enchantment.ensorcellation.curse_fool": "Fluch der Torheit",
+  "enchantment.ensorcellation.curse_fool.desc": "Verhindert das Sammeln von Erfahrung bei Verwendung dieses Gegenstands.",
+
+  "enchantment.ensorcellation.curse_mercy": "Fluch der Gnade",
+  "enchantment.ensorcellation.curse_mercy.desc": "Verhindert einen Tödlichen Schlag mit dieser Waffe.",
+
+  "enchantment.ensorcellation.damage_ender": "Ender Disruption",
+  "enchantment.ensorcellation.damage_ender.desc": "Erhöht Schaden gegen Ender-Monster und hemmt Teleportation.",
+
+  "enchantment.ensorcellation.damage_illager": "Vigilante",
+  "enchantment.ensorcellation.damage_illager.desc": "Erhöht Schaden gegen Plünderer.",
+
+  "enchantment.ensorcellation.damage_villager": "Bandit",
+  "enchantment.ensorcellation.damage_villager.desc": "Erhöht Schaden gegen Dorfbewohner.",
+
+  "enchantment.ensorcellation.displacement": "Verdrängung",
+  "enchantment.ensorcellation.displacement.desc": "Teleportiert angreifer Zufällig weg.",
+
+  "enchantment.ensorcellation.excavating": "Ausgrabung",
+  "enchantment.ensorcellation.excavating.desc": "Baut zusätzliche Blöcke in der Nähe ab.",
+
+  "enchantment.ensorcellation.exp_boost": "Einsicht",
+  "enchantment.ensorcellation.exp_boost.desc": "Erhöht das Sammeln von Erfahrung bei Verwendung dieses Gegenstands",
+
+  "enchantment.ensorcellation.fire_rebuke": "Flammender Tadel ",
+  "enchantment.ensorcellation.fire_rebuke.desc": "Zündet Attakierende und stößt sie zurück.",
+
+  "enchantment.ensorcellation.frost_aspect": "Frostaspekt",
+  "enchantment.ensorcellation.frost_aspect.desc": "Verlangsamt und Schwächt das Ziel.",
+
+  "enchantment.ensorcellation.frost_rebuke": "Eisiger Tadel",
+  "enchantment.ensorcellation.frost_rebuke.desc": "Verlangsamt und Schwächt Attakierende und stößt sie zurück.",
+
+  "enchantment.ensorcellation.frost_walker": "Eisläufer",
+  "enchantment.ensorcellation.frost_walker.desc": "Friert die Oberfläche von Wasser und Lava, wodurch einfacher Übergang ermöglicht wird",
+
+  "enchantment.ensorcellation.furrowing": "Furchen",
+  "enchantment.ensorcellation.furrowing.desc": "Pflügt zusätzliche Blöcke einer Reihe entlang.",
+
+  "enchantment.ensorcellation.gourmand": "Vielfraß",
+  "enchantment.ensorcellation.gourmand.desc": "Essen ist nahrhafter und befriedigender.",
+
+  "enchantment.ensorcellation.hunter": "Jägerkopfgeld",
+  "enchantment.ensorcellation.hunter.desc": "Tiere haben eine Chance, mehr Gegenstände fallen zu lassen.",
+
+  "enchantment.ensorcellation.instigating": "Anstiftung",
+  "enchantment.ensorcellation.instigating.desc": "Erhöhter Schaden wenn das Ziel maximale Gesundheit hat.",
+
+  "enchantment.ensorcellation.leech": "Blutegel",
+  "enchantment.ensorcellation.leech.desc": "Heilt dich wenn ein Monster getötet wird.",
+
+  "enchantment.ensorcellation.magic_edge": "Magischer Schnitt",
+  "enchantment.ensorcellation.magic_edge.desc": "Erhöht den Schaden leicht und wandelt diesen in Magie um.",
+
+  "enchantment.ensorcellation.magic_protection": "Magischer Schutz",
+  "enchantment.ensorcellation.magic_protection.desc": "Verringert Schaden durch Magie.",
+
+  "enchantment.ensorcellation.phalanx": "Phalanx",
+  "enchantment.ensorcellation.phalanx.desc": "Erlaubt es dem Träger, schneller zu laufen wenn ein Schild ausgerüstet ist.",
+
+  "enchantment.ensorcellation.pilfering": "Diebstahl",
+  "enchantment.ensorcellation.pilfering.desc": "Stiehlt möglicherweise ein Rüstungsteil von Angehakten Zielen.",
+
+  "enchantment.ensorcellation.preservation": "Erhaltung",
+  "enchantment.ensorcellation.preservation.desc": "Entfernt die Steigenden Xp-Kosten beim Reparieren.",
+
+  "enchantment.ensorcellation.quick_draw": "Schnellzug",
+  "enchantment.ensorcellation.quick_draw.desc": "Senkt die Zeit die benötigt wird, um einen Bogen vollständig zu spannen.",
+
+  "enchantment.ensorcellation.reach": "Reichweite",
+  "enchantment.ensorcellation.reach.desc": "Erhöht die Entfernung, in welcher der Träger mit Blöcken interagieren kann.",
+
+  "enchantment.ensorcellation.smashing": "Zerschlagen",
+  "enchantment.ensorcellation.smashing.desc": "Abgebaute Erze werden in kleine Teile Zerschlagen, was die Ausbeute erhöht.",
+
+  "enchantment.ensorcellation.smelting": "Schmelze",
+  "enchantment.ensorcellation.smelting.desc": "Abgebaute Blöcke werden wie in einem Ofen geschmolzen.",
+
+  "enchantment.ensorcellation.soulbound": "Seelengebunden",
+  "enchantment.ensorcellation.soulbound.desc": "Der Gegenstand bleibt nach vorzeitigem Ableben beim Träger.",
+
+  "enchantment.ensorcellation.tilling": "Pflügen",
+  "enchantment.ensorcellation.tilling.desc": "Pflügt zusätzliche Blöcke in einem Radius.",
+
+  "enchantment.ensorcellation.trueshot": "Wahrheitsschuss",
+  "enchantment.ensorcellation.trueshot.desc": "Erhöht die Genauigkeit und Geschwindigkeit von Pfeilen, und erlaubt es ihnen, Rüstung zu durchdringen.",
+
+  "enchantment.ensorcellation.vitality": "Vitalität",
+  "enchantment.ensorcellation.vitality.desc": "Erhöht die Maximale Gesundheit des Trägers.",
+
+  "enchantment.ensorcellation.volley": "Volley",
+  "enchantment.ensorcellation.volley.desc": "Drei Pfeile werden in Bogenform geschossen, wobei nur einer Verbraucht wird.",
+
+  "enchantment.ensorcellation.vorpal": "Vorpal",
+  "enchantment.ensorcellation.vorpal.desc": "Macht zufällig mächtige Attacken und Enthauptungen.",
+
+  "enchantment.ensorcellation.weeding": "Jäten",
+  "enchantment.ensorcellation.weeding.desc": "Entfernt Pflanzen und Pflügt Blöcke."
+}

@@ -1,0 +1,112 @@
+{
+  "enchantment.ensorcellation.air_affinity": "공기 친화적",
+  "enchantment.ensorcellation.air_affinity.desc": "발이 땅에서 떨어져 있을 때 생기는 채굴 속도 감소가 없어집니다.",
+
+  "enchantment.ensorcellation.angler": "통 큰 낚시꾼",
+  "enchantment.ensorcellation.angler.desc": "낚시 시 아이템을 추가로 낚을 확률이 올라갑니다.",
+
+  "enchantment.ensorcellation.bulwark": "방벽",
+  "enchantment.ensorcellation.bulwark.desc": "방패를 들 시 밀쳐지는 것을 막아주고 공격자의 무기가 불능이 됩니다.",
+
+  "enchantment.ensorcellation.cavalier": "무신경함",
+  "enchantment.ensorcellation.cavalier.desc": "무언가에 타고 있을 때 더 큰 피해를 입힙니다.",
+
+  "enchantment.ensorcellation.curse_fool": "무식 저주",
+  "enchantment.ensorcellation.curse_fool.desc": "아이템을 사용할 시 경험치를 얻을 수 없습니다.",
+
+  "enchantment.ensorcellation.curse_mercy": "자비 저주",
+  "enchantment.ensorcellation.curse_mercy.desc": "상대가 죽을 수 있는 공격은 무효화됩니다.",
+
+  "enchantment.ensorcellation.damage_ender": "엔더 붕괴",
+  "enchantment.ensorcellation.damage_ender.desc": "엔드 몹에게 더 큰 피해를 입히고 순간이동할 수 없게 만듭니다.",
+
+  "enchantment.ensorcellation.damage_illager": "자경단",
+  "enchantment.ensorcellation.damage_illager.desc": "우민에게 더 큰 피해를 입힙니다.",
+
+  "enchantment.ensorcellation.damage_villager": "무법자",
+  "enchantment.ensorcellation.damage_villager.desc": "주민에게 더 큰 피해를 입힙니다.",
+
+  "enchantment.ensorcellation.displacement": "내쫓기",
+  "enchantment.ensorcellation.displacement.desc": "공격자가 무작위로 순간이동합니다.",
+
+  "enchantment.ensorcellation.excavating": "채굴",
+  "enchantment.ensorcellation.excavating.desc": "일정 범위내의 블록을 추가로 캡니다.",
+
+  "enchantment.ensorcellation.exp_boost": "통찰력",
+  "enchantment.ensorcellation.exp_boost.desc": "아이템을 사용할 때 얻는 경험치의 양이 늘어납니다.",
+
+  "enchantment.ensorcellation.fire_rebuke": "불같은 꾸짖음",
+  "enchantment.ensorcellation.fire_rebuke.desc": "공격자에게 불을 붙이고 밀쳐냅니다.",
+
+  "enchantment.ensorcellation.frost_aspect": "냉동",
+  "enchantment.ensorcellation.frost_aspect.desc": "목표물을 느리고 약하게 만듭니다.",
+
+  "enchantment.ensorcellation.frost_rebuke": "차가운 꾸짖음",
+  "enchantment.ensorcellation.frost_rebuke.desc": "공격자를 느리고 약하게 만들고 밀쳐냅니다.",
+
+  "enchantment.ensorcellation.frost_walker": "차가운 걸음",
+  "enchantment.ensorcellation.frost_walker.desc": "물과 용암의 표면을 얼려 지나다닐 수 있게 합니다.",
+
+  "enchantment.ensorcellation.furrowing": "밭고랑",
+  "enchantment.ensorcellation.furrowing.desc": "일직선상의 블록을 추가로 갑니다.",
+
+  "enchantment.ensorcellation.gourmand": "대식가",
+  "enchantment.ensorcellation.gourmand.desc": "음식을 먹었을 때 더 많은 영양소와 만족감을 얻습니다.",
+
+  "enchantment.ensorcellation.hunter": "통 큰 사냥꾼",
+  "enchantment.ensorcellation.hunter.desc": "죽인 동물이 전리품을 추가로 떨굴 확률이 올라갑니다.",
+
+  "enchantment.ensorcellation.instigating": "부추김",
+  "enchantment.ensorcellation.instigating.desc": "목표물의 체력이 가득 차 있을 시 추가 피해를 입힙니다.",
+
+  "enchantment.ensorcellation.leech": "거머리",
+  "enchantment.ensorcellation.leech.desc": "몹을 죽이면 체력을 회복합니다.",
+
+  "enchantment.ensorcellation.magic_edge": "마법 날",
+  "enchantment.ensorcellation.magic_edge.desc": "약간의 마법 피해가 더해집니다.",
+
+  "enchantment.ensorcellation.magic_protection": "마법으로부터 보호",
+  "enchantment.ensorcellation.magic_protection.desc": "마법에 의한 피해가 줄어듭니다.",
+
+  "enchantment.ensorcellation.phalanx": "보병술",
+  "enchantment.ensorcellation.phalanx.desc": "방패를 든 채로 더 빨리 움직일 수 있습니다.",
+
+  "enchantment.ensorcellation.pilfering": "좀도둑",
+  "enchantment.ensorcellation.pilfering.desc": "낚시찌에 걸린 목표물의 갑옷을 훔쳐옵니다.",
+
+  "enchantment.ensorcellation.preservation": "보존",
+  "enchantment.ensorcellation.preservation.desc": "아이템을 수리할 때 드는 마법 부여 비용이 늘어나지 않습니다.",
+
+  "enchantment.ensorcellation.quick_draw": "빠른 조준",
+  "enchantment.ensorcellation.quick_draw.desc": "활시위를 당기는 데 드는 시간이 줄어듭니다.",
+
+  "enchantment.ensorcellation.reach": "거리",
+  "enchantment.ensorcellation.reach.desc": "블록과 상호작용할 수 있는 거리가 늘어납니다.",
+
+  "enchantment.ensorcellation.smashing": "분쇄",
+  "enchantment.ensorcellation.smashing.desc": "원석을 부술 시 조각이 되어 나옵니다. 광물의 총 산출량은 늘어납니다.",
+
+  "enchantment.ensorcellation.smelting": "제련",
+  "enchantment.ensorcellation.smelting.desc": "불록을 부술 시 화로에 구운 상태로 나옵니다.",
+
+  "enchantment.ensorcellation.soulbound": "영혼 귀속",
+  "enchantment.ensorcellation.soulbound.desc": "아이템이 소유자가 죽어도 떨궈지지 않습니다.",
+
+  "enchantment.ensorcellation.tilling": "경작",
+  "enchantment.ensorcellation.tilling.desc": "일정 범위 내의 블록을 추가로 갑니다.",
+
+  "enchantment.ensorcellation.trueshot": "정조준",
+  "enchantment.ensorcellation.trueshot.desc": "화살의 정확도와 속도가 늘어나고 목표물을 관통합니다.",
+
+  "enchantment.ensorcellation.vitality": "활력",
+  "enchantment.ensorcellation.vitality.desc": "착용자의 최대 체력이 늘어납니다.",
+
+  "enchantment.ensorcellation.volley": "일제 사격",
+  "enchantment.ensorcellation.volley.desc": "한 번에 화살 3개가 나갑니다. 오직 1개의 화살만이 소비됩니다.",
+
+  "enchantment.ensorcellation.vorpal": "참수형",
+  "enchantment.ensorcellation.vorpal.desc": "무작위로 강력한 공격을 가하고 머리를 자릅니다.",
+
+  "enchantment.ensorcellation.weeding": "잡초 뽑기",
+  "enchantment.ensorcellation.weeding.desc": "블록을 갈며 식물을 뽑습니다."
+}
