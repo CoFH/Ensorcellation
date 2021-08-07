@@ -313,19 +313,19 @@ public class EnsorcConfig {
                 .defineInRange("Max Level", 3, 1, MAX_ENCHANT_LEVEL);
         critBaseVorpal = SERVER_CONFIG
                 .comment("Adjust this value to set the base critical hit chance of the Enchantment (in percentage).")
-                .defineInRange("Base Critical Chance", 5, 1, 100);
+                .defineInRange("Base Critical Chance", 5, 0, 100);
         critLevelVorpal = SERVER_CONFIG
                 .comment("Adjust this value to set the additional critical hit chance per level of the Enchantment (in percentage).")
-                .defineInRange("Critical Chance / Level", 5, 1, 100);
+                .defineInRange("Critical Chance / Level", 5, 0, 100);
         critDamageVorpal = SERVER_CONFIG
                 .comment("Adjust this value to set the critical hit damage multiplier.")
-                .defineInRange("Critical Damage Multiplier", 5, 2, 1000);
+                .defineInRange("Critical Damage Multiplier", 5, 0, 1000);
         headBaseVorpal = SERVER_CONFIG
-                .comment("Adjust this value to set the base critical hit chance for the Enchantment (in percentage).")
-                .defineInRange("Base Head Drop Chance", 10, 1, 100);
+                .comment("Adjust this value to set the base head drop chance for the Enchantment (in percentage).")
+                .defineInRange("Base Head Drop Chance", 10, 0, 100);
         headLevelVorpal = SERVER_CONFIG
-                .comment("Adjust this value to set the critical hit chance per level of the Enchantment (in percentage).")
-                .defineInRange("Head Drop Chance / Level", 10, 1, 100);
+                .comment("Adjust this value to set the head drop chance per level of the Enchantment (in percentage).")
+                .defineInRange("Head Drop Chance / Level", 10, 0, 100);
         SERVER_CONFIG.pop();
 
         // TOOLS
