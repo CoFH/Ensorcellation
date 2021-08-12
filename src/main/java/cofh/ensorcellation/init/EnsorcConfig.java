@@ -183,7 +183,7 @@ public class EnsorcConfig {
                 .define("Enable", true);
         treasureReach = SERVER_CONFIG
                 .comment(treasure)
-                .define("Treasure", false);
+                .define("Treasure", true);
         levelReach = SERVER_CONFIG
                 .comment(level)
                 .defineInRange("Max Level", 3, 1, MAX_ENCHANT_LEVEL);
@@ -195,12 +195,12 @@ public class EnsorcConfig {
                 .define("Enable", true);
         treasureVitality = SERVER_CONFIG
                 .comment(treasure)
-                .define("Treasure", false);
+                .define("Treasure", true);
         levelVitality = SERVER_CONFIG
                 .comment(level)
                 .defineInRange("Max Level", 3, 1, MAX_ENCHANT_LEVEL);
         healthLevelVitality = SERVER_CONFIG
-                .comment("Adjust this value to set the health granted level of the Enchantment. (There are 2 health per heart icon.)")
+                .comment("Adjust this value to set the health granted per level of the Enchantment. (There are 2 health per heart icon.)")
                 .defineInRange("Health / Level", 4, 1, 10);
         SERVER_CONFIG.pop();
 
@@ -232,7 +232,7 @@ public class EnsorcConfig {
         SERVER_CONFIG.push("Outlaw");
         enableDamageVillager = SERVER_CONFIG
                 .comment("If TRUE, the Outlaw Enchantment is available for various Weapons.")
-                .define("Enable", true);
+                .define("Enable", false);
         treasureDamageVillager = SERVER_CONFIG
                 .comment(treasure)
                 .define("Treasure", false);
