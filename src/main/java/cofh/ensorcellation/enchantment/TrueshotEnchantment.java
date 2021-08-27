@@ -18,7 +18,7 @@ public class TrueshotEnchantment extends EnchantmentCoFH {
     }
 
     @Override
-    public int getMinEnchantability(int level) {
+    public int getMinCost(int level) {
 
         return 15 + (level - 1) * 10;
     }
@@ -26,7 +26,7 @@ public class TrueshotEnchantment extends EnchantmentCoFH {
     @Override
     protected int maxDelegate(int level) {
 
-        return getMinEnchantability(level) + 50;
+        return getMinCost(level) + 50;
     }
 
     @Override
@@ -36,9 +36,9 @@ public class TrueshotEnchantment extends EnchantmentCoFH {
     }
 
     @Override
-    public boolean canApplyTogether(Enchantment ench) {
+    public boolean checkCompatibility(Enchantment ench) {
 
-        return super.canApplyTogether(ench) && ench != VOLLEY;
+        return super.checkCompatibility(ench) && ench != VOLLEY;
     }
 
 }

@@ -835,17 +835,17 @@ public class EnsorcConfig {
     private static void refreshOverrideConfig() {
 
         // These should not cast incorrectly, but who knows in a multi-mod setup. ¯\_(ツ)_/¯
-        if (PROTECTION instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) PROTECTION).setEnable(enableProtection.get());
-            ((EnchantmentCoFH) PROTECTION).setMaxLevel(levelProtection.get());
+        if (ALL_DAMAGE_PROTECTION instanceof EnchantmentCoFH) {
+            ((EnchantmentCoFH) ALL_DAMAGE_PROTECTION).setEnable(enableProtection.get());
+            ((EnchantmentCoFH) ALL_DAMAGE_PROTECTION).setMaxLevel(levelProtection.get());
         }
         if (BLAST_PROTECTION instanceof EnchantmentCoFH) {
             ((EnchantmentCoFH) BLAST_PROTECTION).setEnable(enableProtectionBlast.get());
             ((EnchantmentCoFH) BLAST_PROTECTION).setMaxLevel(levelProtectionBlast.get());
         }
-        if (FEATHER_FALLING instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) FEATHER_FALLING).setEnable(enableProtectionFall.get());
-            ((EnchantmentCoFH) FEATHER_FALLING).setMaxLevel(levelProtectionFall.get());
+        if (FALL_PROTECTION instanceof EnchantmentCoFH) {
+            ((EnchantmentCoFH) FALL_PROTECTION).setEnable(enableProtectionFall.get());
+            ((EnchantmentCoFH) FALL_PROTECTION).setMaxLevel(levelProtectionFall.get());
         }
         if (FIRE_PROTECTION instanceof EnchantmentCoFH) {
             ((EnchantmentCoFH) FIRE_PROTECTION).setEnable(enableProtectionFire.get());
@@ -869,9 +869,9 @@ public class EnsorcConfig {
             ((EnchantmentCoFH) KNOCKBACK).setEnable(enableKnockback.get());
             ((EnchantmentCoFH) KNOCKBACK).setMaxLevel(levelKnockback.get());
         }
-        if (LOOTING instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) LOOTING).setEnable(enableLooting.get());
-            ((EnchantmentCoFH) LOOTING).setMaxLevel(levelLooting.get());
+        if (MOB_LOOTING instanceof EnchantmentCoFH) {
+            ((EnchantmentCoFH) MOB_LOOTING).setEnable(enableLooting.get());
+            ((EnchantmentCoFH) MOB_LOOTING).setMaxLevel(levelLooting.get());
         }
         if (THORNS instanceof EnchantmentCoFH) {
             ((EnchantmentCoFH) THORNS).setEnable(enableThorns.get());

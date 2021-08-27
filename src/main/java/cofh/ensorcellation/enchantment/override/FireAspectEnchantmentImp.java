@@ -13,15 +13,15 @@ public class FireAspectEnchantmentImp extends EnchantmentOverride {
     }
 
     @Override
-    public int getMinEnchantability(int level) {
+    public int getMinCost(int level) {
 
         return 10 + 20 * (level - 1);
     }
 
     @Override
-    public int getMaxEnchantability(int level) {
+    public int getMaxCost(int level) {
 
-        return super.getMinEnchantability(level) + 50;
+        return super.getMinCost(level) + 50;
     }
 
 }

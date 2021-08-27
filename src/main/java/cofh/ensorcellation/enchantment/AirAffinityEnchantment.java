@@ -12,7 +12,7 @@ public class AirAffinityEnchantment extends EnchantmentCoFH {
     }
 
     @Override
-    public int getMinEnchantability(int level) {
+    public int getMinCost(int level) {
 
         return 1;
     }
@@ -20,7 +20,7 @@ public class AirAffinityEnchantment extends EnchantmentCoFH {
     @Override
     protected int maxDelegate(int level) {
 
-        return getMinEnchantability(level) + 40;
+        return getMinCost(level) + 40;
     }
 
 }

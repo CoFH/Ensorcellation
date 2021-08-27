@@ -39,7 +39,7 @@ public class FireRebukeEnchantment extends EnchantmentCoFH {
     }
 
     @Override
-    public int getMinEnchantability(int level) {
+    public int getMinCost(int level) {
 
         return 5 + 15 * (level - 1);
     }
@@ -47,7 +47,7 @@ public class FireRebukeEnchantment extends EnchantmentCoFH {
     @Override
     protected int maxDelegate(int level) {
 
-        return super.getMinEnchantability(level) + 50;
+        return super.getMinCost(level) + 50;
     }
 
     @Override
@@ -58,23 +58,23 @@ public class FireRebukeEnchantment extends EnchantmentCoFH {
     }
 
     @Override
-    public boolean canApplyTogether(Enchantment ench) {
+    public boolean checkCompatibility(Enchantment ench) {
 
-        return super.canApplyTogether(ench) && ench != THORNS && ench != DISPLACEMENT && ench != FROST_REBUKE;
+        return super.checkCompatibility(ench) && ench != THORNS && ench != DISPLACEMENT && ench != FROST_REBUKE;
     }
 
     // region HELPERS
     @Override
-    public void onUserHurt(LivingEntity user, Entity attacker, int level) {
+    public void doPostHurt(LivingEntity user, Entity attacker, int level) {
 
         if (!(attacker instanceof LivingEntity)) {
             return;
         }
-        Map.Entry<EquipmentSlotType, ItemStack> stack = EnchantmentHelper.getRandomItemWithEnchantment(FIRE_REBUKE, user);
-        if (shouldHit(level, user.getRNG())) {
+        Map.Entry<EquipmentSlotType, ItemStack> stack = EnchantmentHelper.getRandomItemWith(FIRE_REBUKE, user);
+        if (shouldHit(level, user.getRandom())) {
             onHit(user, attacker, level);
             if (stack != null) {
-                (stack.getValue()).damageItem(2, user, (entity) -> entity.sendBreakAnimation(stack.getKey()));
+                (stack.getValue()).hurtAndBreak(2, user, (entity) -> entity.broadcastBreakEvent(stack.getKey()));
             }
         }
     }
@@ -85,13 +85,13 @@ public class FireRebukeEnchantment extends EnchantmentCoFH {
             return;
         }
         if (user instanceof PlayerEntity || !(attacker instanceof PlayerEntity) || mobsAffectPlayers) {
-            ((LivingEntity) attacker).applyKnockback(0.5F * level, user.getPosX() - attacker.getPosX(), user.getPosZ() - attacker.getPosZ());
+            ((LivingEntity) attacker).knockback(0.5F * level, user.getX() - attacker.getX(), user.getZ() - attacker.getZ());
         }
-        Random rand = user.getRNG();
+        Random rand = user.getRandom();
         AFFLICTED_ENTITIES.add(new Tuple<>(attacker, 1 + rand.nextInt(3 * level)));
-        if (attacker.world instanceof ServerWorld) {
+        if (attacker.level instanceof ServerWorld) {
             for (int j = 0; j < 3 * level; ++j) {
-                Utils.spawnParticles(attacker.world, ParticleTypes.FLAME, attacker.getPosX() + rand.nextDouble(), attacker.getPosY() + 1.0D + rand.nextDouble(), attacker.getPosZ() + rand.nextDouble(), 1, 0, 0, 0, 0);
+                Utils.spawnParticles(attacker.level, ParticleTypes.FLAME, attacker.getX() + rand.nextDouble(), attacker.getY() + 1.0D + rand.nextDouble(), attacker.getZ() + rand.nextDouble(), 1, 0, 0, 0, 0);
             }
         }
     }
@@ -107,7 +107,7 @@ public class FireRebukeEnchantment extends EnchantmentCoFH {
             return;
         }
         for (Tuple<Entity, Integer> entry : AFFLICTED_ENTITIES) {
-            entry.getA().setFire(entry.getB());
+            entry.getA().setSecondsOnFire(entry.getB());
         }
         AFFLICTED_ENTITIES.clear();
     }

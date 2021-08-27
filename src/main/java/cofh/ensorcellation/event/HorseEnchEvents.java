@@ -40,12 +40,12 @@ public class HorseEnchEvents {
         }
         LivingEntity entity = event.getEntityLiving();
         DamageSource source = event.getSource();
-        Entity attacker = source.getTrueSource();
+        Entity attacker = source.getEntity();
 
         if (!(entity instanceof AbstractHorseEntity)) {
             return;
         }
-        ItemStack armor = ((AbstractHorseEntity) entity).horseChest.getStackInSlot(1);
+        ItemStack armor = ((AbstractHorseEntity) entity).inventory.getItem(1);
         if (!armor.isEmpty()) {
             // FROST WALKER
             int encFrostWalker = getItemEnchantmentLevel(FROST_WALKER, armor);
@@ -63,38 +63,38 @@ public class HorseEnchEvents {
         }
         LivingEntity entity = event.getEntityLiving();
         DamageSource source = event.getSource();
-        Entity attacker = source.getTrueSource();
+        Entity attacker = source.getEntity();
 
         if (!(entity instanceof AbstractHorseEntity)) {
             return;
         }
-        ItemStack armor = ((AbstractHorseEntity) entity).horseChest.getStackInSlot(1);
+        ItemStack armor = ((AbstractHorseEntity) entity).inventory.getItem(1);
         if (!armor.isEmpty()) {
             int totalProtection = 0;
             // PROTECTION
-            int encProtection = getItemEnchantmentLevel(PROTECTION, armor);
+            int encProtection = getItemEnchantmentLevel(ALL_DAMAGE_PROTECTION, armor);
             if (encProtection > 0) {
-                totalProtection += PROTECTION.calcModifierDamage(encProtection, source);
+                totalProtection += ALL_DAMAGE_PROTECTION.getDamageProtection(encProtection, source);
             }
             // FIRE PROTECTION
             int encProtectionFire = getItemEnchantmentLevel(FIRE_PROTECTION, armor);
             if (encProtectionFire > 0) {
-                totalProtection += FIRE_PROTECTION.calcModifierDamage(encProtection, source);
+                totalProtection += FIRE_PROTECTION.getDamageProtection(encProtection, source);
             }
             // FEATHER FALLING
-            int encProtectionFall = getItemEnchantmentLevel(FEATHER_FALLING, armor);
+            int encProtectionFall = getItemEnchantmentLevel(FALL_PROTECTION, armor);
             if (encProtectionFall > 0) {
-                totalProtection += FEATHER_FALLING.calcModifierDamage(encProtection, source);
+                totalProtection += FALL_PROTECTION.getDamageProtection(encProtection, source);
             }
             // BLAST PROTECTION
             int encProtectionExplosion = getItemEnchantmentLevel(BLAST_PROTECTION, armor);
             if (encProtectionExplosion > 0) {
-                totalProtection += BLAST_PROTECTION.calcModifierDamage(encProtection, source);
+                totalProtection += BLAST_PROTECTION.getDamageProtection(encProtection, source);
             }
             // PROJECTILE PROTECTION
             int encProtectionProjectile = getItemEnchantmentLevel(PROJECTILE_PROTECTION, armor);
             if (encProtectionProjectile > 0) {
-                totalProtection += PROJECTILE_PROTECTION.calcModifierDamage(encProtection, source);
+                totalProtection += PROJECTILE_PROTECTION.getDamageProtection(encProtection, source);
             }
             float damageReduction = Math.min(totalProtection * HORSE_MODIFIER, 20.0F);
             event.setAmount(event.getAmount() * (1.0F - damageReduction / 25.0F));
@@ -102,22 +102,22 @@ public class HorseEnchEvents {
             if (attacker != null) {
                 // THORNS
                 int encThorns = getItemEnchantmentLevel(THORNS, armor);
-                if (ThornsEnchantment.shouldHit(encThorns, entity.getRNG())) {
-                    attacker.attackEntityFrom(DamageSource.causeThornsDamage(entity), ThornsEnchantment.getDamage(encThorns, MathHelper.RANDOM));
+                if (ThornsEnchantment.shouldHit(encThorns, entity.getRandom())) {
+                    attacker.hurt(DamageSource.thorns(entity), ThornsEnchantment.getDamage(encThorns, MathHelper.RANDOM));
                 }
                 // DISPLACEMENT
                 int encDisplacement = getItemEnchantmentLevel(DISPLACEMENT, armor);
-                if (DisplacementEnchantment.shouldHit(encDisplacement, entity.getRNG())) {
+                if (DisplacementEnchantment.shouldHit(encDisplacement, entity.getRandom())) {
                     DisplacementEnchantment.onHit(entity, attacker, encDisplacement);
                 }
                 // FIRE REBUKE
                 int encFireRebuke = getItemEnchantmentLevel(FIRE_REBUKE, armor);
-                if (FireRebukeEnchantment.shouldHit(encFireRebuke, entity.getRNG())) {
+                if (FireRebukeEnchantment.shouldHit(encFireRebuke, entity.getRandom())) {
                     FireRebukeEnchantment.onHit(entity, attacker, encFireRebuke);
                 }
                 // FROST REBUKE
                 int encFrostRebuke = getItemEnchantmentLevel(FROST_REBUKE, armor);
-                if (FrostRebukeEnchantment.shouldHit(encFrostRebuke, entity.getRNG())) {
+                if (FrostRebukeEnchantment.shouldHit(encFrostRebuke, entity.getRandom())) {
                     FrostRebukeEnchantment.onHit(entity, attacker, encFrostRebuke);
                 }
             }
@@ -135,13 +135,13 @@ public class HorseEnchEvents {
         if (!(entity instanceof AbstractHorseEntity)) {
             return;
         }
-        ItemStack armor = ((AbstractHorseEntity) entity).horseChest.getStackInSlot(1);
+        ItemStack armor = ((AbstractHorseEntity) entity).inventory.getItem(1);
         if (!armor.isEmpty()) {
             // FROST WALKER
             int encFrostWalker = getItemEnchantmentLevel(FROST_WALKER, armor);
             if (encFrostWalker > 0) {
-                FrostWalkerEnchantment.freezeNearby(entity, entity.world, entity.getPosition(), encFrostWalker);
-                FrostWalkerEnchantmentImp.freezeNearby(entity, entity.world, entity.getPosition(), encFrostWalker);
+                FrostWalkerEnchantment.onEntityMoved(entity, entity.level, entity.blockPosition(), encFrostWalker);
+                FrostWalkerEnchantmentImp.freezeNearby(entity, entity.level, entity.blockPosition(), encFrostWalker);
             }
         }
     }

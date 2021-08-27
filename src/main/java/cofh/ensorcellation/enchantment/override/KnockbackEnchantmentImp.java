@@ -13,7 +13,7 @@ public class KnockbackEnchantmentImp extends EnchantmentOverride {
     }
 
     @Override
-    public int getMinEnchantability(int level) {
+    public int getMinCost(int level) {
 
         return 5 + 20 * (level - 1);
     }

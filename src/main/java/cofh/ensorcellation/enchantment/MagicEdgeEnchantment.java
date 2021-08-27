@@ -20,7 +20,7 @@ public class MagicEdgeEnchantment extends DamageEnchantmentCoFH {
     }
 
     @Override
-    public int getMinEnchantability(int level) {
+    public int getMinCost(int level) {
 
         return 15 + (level - 1) * 9;
     }
@@ -28,13 +28,13 @@ public class MagicEdgeEnchantment extends DamageEnchantmentCoFH {
     @Override
     protected int maxDelegate(int level) {
 
-        return getMinEnchantability(level) + 50;
+        return getMinCost(level) + 50;
     }
 
     @Override
-    public boolean canApplyTogether(Enchantment ench) {
+    public boolean checkCompatibility(Enchantment ench) {
 
-        return super.canApplyTogether(ench) && ench != Enchantments.SWEEPING;
+        return super.checkCompatibility(ench) && ench != Enchantments.SWEEPING_EDGE;
     }
 
     // region HELPERS
@@ -45,10 +45,10 @@ public class MagicEdgeEnchantment extends DamageEnchantmentCoFH {
 
     public static void onHit(LivingEntity entity, int level) {
 
-        if (entity.world instanceof ServerWorld) {
+        if (entity.level instanceof ServerWorld) {
             for (int i = 0; i < 2 * level; ++i) {
-                Utils.spawnParticles(entity.world, ParticleTypes.ENCHANT, entity.getPosX() + entity.world.rand.nextDouble(), entity.getPosY() + 1.0D + entity.world.rand.nextDouble(), entity.getPosZ() + entity.world.rand.nextDouble(), 1, 0, 0, 0, 0);
-                Utils.spawnParticles(entity.world, ParticleTypes.ENCHANTED_HIT, entity.getPosX() + entity.world.rand.nextDouble(), entity.getPosY() + 1.0D + entity.world.rand.nextDouble(), entity.getPosZ() + entity.world.rand.nextDouble(), 1, 0, 0, 0, 0);
+                Utils.spawnParticles(entity.level, ParticleTypes.ENCHANT, entity.getX() + entity.level.random.nextDouble(), entity.getY() + 1.0D + entity.level.random.nextDouble(), entity.getZ() + entity.level.random.nextDouble(), 1, 0, 0, 0, 0);
+                Utils.spawnParticles(entity.level, ParticleTypes.ENCHANTED_HIT, entity.getX() + entity.level.random.nextDouble(), entity.getY() + 1.0D + entity.level.random.nextDouble(), entity.getZ() + entity.level.random.nextDouble(), 1, 0, 0, 0, 0);
             }
         }
     }

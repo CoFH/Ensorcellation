@@ -14,27 +14,27 @@ public class MendingEnchantmentAlt extends EnchantmentOverride {
     public MendingEnchantmentAlt() {
 
         super(Rarity.RARE, EnchantmentType.BREAKABLE, EquipmentSlotType.values());
-        name = "enchantment." + ID_ENSORCELLATION + ".preservation";
+        descriptionId = "enchantment." + ID_ENSORCELLATION + ".preservation";
         treasureEnchantment = true;
     }
 
     public EnchantmentCoFH setEnable(boolean enable) {
 
         this.enable = enable;
-        name = "enchantment." + (enable ? ID_ENSORCELLATION + ".preservation" : "minecraft.mending");
+        descriptionId = "enchantment." + (enable ? ID_ENSORCELLATION + ".preservation" : "minecraft.mending");
         return this;
     }
 
     @Override
-    public int getMinEnchantability(int level) {
+    public int getMinCost(int level) {
 
         return level * 25;
     }
 
     @Override
-    public int getMaxEnchantability(int level) {
+    public int getMaxCost(int level) {
 
-        return getMinEnchantability(level) + 50;
+        return getMinCost(level) + 50;
     }
 
 }

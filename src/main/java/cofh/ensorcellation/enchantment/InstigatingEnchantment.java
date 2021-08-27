@@ -14,7 +14,7 @@ public class InstigatingEnchantment extends DamageEnchantmentCoFH {
     }
 
     @Override
-    public int getMinEnchantability(int level) {
+    public int getMinCost(int level) {
 
         return level * 25;
     }
@@ -22,7 +22,7 @@ public class InstigatingEnchantment extends DamageEnchantmentCoFH {
     @Override
     protected int maxDelegate(int level) {
 
-        return getMinEnchantability(level) + 50;
+        return getMinCost(level) + 50;
     }
 
 }

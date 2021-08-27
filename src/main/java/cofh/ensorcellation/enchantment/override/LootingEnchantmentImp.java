@@ -17,21 +17,21 @@ public class LootingEnchantmentImp extends EnchantmentOverride {
     }
 
     @Override
-    public int getMinEnchantability(int level) {
+    public int getMinCost(int level) {
 
         return 15 + (level - 1) * 9;
     }
 
     @Override
-    public int getMaxEnchantability(int level) {
+    public int getMaxCost(int level) {
 
-        return super.getMinEnchantability(level) + 50;
+        return super.getMinCost(level) + 50;
     }
 
     @Override
-    public boolean canApplyTogether(Enchantment ench) {
+    public boolean checkCompatibility(Enchantment ench) {
 
-        return super.canApplyTogether(ench) && ench != Enchantments.SILK_TOUCH && ench != EXCAVATING;
+        return super.checkCompatibility(ench) && ench != Enchantments.SILK_TOUCH && ench != EXCAVATING;
     }
 
 }

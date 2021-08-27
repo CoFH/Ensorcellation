@@ -45,37 +45,37 @@ public class ShieldEnchEvents {
         }
         LivingEntity entity = event.getEntityLiving();
         DamageSource source = event.getSource();
-        Entity attacker = source.getTrueSource();
-        ItemStack stack = entity.getActiveItemStack();
+        Entity attacker = source.getEntity();
+        ItemStack stack = entity.getUseItem();
 
         if (canBlockDamageSource(entity, source) && attacker != null) {
             // THORNS
             int encThorns = getItemEnchantmentLevel(THORNS, stack);
-            if (ThornsEnchantmentImp.shouldHit(encThorns, entity.getRNG())) {
-                attacker.attackEntityFrom(DamageSource.causeThornsDamage(entity), ThornsEnchantment.getDamage(encThorns, entity.getRNG()));
+            if (ThornsEnchantmentImp.shouldHit(encThorns, entity.getRandom())) {
+                attacker.hurt(DamageSource.thorns(entity), ThornsEnchantment.getDamage(encThorns, entity.getRandom()));
             }
             // DISPLACEMENT
             int encDisplacement = getItemEnchantmentLevel(DISPLACEMENT, stack);
-            if (DisplacementEnchantment.shouldHit(encDisplacement, entity.getRNG())) {
+            if (DisplacementEnchantment.shouldHit(encDisplacement, entity.getRandom())) {
                 DisplacementEnchantment.onHit(entity, attacker, encDisplacement);
             }
             // FIRE REBUKE
             int encFireRebuke = getItemEnchantmentLevel(FIRE_REBUKE, stack);
-            if (FireRebukeEnchantment.shouldHit(encFireRebuke, entity.getRNG())) {
+            if (FireRebukeEnchantment.shouldHit(encFireRebuke, entity.getRandom())) {
                 FireRebukeEnchantment.onHit(entity, attacker, encFireRebuke);
             }
             // FROST REBUKE
             int encFrostRebuke = getItemEnchantmentLevel(FROST_REBUKE, stack);
-            if (FrostRebukeEnchantment.shouldHit(encFrostRebuke, entity.getRNG())) {
+            if (FrostRebukeEnchantment.shouldHit(encFrostRebuke, entity.getRandom())) {
                 FrostRebukeEnchantment.onHit(entity, attacker, encFrostRebuke);
             }
             // BULWARK
             int encBulwark = getItemEnchantmentLevel(BULWARK, stack);
             if (encBulwark > 0 && attacker instanceof PlayerEntity) {
                 PlayerEntity playerAttacker = (PlayerEntity) attacker;
-                if (playerAttacker.getRNG().nextFloat() < 0.5F) {
-                    playerAttacker.getCooldownTracker().setCooldown(playerAttacker.getHeldItemMainhand().getItem(), 100);
-                    attacker.world.setEntityState(attacker, (byte) 30);
+                if (playerAttacker.getRandom().nextFloat() < 0.5F) {
+                    playerAttacker.getCooldowns().addCooldown(playerAttacker.getMainHandItem().getItem(), 100);
+                    attacker.level.broadcastEntityEvent(attacker, (byte) 30);
                 }
             }
         }
@@ -88,7 +88,7 @@ public class ShieldEnchEvents {
             return;
         }
         LivingEntity entity = event.getEntityLiving();
-        ItemStack stack = entity.getActiveItemStack();
+        ItemStack stack = entity.getUseItem();
 
         ModifiableAttributeInstance knockbackResAttr = entity.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
         ModifiableAttributeInstance moveSpeedAttr = entity.getAttribute(Attributes.MOVEMENT_SPEED);
@@ -104,14 +104,14 @@ public class ShieldEnchEvents {
             int encBulwark = getItemEnchantmentLevel(BULWARK, stack);
             if (knockbackResAttr != null) {
                 if (encBulwark > 0) {
-                    knockbackResAttr.applyNonPersistentModifier(new AttributeModifier(UUID_ENCH_BULWARK_KNOCKBACK_RESISTANCE, ID_BULWARK, 1.0D, ADDITION));
+                    knockbackResAttr.addTransientModifier(new AttributeModifier(UUID_ENCH_BULWARK_KNOCKBACK_RESISTANCE, ID_BULWARK, 1.0D, ADDITION));
                 }
             }
             // PHALANX
             int encPhalanx = getItemEnchantmentLevel(PHALANX, stack);
             if (moveSpeedAttr != null) {
                 if (encPhalanx > 0) {
-                    moveSpeedAttr.applyNonPersistentModifier(new AttributeModifier(UUID_ENCH_PHALANX_MOVEMENT_SPEED, ID_PHALANX, PhalanxEnchantment.SPEED * encPhalanx, MULTIPLY_TOTAL));
+                    moveSpeedAttr.addTransientModifier(new AttributeModifier(UUID_ENCH_PHALANX_MOVEMENT_SPEED, ID_PHALANX, PhalanxEnchantment.SPEED * encPhalanx, MULTIPLY_TOTAL));
                 }
             }
         }
@@ -120,20 +120,20 @@ public class ShieldEnchEvents {
     // region HELPERS
     private static boolean canBlockDamageSource(LivingEntity living, DamageSource source) {
 
-        Entity entity = source.getImmediateSource();
+        Entity entity = source.getDirectEntity();
         if (entity instanceof AbstractArrowEntity) {
             AbstractArrowEntity arrow = (AbstractArrowEntity) entity;
             if (arrow.getPierceLevel() > 0) {
                 return false;
             }
         }
-        if (!source.isUnblockable() && living.isActiveItemStackBlocking()) {
-            Vector3d vec3d2 = source.getDamageLocation();
+        if (!source.isBypassArmor() && living.isBlocking()) {
+            Vector3d vec3d2 = source.getSourcePosition();
             if (vec3d2 != null) {
-                Vector3d vec3d = living.getLook(1.0F);
-                Vector3d vec3d1 = vec3d2.subtractReverse(new Vector3d(living.getPosX(), living.getPosY(), living.getPosZ())).normalize();
+                Vector3d vec3d = living.getViewVector(1.0F);
+                Vector3d vec3d1 = vec3d2.vectorTo(new Vector3d(living.getX(), living.getY(), living.getZ())).normalize();
                 vec3d1 = new Vector3d(vec3d1.x, 0.0D, vec3d1.z);
-                return vec3d1.dotProduct(vec3d) < 0.0D;
+                return vec3d1.dot(vec3d) < 0.0D;
             }
         }
         return false;

@@ -13,7 +13,7 @@ public class CurseFoolEnchant extends EnchantmentCoFH {
     }
 
     @Override
-    public int getMinEnchantability(int level) {
+    public int getMinCost(int level) {
 
         return 25;
     }

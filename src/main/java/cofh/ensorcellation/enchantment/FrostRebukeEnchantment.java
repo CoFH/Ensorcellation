@@ -36,7 +36,7 @@ public class FrostRebukeEnchantment extends EnchantmentCoFH {
     }
 
     @Override
-    public int getMinEnchantability(int level) {
+    public int getMinCost(int level) {
 
         return 5 + 15 * (level - 1);
     }
@@ -44,7 +44,7 @@ public class FrostRebukeEnchantment extends EnchantmentCoFH {
     @Override
     protected int maxDelegate(int level) {
 
-        return super.getMinEnchantability(level) + 50;
+        return super.getMinCost(level) + 50;
     }
 
     @Override
@@ -55,23 +55,23 @@ public class FrostRebukeEnchantment extends EnchantmentCoFH {
     }
 
     @Override
-    public boolean canApplyTogether(Enchantment ench) {
+    public boolean checkCompatibility(Enchantment ench) {
 
-        return super.canApplyTogether(ench) && ench != THORNS && ench != DISPLACEMENT && ench != FIRE_REBUKE;
+        return super.checkCompatibility(ench) && ench != THORNS && ench != DISPLACEMENT && ench != FIRE_REBUKE;
     }
 
     // region HELPERS
     @Override
-    public void onUserHurt(LivingEntity user, Entity attacker, int level) {
+    public void doPostHurt(LivingEntity user, Entity attacker, int level) {
 
         if (!(attacker instanceof LivingEntity)) {
             return;
         }
-        Map.Entry<EquipmentSlotType, ItemStack> stack = EnchantmentHelper.getRandomItemWithEnchantment(FROST_REBUKE, user);
-        if (shouldHit(level, user.getRNG())) {
+        Map.Entry<EquipmentSlotType, ItemStack> stack = EnchantmentHelper.getRandomItemWith(FROST_REBUKE, user);
+        if (shouldHit(level, user.getRandom())) {
             onHit(user, attacker, level);
             if (stack != null) {
-                (stack.getValue()).damageItem(2, user, (entity) -> entity.sendBreakAnimation(stack.getKey()));
+                (stack.getValue()).hurtAndBreak(2, user, (entity) -> entity.broadcastBreakEvent(stack.getKey()));
             }
         }
     }
@@ -82,17 +82,17 @@ public class FrostRebukeEnchantment extends EnchantmentCoFH {
             return;
         }
         if (user instanceof PlayerEntity || !(attacker instanceof PlayerEntity) || mobsAffectPlayers) {
-            ((LivingEntity) attacker).applyKnockback(0.5F * level, user.getPosX() - attacker.getPosX(), user.getPosZ() - attacker.getPosZ());
+            ((LivingEntity) attacker).knockback(0.5F * level, user.getX() - attacker.getX(), user.getZ() - attacker.getZ());
         }
-        Random rand = user.getRNG();
+        Random rand = user.getRandom();
         int i = 20 + 20 * rand.nextInt(3 * level);
-        if (attacker.isBurning()) {
-            attacker.extinguish();
+        if (attacker.isOnFire()) {
+            attacker.clearFire();
         }
-        ((LivingEntity) attacker).addPotionEffect(new EffectInstance(CHILLED, i, level - 1, false, false));
-        if (attacker.world instanceof ServerWorld) {
+        ((LivingEntity) attacker).addEffect(new EffectInstance(CHILLED, i, level - 1, false, false));
+        if (attacker.level instanceof ServerWorld) {
             for (int j = 0; j < 3 * level; ++j) {
-                Utils.spawnParticles(attacker.world, ParticleTypes.ITEM_SNOWBALL, attacker.getPosX() + rand.nextDouble(), attacker.getPosY() + 1.0D + rand.nextDouble(), attacker.getPosZ() + rand.nextDouble(), 1, 0, 0, 0, 0);
+                Utils.spawnParticles(attacker.level, ParticleTypes.ITEM_SNOWBALL, attacker.getX() + rand.nextDouble(), attacker.getY() + 1.0D + rand.nextDouble(), attacker.getZ() + rand.nextDouble(), 1, 0, 0, 0, 0);
             }
         }
     }
