@@ -336,9 +336,9 @@ public class EnsorcConfig {
         treasureExcavating = SERVER_CONFIG
                 .comment(treasure)
                 .define("Treasure", true);
-        levelExcavating = SERVER_CONFIG
-                .comment(level)
-                .defineInRange("Max Level", 2, 1, MAX_ENCHANT_LEVEL);
+        //        levelExcavating = SERVER_CONFIG
+        //                .comment(level)
+        //                .defineInRange("Max Level", 1, 1, MAX_ENCHANT_LEVEL);
         SERVER_CONFIG.pop();
 
         // BOWS
@@ -756,7 +756,7 @@ public class EnsorcConfig {
         if (EXCAVATING instanceof EnchantmentCoFH) {
             ((EnchantmentCoFH) EXCAVATING).setEnable(enableExcavating.get());
             ((EnchantmentCoFH) EXCAVATING).setTreasureEnchantment(treasureExcavating.get());
-            ((EnchantmentCoFH) EXCAVATING).setMaxLevel(levelExcavating.get());
+            //            ((EnchantmentCoFH) EXCAVATING).setMaxLevel(levelExcavating.get());
         }
         // BOWS
         if (HUNTER instanceof EnchantmentCoFH) {
@@ -984,7 +984,7 @@ public class EnsorcConfig {
     // TOOLS
     private static BooleanValue enableExcavating;
     private static BooleanValue treasureExcavating;
-    private static IntValue levelExcavating;
+    //    private static IntValue levelExcavating;
 
     // BOWS
     private static BooleanValue enableHunter;
