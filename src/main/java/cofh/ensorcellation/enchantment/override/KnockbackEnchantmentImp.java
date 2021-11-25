@@ -1,14 +1,14 @@
 package cofh.ensorcellation.enchantment.override;
 
+import cofh.core.init.CoreEnchantments;
 import cofh.lib.enchantment.EnchantmentOverride;
-import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.inventory.EquipmentSlotType;
 
 public class KnockbackEnchantmentImp extends EnchantmentOverride {
 
     public KnockbackEnchantmentImp() {
 
-        super(Rarity.UNCOMMON, EnchantmentType.WEAPON, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND});
+        super(Rarity.UNCOMMON, CoreEnchantments.Types.SWORD_OR_AXE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND});
         maxLevel = 2;
     }
 
