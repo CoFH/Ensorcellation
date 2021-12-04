@@ -45,6 +45,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static cofh.lib.util.Utils.getHeldEnchantmentLevel;
@@ -148,7 +149,6 @@ public class CommonEvents {
                     .withOptionalParameter(LootParameters.KILLER_ENTITY, source.getEntity())
                     .withOptionalParameter(LootParameters.DIRECT_KILLER_ENTITY, source.getDirectEntity());
             contextBuilder = contextBuilder.withParameter(LootParameters.LAST_DAMAGE_PLAYER, player).withLuck(player.getLuck());
-            table.getRandomItems(contextBuilder.create(LootParameterSets.ENTITY));
 
             for (int i = 0; i < encHunter; ++i) {
                 if (player.getRandom().nextInt(100) < HunterEnchantment.chance) {
@@ -391,7 +391,7 @@ public class CommonEvents {
                     .withLuck((float) hook.luck + player.getLuck());
             contextBuilder.withParameter(LootParameters.KILLER_ENTITY, player).withParameter(LootParameters.THIS_ENTITY, hook);
             LootTable table = hook.level.getServer().getLootTables().get(LootTables.FISHING);
-            List<ItemStack> list = table.getRandomItems(contextBuilder.create(LootParameterSets.FISHING));
+            List<ItemStack> list = new ArrayList<>();
 
             for (int i = 0; i < encAngler; ++i) {
                 if (player.getRandom().nextInt(100) < AnglerEnchantment.chance) {
