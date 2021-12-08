@@ -39,7 +39,7 @@ public class PreservationEvents {
         if (getItemEnchantmentLevel(MENDING, left) <= 0) {
             return;
         }
-        if (output.getDamage() < left.getDamage()) {
+        if (output.getDamageValue() < left.getDamageValue()) {
             event.setBreakChance(MendingEnchantmentAlt.anvilDamage);
         }
     }
@@ -61,31 +61,31 @@ public class PreservationEvents {
         ItemStack right = event.getRight();
         ItemStack output = left.copy();
 
-        if (output.isDamageable() && output.getItem().getIsRepairable(left, right)) {
-            int damageLeft = Math.min(output.getDamage(), output.getMaxDamage() / 4);
+        if (output.isDamageableItem() && output.getItem().isValidRepairItem(left, right)) {
+            int damageLeft = Math.min(output.getDamageValue(), output.getMaxDamage() / 4);
             if (damageLeft <= 0) {
                 return;
             }
             int matCost;
             for (matCost = 0; damageLeft > 0 && matCost < right.getCount(); ++matCost) {
-                int durability = output.getDamage() - damageLeft;
-                output.setDamage(durability);
-                damageLeft = Math.min(output.getDamage(), output.getMaxDamage() / 4);
+                int durability = output.getDamageValue() - damageLeft;
+                output.setDamageValue(durability);
+                damageLeft = Math.min(output.getDamageValue(), output.getMaxDamage() / 4);
             }
             event.setMaterialCost(matCost);
             // event.setCost(0);
             event.setOutput(output);
-        } else if (output.isDamageable()) {
-            int damageLeft = left.getMaxDamage() - left.getDamage();
-            int damageRight = right.getMaxDamage() - right.getDamage();
+        } else if (output.isDamageableItem()) {
+            int damageLeft = left.getMaxDamage() - left.getDamageValue();
+            int damageRight = right.getMaxDamage() - right.getDamageValue();
             int damageRepair = damageLeft + damageRight + output.getMaxDamage() * 12 / 100;
             int damageOutput = output.getMaxDamage() - damageRepair;
 
             if (damageOutput < 0) {
                 damageOutput = 0;
             }
-            if (damageOutput < output.getDamage()) {
-                output.setDamage(damageOutput);
+            if (damageOutput < output.getDamageValue()) {
+                output.setDamageValue(damageOutput);
             }
             // event.setCost(0);
             event.setOutput(output);
@@ -104,12 +104,12 @@ public class PreservationEvents {
         PlayerEntity player = event.getPlayer();
         ExperienceOrbEntity orb = event.getOrb();
 
-        player.xpCooldown = 2;
-        player.onItemPickup(orb, 1);
+        player.takeXpDelay = 2;
+        player.take(orb, 1);
 
         XpHelper.attemptStoreXP(player, orb);
-        if (orb.xpValue > 0) {
-            player.giveExperiencePoints(orb.xpValue);
+        if (orb.value > 0) {
+            player.giveExperiencePoints(orb.value);
         }
         orb.remove();
         event.setCanceled(true);

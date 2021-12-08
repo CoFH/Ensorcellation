@@ -23,7 +23,7 @@ public class SmeltingEnchantment extends EnchantmentCoFH {
     }
 
     @Override
-    public int getMinEnchantability(int level) {
+    public int getMinCost(int level) {
 
         return 15;
     }
@@ -31,7 +31,7 @@ public class SmeltingEnchantment extends EnchantmentCoFH {
     @Override
     protected int maxDelegate(int level) {
 
-        return getMinEnchantability(level) + 50;
+        return getMinCost(level) + 50;
     }
 
     @Override
@@ -42,9 +42,9 @@ public class SmeltingEnchantment extends EnchantmentCoFH {
     }
 
     @Override
-    public boolean canApplyTogether(Enchantment ench) {
+    public boolean checkCompatibility(Enchantment ench) {
 
-        return super.canApplyTogether(ench) && ench != Enchantments.SILK_TOUCH;
+        return super.checkCompatibility(ench) && ench != Enchantments.SILK_TOUCH;
     }
 
     // region CONVERSION
@@ -52,12 +52,12 @@ public class SmeltingEnchantment extends EnchantmentCoFH {
 
         IInventory inv = new Inventory(stack);
 
-        IRecipe<?> recipe = world.getRecipeManager().getRecipe(IRecipeType.SMELTING, inv, world).orElse(null);
+        IRecipe<?> recipe = world.getRecipeManager().getRecipeFor(IRecipeType.SMELTING, inv, world).orElse(null);
 
         if (recipe == null) {
             return ItemStack.EMPTY;
         }
-        ItemStack result = recipe.getRecipeOutput();
+        ItemStack result = recipe.getResultItem();
         return result.isEmpty() ? ItemStack.EMPTY : ItemHelper.cloneStack(result, result.getCount() * stack.getCount());
     }
     // endregion

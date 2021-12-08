@@ -34,15 +34,15 @@ public class FrostWalkerEnchantmentImp extends EnchantmentOverride {
     }
 
     @Override
-    public int getMinEnchantability(int level) {
+    public int getMinCost(int level) {
 
         return level * 10;
     }
 
     @Override
-    public int getMaxEnchantability(int level) {
+    public int getMaxCost(int level) {
 
-        return getMinEnchantability(level) + 15;
+        return getMinCost(level) + 15;
     }
 
     @Override
@@ -55,9 +55,9 @@ public class FrostWalkerEnchantmentImp extends EnchantmentOverride {
     }
 
     @Override
-    public boolean canApplyTogether(Enchantment ench) {
+    public boolean checkCompatibility(Enchantment ench) {
 
-        return super.canApplyTogether(ench) && ench != Enchantments.DEPTH_STRIDER;
+        return super.checkCompatibility(ench) && ench != Enchantments.DEPTH_STRIDER;
     }
 
     // region HELPERS
@@ -67,20 +67,20 @@ public class FrostWalkerEnchantmentImp extends EnchantmentOverride {
             return;
         }
         if (living.isOnGround() && GLOSSED_MAGMA != null) {
-            BlockState state = GLOSSED_MAGMA.getDefaultState();
+            BlockState state = GLOSSED_MAGMA.defaultBlockState();
             float f = (float) Math.min(16, 2 + level);
             BlockPos.Mutable mutable = new BlockPos.Mutable();
 
-            for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-f, -1.0D, -f), pos.add(f, -1.0D, f))) {
-                if (blockpos.withinDistance(living.getPositionVec(), f)) {
-                    mutable.setPos(blockpos.getX(), blockpos.getY() + 1, blockpos.getZ());
+            for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-f, -1.0D, -f), pos.offset(f, -1.0D, f))) {
+                if (blockpos.closerThan(living.position(), f)) {
+                    mutable.set(blockpos.getX(), blockpos.getY() + 1, blockpos.getZ());
                     BlockState blockstate1 = worldIn.getBlockState(mutable);
                     if (blockstate1.isAir(worldIn, mutable)) {
                         BlockState blockstate2 = worldIn.getBlockState(blockpos);
-                        boolean isFull = blockstate2.getBlock() == Blocks.LAVA && blockstate2.get(FlowingFluidBlock.LEVEL) == 0;
-                        if (blockstate2.getMaterial() == Material.LAVA && isFull && state.isValidPosition(worldIn, blockpos) && worldIn.placedBlockCollides(state, blockpos, ISelectionContext.dummy()) && !ForgeEventFactory.onBlockPlace(living, BlockSnapshot.create(worldIn.getDimensionKey(), worldIn, blockpos), net.minecraft.util.Direction.UP)) {
-                            worldIn.setBlockState(blockpos, state);
-                            worldIn.getPendingBlockTicks().scheduleTick(blockpos, GLOSSED_MAGMA, MathHelper.nextInt(living.getRNG(), 60, 120));
+                        boolean isFull = blockstate2.getBlock() == Blocks.LAVA && blockstate2.getValue(FlowingFluidBlock.LEVEL) == 0;
+                        if (blockstate2.getMaterial() == Material.LAVA && isFull && state.canSurvive(worldIn, blockpos) && worldIn.isUnobstructed(state, blockpos, ISelectionContext.empty()) && !ForgeEventFactory.onBlockPlace(living, BlockSnapshot.create(worldIn.dimension(), worldIn, blockpos), net.minecraft.util.Direction.UP)) {
+                            worldIn.setBlockAndUpdate(blockpos, state);
+                            worldIn.getBlockTicks().scheduleTick(blockpos, GLOSSED_MAGMA, MathHelper.nextInt(living.getRandom(), 60, 120));
                         }
                     }
                 }
@@ -91,7 +91,7 @@ public class FrostWalkerEnchantmentImp extends EnchantmentOverride {
     public void setFreezeLava(boolean freezeLava) {
 
         FrostWalkerEnchantmentImp.freezeLava = freezeLava;
-        name = "enchantment." + (freezeLava ? ID_ENSORCELLATION + ".frost_walker" : "minecraft.frost_walker");
+        descriptionId = "enchantment." + (freezeLava ? ID_ENSORCELLATION + ".frost_walker" : "minecraft.frost_walker");
     }
     // endregion
 }

@@ -28,18 +28,18 @@ public class ShieldEnchClientEvents {
     public static void handleFOVUpdateEvent(FOVUpdateEvent event) {
 
         PlayerEntity entity = event.getEntity();
-        ItemStack stack = event.getEntity().getActiveItemStack();
+        ItemStack stack = event.getEntity().getUseItem();
 
         if (stack.getItem().isShield(stack, entity)) {
             int encPhalanx = getItemEnchantmentLevel(PHALANX, stack);
             if (encPhalanx > 0) {
                 modPhalanx = encPhalanx * PhalanxEnchantment.SPEED / 2D;
                 hadPhalanx = true;
-                timePhalanx = entity.world.getGameTime();
+                timePhalanx = entity.level.getGameTime();
             }
             event.setNewfov((float) MathHelper.clamp(event.getNewfov() - modPhalanx, 1.0D, 2.5D));
         } else if (hadPhalanx) {
-            if (entity.world.getGameTime() - 20 > timePhalanx) {
+            if (entity.level.getGameTime() - 20 > timePhalanx) {
                 hadPhalanx = false;
                 modPhalanx = 0;
             }

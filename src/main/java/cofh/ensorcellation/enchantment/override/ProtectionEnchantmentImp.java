@@ -21,19 +21,19 @@ public class ProtectionEnchantmentImp extends EnchantmentOverride {
     }
 
     @Override
-    public int calcModifierDamage(int level, DamageSource source) {
+    public int getDamageProtection(int level, DamageSource source) {
 
-        if (level <= 0 || source.canHarmInCreative()) {
+        if (level <= 0 || source.isBypassInvul()) {
             return 0;
         } else if (this.protectionType == Type.ALL) {
             return level;
         } else if (this.protectionType == Type.FALL && source == DamageSource.FALL) {
             return level * 3;
-        } else if (this.protectionType == Type.FIRE && source.isFireDamage()) {
+        } else if (this.protectionType == Type.FIRE && source.isFire()) {
             return level * 2;
         } else if (this.protectionType == Type.EXPLOSION && source.isExplosion()) {
             return level * 2;
-        } else if (this.protectionType == Type.MAGIC && source.isMagicDamage()) {
+        } else if (this.protectionType == Type.MAGIC && source.isMagic()) {
             return level * 2;
         } else {
             return this.protectionType == Type.PROJECTILE && source.isProjectile() ? level * 2 : 0;
@@ -41,15 +41,15 @@ public class ProtectionEnchantmentImp extends EnchantmentOverride {
     }
 
     @Override
-    public int getMinEnchantability(int level) {
+    public int getMinCost(int level) {
 
         return protectionType.getMinimalEnchantability() + (level - 1) * protectionType.getEnchantIncreasePerLevel();
     }
 
     @Override
-    public int getMaxEnchantability(int level) {
+    public int getMaxCost(int level) {
 
-        return getMinEnchantability(level) + protectionType.getEnchantIncreasePerLevel();
+        return getMinCost(level) + protectionType.getEnchantIncreasePerLevel();
     }
 
     @Override
@@ -65,7 +65,7 @@ public class ProtectionEnchantmentImp extends EnchantmentOverride {
     }
 
     @Override
-    public boolean canApplyTogether(Enchantment ench) {
+    public boolean checkCompatibility(Enchantment ench) {
 
         if (ench instanceof ProtectionEnchantmentImp) {
             ProtectionEnchantmentImp enchProtection = (ProtectionEnchantmentImp) ench;
@@ -75,7 +75,7 @@ public class ProtectionEnchantmentImp extends EnchantmentOverride {
                 return this.protectionType == Type.FALL || enchProtection.protectionType == Type.FALL;
             }
         } else {
-            return super.canApplyTogether(ench);
+            return super.checkCompatibility(ench);
         }
     }
 

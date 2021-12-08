@@ -16,7 +16,7 @@ public class FurrowingEnchantment extends EnchantmentCoFH {
     }
 
     @Override
-    public int getMinEnchantability(int level) {
+    public int getMinCost(int level) {
 
         return 10 + (level - 1) * 9;
     }
@@ -24,13 +24,13 @@ public class FurrowingEnchantment extends EnchantmentCoFH {
     @Override
     protected int maxDelegate(int level) {
 
-        return getMinEnchantability(level) + 50;
+        return getMinCost(level) + 50;
     }
 
     @Override
-    public boolean canApplyTogether(Enchantment ench) {
+    public boolean checkCompatibility(Enchantment ench) {
 
-        return super.canApplyTogether(ench) && ench != TILLING;
+        return super.checkCompatibility(ench) && ench != TILLING;
     }
 
 }

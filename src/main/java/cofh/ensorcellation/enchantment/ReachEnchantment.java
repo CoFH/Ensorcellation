@@ -13,7 +13,7 @@ public class ReachEnchantment extends EnchantmentCoFH {
     }
 
     @Override
-    public int getMinEnchantability(int level) {
+    public int getMinCost(int level) {
 
         return 10 + (level - 1) * 9;
     }
@@ -21,7 +21,7 @@ public class ReachEnchantment extends EnchantmentCoFH {
     @Override
     protected int maxDelegate(int level) {
 
-        return getMinEnchantability(level) + 50;
+        return getMinCost(level) + 50;
     }
 
 }

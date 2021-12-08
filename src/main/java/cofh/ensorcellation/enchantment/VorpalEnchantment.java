@@ -25,7 +25,7 @@ public class VorpalEnchantment extends EnchantmentCoFH {
     }
 
     @Override
-    public int getMinEnchantability(int level) {
+    public int getMinCost(int level) {
 
         return 15 + (level - 1) * 9;
     }
@@ -33,18 +33,18 @@ public class VorpalEnchantment extends EnchantmentCoFH {
     @Override
     protected int maxDelegate(int level) {
 
-        return getMinEnchantability(level) + 50;
+        return getMinCost(level) + 50;
     }
 
     // region HELPERS
     public static void onHit(LivingEntity entity, int level) {
 
-        entity.world.playSound(null, entity.getPosition(), SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, SoundCategory.PLAYERS, 1.0F, 1.0F);
-        if (entity.world instanceof ServerWorld) {
+        entity.level.playSound(null, entity.blockPosition(), SoundEvents.PLAYER_ATTACK_CRIT, SoundCategory.PLAYERS, 1.0F, 1.0F);
+        if (entity.level instanceof ServerWorld) {
             for (int i = 0; i < 2 * level; ++i) {
-                Utils.spawnParticles(entity.world, ParticleTypes.CRIT, entity.getPosX() + entity.world.rand.nextDouble(), entity.getPosY() + 1.0D + entity.world.rand.nextDouble(), entity.getPosZ() + entity.world.rand.nextDouble(), 1, 0, 0, 0, 0);
+                Utils.spawnParticles(entity.level, ParticleTypes.CRIT, entity.getX() + entity.level.random.nextDouble(), entity.getY() + 1.0D + entity.level.random.nextDouble(), entity.getZ() + entity.level.random.nextDouble(), 1, 0, 0, 0, 0);
             }
-            Utils.spawnParticles(entity.world, ParticleTypes.SWEEP_ATTACK, entity.getPosX() + entity.world.rand.nextDouble(), entity.getPosY() + 1.0D + entity.world.rand.nextDouble(), entity.getPosZ() + entity.world.rand.nextDouble(), 1, 0, 0, 0, 0);
+            Utils.spawnParticles(entity.level, ParticleTypes.SWEEP_ATTACK, entity.getX() + entity.level.random.nextDouble(), entity.getY() + 1.0D + entity.level.random.nextDouble(), entity.getZ() + entity.level.random.nextDouble(), 1, 0, 0, 0, 0);
         }
     }
     // endregion

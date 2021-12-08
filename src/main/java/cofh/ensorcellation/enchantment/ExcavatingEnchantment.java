@@ -11,12 +11,11 @@ public class ExcavatingEnchantment extends EnchantmentCoFH {
     public ExcavatingEnchantment() {
 
         super(Rarity.RARE, CoreEnchantments.Types.PICKAXE_OR_SHOVEL, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND});
-        maxLevel = 2;
         treasureEnchantment = true;
     }
 
     @Override
-    public int getMinEnchantability(int level) {
+    public int getMinCost(int level) {
 
         return level * 25;
     }
@@ -24,13 +23,13 @@ public class ExcavatingEnchantment extends EnchantmentCoFH {
     @Override
     protected int maxDelegate(int level) {
 
-        return getMinEnchantability(level) + 50;
+        return getMinCost(level) + 50;
     }
 
     @Override
-    public boolean canApplyTogether(Enchantment ench) {
+    public boolean checkCompatibility(Enchantment ench) {
 
-        return super.canApplyTogether(ench) && ench != Enchantments.LOOTING;
+        return super.checkCompatibility(ench) && ench != Enchantments.MOB_LOOTING;
     }
 
 }

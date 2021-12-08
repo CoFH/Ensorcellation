@@ -19,15 +19,15 @@ public class SoulSpeedEnchantmentImp extends EnchantmentOverride {
     }
 
     @Override
-    public int getMinEnchantability(int level) {
+    public int getMinCost(int level) {
 
         return level * 10;
     }
 
     @Override
-    public int getMaxEnchantability(int level) {
+    public int getMaxCost(int level) {
 
-        return getMinEnchantability(level) + 15;
+        return getMinCost(level) + 15;
     }
 
     @Override

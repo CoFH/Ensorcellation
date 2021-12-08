@@ -15,7 +15,7 @@ public class PilferingEnchantment extends EnchantmentCoFH {
     }
 
     @Override
-    public int getMinEnchantability(int level) {
+    public int getMinCost(int level) {
 
         return 25;
     }
@@ -23,7 +23,7 @@ public class PilferingEnchantment extends EnchantmentCoFH {
     @Override
     protected int maxDelegate(int level) {
 
-        return getMinEnchantability(level) + 50;
+        return getMinCost(level) + 50;
     }
 
 }

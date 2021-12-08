@@ -30,23 +30,23 @@ public class ThornsEnchantmentImp extends EnchantmentOverride {
     }
 
     @Override
-    public int getMinEnchantability(int level) {
+    public int getMinCost(int level) {
 
         return 10 + 20 * (level - 1);
     }
 
     @Override
-    public int getMaxEnchantability(int level) {
+    public int getMaxCost(int level) {
 
-        return super.getMinEnchantability(level) + 50;
+        return super.getMinCost(level) + 50;
     }
 
     @Override
-    public boolean canApply(ItemStack stack) {
+    public boolean canEnchant(ItemStack stack) {
 
         Item item = stack.getItem();
         if (!enable) {
-            return item instanceof ArmorItem || super.canApply(stack);
+            return item instanceof ArmorItem || super.canEnchant(stack);
         }
         return item instanceof ArmorItem || item instanceof HorseArmorItem || item.isShield(stack, null);
     }
@@ -63,19 +63,19 @@ public class ThornsEnchantmentImp extends EnchantmentOverride {
 
     // region HELPERS
     @Override
-    public void onUserHurt(LivingEntity user, Entity attacker, int level) {
+    public void doPostHurt(LivingEntity user, Entity attacker, int level) {
 
-        Random rand = user.getRNG();
-        Map.Entry<EquipmentSlotType, ItemStack> stack = EnchantmentHelper.getRandomItemWithEnchantment(THORNS, user);
+        Random rand = user.getRandom();
+        Map.Entry<EquipmentSlotType, ItemStack> stack = EnchantmentHelper.getRandomItemWith(THORNS, user);
         if (shouldHit(level, rand)) {
             if (attacker != null) {
-                attacker.attackEntityFrom(DamageSource.causeThornsDamage(user), (float) ThornsEnchantment.getDamage(level, rand));
+                attacker.hurt(DamageSource.thorns(user), (float) ThornsEnchantment.getDamage(level, rand));
             }
             if (stack != null) {
-                (stack.getValue()).damageItem(3, user, (entity) -> entity.sendBreakAnimation(stack.getKey()));
+                (stack.getValue()).hurtAndBreak(3, user, (entity) -> entity.broadcastBreakEvent(stack.getKey()));
             }
         } else if (stack != null) {
-            (stack.getValue()).damageItem(1, user, (entity) -> entity.sendBreakAnimation(stack.getKey()));
+            (stack.getValue()).hurtAndBreak(1, user, (entity) -> entity.broadcastBreakEvent(stack.getKey()));
         }
 
     }

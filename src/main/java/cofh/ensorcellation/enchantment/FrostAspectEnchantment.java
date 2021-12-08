@@ -25,7 +25,7 @@ public class FrostAspectEnchantment extends EnchantmentCoFH {
     }
 
     @Override
-    public int getMinEnchantability(int level) {
+    public int getMinCost(int level) {
 
         return 10 + 20 * (level - 1);
     }
@@ -33,13 +33,13 @@ public class FrostAspectEnchantment extends EnchantmentCoFH {
     @Override
     protected int maxDelegate(int level) {
 
-        return super.getMinEnchantability(level) + 50;
+        return super.getMinCost(level) + 50;
     }
 
     @Override
-    public boolean canApplyTogether(Enchantment ench) {
+    public boolean checkCompatibility(Enchantment ench) {
 
-        return super.canApplyTogether(ench) && ench != Enchantments.FIRE_ASPECT;
+        return super.checkCompatibility(ench) && ench != Enchantments.FIRE_ASPECT;
     }
 
     // region HELPERS
@@ -56,13 +56,13 @@ public class FrostAspectEnchantment extends EnchantmentCoFH {
     public static void onHit(LivingEntity entity, int level) {
 
         int i = 80 * level;
-        if (entity.isBurning()) {
-            entity.extinguish();
+        if (entity.isOnFire()) {
+            entity.clearFire();
         }
-        entity.addPotionEffect(new EffectInstance(CHILLED, i, level - 1, false, false));
-        if (entity.world instanceof ServerWorld) {
+        entity.addEffect(new EffectInstance(CHILLED, i, level - 1, false, false));
+        if (entity.level instanceof ServerWorld) {
             for (int j = 0; j < 4 * level; ++j) {
-                Utils.spawnParticles(entity.world, ParticleTypes.ITEM_SNOWBALL, entity.getPosX() + entity.world.rand.nextDouble(), entity.getPosY() + 1.0D + entity.world.rand.nextDouble(), entity.getPosZ() + entity.world.rand.nextDouble(), 1, 0, 0, 0, 0);
+                Utils.spawnParticles(entity.level, ParticleTypes.ITEM_SNOWBALL, entity.getX() + entity.level.random.nextDouble(), entity.getY() + 1.0D + entity.level.random.nextDouble(), entity.getZ() + entity.level.random.nextDouble(), 1, 0, 0, 0, 0);
             }
         }
     }

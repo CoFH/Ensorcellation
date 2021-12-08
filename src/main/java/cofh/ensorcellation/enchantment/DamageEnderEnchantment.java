@@ -22,7 +22,7 @@ public class DamageEnderEnchantment extends DamageEnchantmentCoFH {
     }
 
     @Override
-    public void onEntityDamaged(LivingEntity user, Entity target, int level) {
+    public void doPostAttack(LivingEntity user, Entity target, int level) {
 
         // Should never actually happen.
         if (ENDERFERENCE == null) {
@@ -30,8 +30,8 @@ public class DamageEnderEnchantment extends DamageEnchantmentCoFH {
         }
         if (target instanceof LivingEntity) {
             LivingEntity living = (LivingEntity) target;
-            int i = 100 + user.getRNG().nextInt(40 * level);
-            living.addPotionEffect(new EffectInstance(ENDERFERENCE, i, 0, false, false));
+            int i = 100 + user.getRandom().nextInt(40 * level);
+            living.addEffect(new EffectInstance(ENDERFERENCE, i, 0, false, false));
         }
     }
 
