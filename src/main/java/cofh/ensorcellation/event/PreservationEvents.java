@@ -17,7 +17,7 @@ import static cofh.lib.util.Utils.getItemEnchantmentLevel;
 import static cofh.lib.util.constants.Constants.ID_ENSORCELLATION;
 import static net.minecraft.enchantment.Enchantments.MENDING;
 
-@Mod.EventBusSubscriber(modid = ID_ENSORCELLATION)
+@Mod.EventBusSubscriber (modid = ID_ENSORCELLATION)
 public class PreservationEvents {
 
     private PreservationEvents() {
@@ -92,7 +92,7 @@ public class PreservationEvents {
         }
     }
 
-    @SubscribeEvent(priority = EventPriority.NORMAL)
+    @SubscribeEvent (priority = EventPriority.NORMAL)
     public static void handlePickupXpEvent(PlayerXpEvent.PickupXp event) {
 
         if (event.isCanceled()) {

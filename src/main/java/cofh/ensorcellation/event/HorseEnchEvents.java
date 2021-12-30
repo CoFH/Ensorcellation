@@ -23,7 +23,7 @@ import static cofh.lib.util.constants.Constants.ID_ENSORCELLATION;
 import static cofh.lib.util.references.EnsorcReferences.*;
 import static net.minecraft.enchantment.Enchantments.*;
 
-@Mod.EventBusSubscriber(modid = ID_ENSORCELLATION)
+@Mod.EventBusSubscriber (modid = ID_ENSORCELLATION)
 public class HorseEnchEvents {
 
     private static final int HORSE_MODIFIER = 3;

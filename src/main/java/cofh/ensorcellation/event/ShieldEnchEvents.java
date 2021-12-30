@@ -30,7 +30,7 @@ import static net.minecraft.enchantment.Enchantments.THORNS;
 import static net.minecraft.entity.ai.attributes.AttributeModifier.Operation.ADDITION;
 import static net.minecraft.entity.ai.attributes.AttributeModifier.Operation.MULTIPLY_TOTAL;
 
-@Mod.EventBusSubscriber(modid = ID_ENSORCELLATION)
+@Mod.EventBusSubscriber (modid = ID_ENSORCELLATION)
 public class ShieldEnchEvents {
 
     private ShieldEnchEvents() {

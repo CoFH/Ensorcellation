@@ -54,12 +54,11 @@ import static cofh.lib.util.constants.Constants.*;
 import static cofh.lib.util.references.EnsorcIDs.ID_REACH;
 import static cofh.lib.util.references.EnsorcIDs.ID_VITALITY;
 import static cofh.lib.util.references.EnsorcReferences.*;
-import static net.minecraft.enchantment.Enchantments.BLOCK_EFFICIENCY;
 import static net.minecraft.enchantment.Enchantments.FROST_WALKER;
 import static net.minecraft.entity.ai.attributes.AttributeModifier.Operation.ADDITION;
 import static net.minecraft.item.Items.*;
 
-@Mod.EventBusSubscriber(modid = ID_ENSORCELLATION)
+@Mod.EventBusSubscriber (modid = ID_ENSORCELLATION)
 public class CommonEvents {
 
     private CommonEvents() {
@@ -67,7 +66,7 @@ public class CommonEvents {
     }
 
     // region LIVING EVENTS
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    @SubscribeEvent (priority = EventPriority.HIGHEST)
     public static void handleLivingAttackEvent(LivingAttackEvent event) {
 
         if (event.isCanceled()) {
@@ -84,7 +83,7 @@ public class CommonEvents {
         }
     }
 
-    @SubscribeEvent(priority = EventPriority.LOWEST)
+    @SubscribeEvent (priority = EventPriority.LOWEST)
     public static void handleLivingDamageEvent(LivingDamageEvent event) {
 
         if (event.isCanceled()) {
@@ -123,7 +122,7 @@ public class CommonEvents {
         }
     }
 
-    @SubscribeEvent(priority = EventPriority.HIGH)
+    @SubscribeEvent (priority = EventPriority.HIGH)
     public static void handleLivingDropsEvent(LivingDropsEvent event) {
 
         if (event.isCanceled()) {
@@ -367,7 +366,7 @@ public class CommonEvents {
         }
     }
 
-    @SubscribeEvent(priority = EventPriority.LOW)
+    @SubscribeEvent (priority = EventPriority.LOW)
     public static void handleItemFishedEvent(ItemFishedEvent event) {
 
         if (event.isCanceled()) {
@@ -418,7 +417,7 @@ public class CommonEvents {
         }
     }
 
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    @SubscribeEvent (priority = EventPriority.HIGHEST)
     public static void handlePickupXpEvent(PlayerXpEvent.PickupXp event) {
 
         PlayerEntity player = event.getPlayer();
@@ -496,7 +495,7 @@ public class CommonEvents {
         }
     }
 
-    @SubscribeEvent(priority = EventPriority.LOW)
+    @SubscribeEvent (priority = EventPriority.LOW)
     public static void handleBreakSpeedEvent(PlayerEvent.BreakSpeed event) {
 
         if (event.isCanceled()) {
@@ -507,17 +506,6 @@ public class CommonEvents {
         int encAirAffinity = getMaxEquippedEnchantmentLevel(player, AIR_AFFINITY);
         if (encAirAffinity > 0 && !player.isOnGround()) {
             event.setNewSpeed(Math.max(event.getNewSpeed(), event.getOriginalSpeed() * 5.0F));
-        }
-        // EXCAVATING
-        int encExcavating = getHeldEnchantmentLevel(player, EXCAVATING);
-        if (encExcavating > 0) {
-            if (!player.isSecondaryUseActive()) {
-                event.setNewSpeed(event.getNewSpeed() / 1 + encExcavating);
-            }
-            int encEfficiency = getHeldEnchantmentLevel(player, BLOCK_EFFICIENCY);
-            if (encEfficiency > 1) {
-                event.setNewSpeed(event.getNewSpeed() / encEfficiency);
-            }
         }
     }
     // endregion

@@ -18,14 +18,14 @@ import static cofh.lib.util.constants.Constants.ID_ENSORCELLATION;
 import static cofh.lib.util.references.EnsorcReferences.SOULBOUND;
 import static net.minecraft.world.GameRules.RULE_KEEPINVENTORY;
 
-@Mod.EventBusSubscriber(modid = ID_ENSORCELLATION)
+@Mod.EventBusSubscriber (modid = ID_ENSORCELLATION)
 public class SoulboundEvents {
 
     private SoulboundEvents() {
 
     }
 
-    @SubscribeEvent(priority = EventPriority.HIGH)
+    @SubscribeEvent (priority = EventPriority.HIGH)
     public static void handlePlayerDropsEvent(LivingDropsEvent event) {
 
         if (event.getEntity() instanceof PlayerEntity) {
@@ -45,7 +45,7 @@ public class SoulboundEvents {
         }
     }
 
-    @SubscribeEvent(priority = EventPriority.HIGH)
+    @SubscribeEvent (priority = EventPriority.HIGH)
     public static void handlePlayerCloneEvent(PlayerEvent.Clone event) {
 
         if (!event.isWasDeath()) {

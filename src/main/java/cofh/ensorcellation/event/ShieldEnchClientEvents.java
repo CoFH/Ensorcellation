@@ -13,7 +13,7 @@ import static cofh.lib.util.Utils.getItemEnchantmentLevel;
 import static cofh.lib.util.constants.Constants.ID_ENSORCELLATION;
 import static cofh.lib.util.references.EnsorcReferences.PHALANX;
 
-@Mod.EventBusSubscriber(value = Dist.CLIENT, modid = ID_ENSORCELLATION)
+@Mod.EventBusSubscriber (value = Dist.CLIENT, modid = ID_ENSORCELLATION)
 public class ShieldEnchClientEvents {
 
     private ShieldEnchClientEvents() {
