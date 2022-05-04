@@ -1,16 +1,16 @@
 package cofh.ensorcellation.enchantment.nyi;
 
 import cofh.lib.enchantment.EnchantmentOverride;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.HorseArmorItem;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.HorseArmorItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 public class SoulSpeedEnchantmentImp extends EnchantmentOverride {
 
     public SoulSpeedEnchantmentImp() {
 
-        super(Rarity.VERY_RARE, EnchantmentType.ARMOR_FEET, new EquipmentSlotType[]{EquipmentSlotType.FEET});
+        super(Rarity.VERY_RARE, EnchantmentCategory.ARMOR_FEET, new EquipmentSlot[]{EquipmentSlot.FEET});
         maxLevel = 3;
         treasureEnchantment = true;
 

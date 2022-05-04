@@ -2,10 +2,11 @@ package cofh.ensorcellation.event;
 
 import cofh.ensorcellation.enchantment.PhalanxEnchantment;
 import cofh.lib.util.helpers.MathHelper;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.FOVUpdateEvent;
+import net.minecraftforge.client.event.FOVModifierEvent;
+import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -25,12 +26,12 @@ public class ShieldEnchClientEvents {
     private static long timePhalanx;
 
     @SubscribeEvent
-    public static void handleFOVUpdateEvent(FOVUpdateEvent event) {
+    public static void handleFOVUpdateEvent(FOVModifierEvent event) {
 
-        PlayerEntity entity = event.getEntity();
+        Player entity = event.getEntity();
         ItemStack stack = event.getEntity().getUseItem();
 
-        if (stack.getItem().isShield(stack, entity)) {
+        if (stack.getItem().canPerformAction(stack, ToolActions.SHIELD_BLOCK)) {
             int encPhalanx = getItemEnchantmentLevel(PHALANX, stack);
             if (encPhalanx > 0) {
                 modPhalanx = encPhalanx * PhalanxEnchantment.SPEED / 2D;

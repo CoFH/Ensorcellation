@@ -3,18 +3,18 @@ package cofh.ensorcellation.enchantment;
 import cofh.core.init.CoreEnchantments;
 import cofh.lib.enchantment.DamageEnchantmentCoFH;
 import cofh.lib.util.Utils;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 
 public class MagicEdgeEnchantment extends DamageEnchantmentCoFH {
 
     public MagicEdgeEnchantment() {
 
-        super(Rarity.RARE, CoreEnchantments.Types.SWORD_OR_AXE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND});
+        super(Rarity.RARE, CoreEnchantments.Types.SWORD_OR_AXE, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
         maxLevel = 3;
         treasureEnchantment = true;
     }
@@ -45,7 +45,7 @@ public class MagicEdgeEnchantment extends DamageEnchantmentCoFH {
 
     public static void onHit(LivingEntity entity, int level) {
 
-        if (entity.level instanceof ServerWorld) {
+        if (entity.level instanceof ServerLevel) {
             for (int i = 0; i < 2 * level; ++i) {
                 Utils.spawnParticles(entity.level, ParticleTypes.ENCHANT, entity.getX() + entity.level.random.nextDouble(), entity.getY() + 1.0D + entity.level.random.nextDouble(), entity.getZ() + entity.level.random.nextDouble(), 1, 0, 0, 0, 0);
                 Utils.spawnParticles(entity.level, ParticleTypes.ENCHANTED_HIT, entity.getX() + entity.level.random.nextDouble(), entity.getY() + 1.0D + entity.level.random.nextDouble(), entity.getZ() + entity.level.random.nextDouble(), 1, 0, 0, 0, 0);

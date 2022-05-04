@@ -1,14 +1,14 @@
 package cofh.ensorcellation.enchantment;
 
 import cofh.lib.enchantment.EnchantmentCoFH;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 public class ReachEnchantment extends EnchantmentCoFH {
 
     public ReachEnchantment() {
 
-        super(Rarity.UNCOMMON, EnchantmentType.ARMOR_CHEST, new EquipmentSlotType[]{EquipmentSlotType.CHEST});
+        super(Rarity.UNCOMMON, EnchantmentCategory.ARMOR_CHEST, new EquipmentSlot[]{EquipmentSlot.CHEST});
         maxLevel = 3;
     }
 

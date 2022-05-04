@@ -1,8 +1,8 @@
 package cofh.ensorcellation.enchantment;
 
 import cofh.lib.enchantment.EnchantmentCoFH;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 public class VitalityEnchantment extends EnchantmentCoFH {
 
@@ -10,7 +10,7 @@ public class VitalityEnchantment extends EnchantmentCoFH {
 
     public VitalityEnchantment() {
 
-        super(Rarity.VERY_RARE, EnchantmentType.ARMOR_CHEST, new EquipmentSlotType[]{EquipmentSlotType.CHEST});
+        super(Rarity.VERY_RARE, EnchantmentCategory.ARMOR_CHEST, new EquipmentSlot[]{EquipmentSlot.CHEST});
         maxLevel = 3;
     }
 

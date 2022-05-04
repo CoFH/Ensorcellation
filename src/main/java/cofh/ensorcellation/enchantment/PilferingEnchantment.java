@@ -1,8 +1,8 @@
 package cofh.ensorcellation.enchantment;
 
 import cofh.lib.enchantment.EnchantmentCoFH;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 public class PilferingEnchantment extends EnchantmentCoFH {
 
@@ -10,7 +10,7 @@ public class PilferingEnchantment extends EnchantmentCoFH {
 
     public PilferingEnchantment() {
 
-        super(Rarity.RARE, EnchantmentType.FISHING_ROD, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND});
+        super(Rarity.RARE, EnchantmentCategory.FISHING_ROD, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
         treasureEnchantment = true;
     }
 

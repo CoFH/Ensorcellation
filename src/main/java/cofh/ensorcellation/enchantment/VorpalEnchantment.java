@@ -3,12 +3,12 @@ package cofh.ensorcellation.enchantment;
 import cofh.core.init.CoreEnchantments;
 import cofh.lib.enchantment.EnchantmentCoFH;
 import cofh.lib.util.Utils;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 
 public class VorpalEnchantment extends EnchantmentCoFH {
 
@@ -20,7 +20,7 @@ public class VorpalEnchantment extends EnchantmentCoFH {
 
     public VorpalEnchantment() {
 
-        super(Rarity.RARE, CoreEnchantments.Types.SWORD_OR_AXE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND});
+        super(Rarity.RARE, CoreEnchantments.Types.SWORD_OR_AXE, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
         maxLevel = 3;
     }
 
@@ -39,8 +39,8 @@ public class VorpalEnchantment extends EnchantmentCoFH {
     // region HELPERS
     public static void onHit(LivingEntity entity, int level) {
 
-        entity.level.playSound(null, entity.blockPosition(), SoundEvents.PLAYER_ATTACK_CRIT, SoundCategory.PLAYERS, 1.0F, 1.0F);
-        if (entity.level instanceof ServerWorld) {
+        entity.level.playSound(null, entity.blockPosition(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 1.0F, 1.0F);
+        if (entity.level instanceof ServerLevel) {
             for (int i = 0; i < 2 * level; ++i) {
                 Utils.spawnParticles(entity.level, ParticleTypes.CRIT, entity.getX() + entity.level.random.nextDouble(), entity.getY() + 1.0D + entity.level.random.nextDouble(), entity.getZ() + entity.level.random.nextDouble(), 1, 0, 0, 0, 0);
             }

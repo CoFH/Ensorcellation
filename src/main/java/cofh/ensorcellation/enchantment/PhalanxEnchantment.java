@@ -1,9 +1,10 @@
 package cofh.ensorcellation.enchantment;
 
 import cofh.lib.enchantment.EnchantmentCoFH;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraftforge.common.ToolActions;
 
 public class PhalanxEnchantment extends EnchantmentCoFH {
 
@@ -11,7 +12,7 @@ public class PhalanxEnchantment extends EnchantmentCoFH {
 
     public PhalanxEnchantment() {
 
-        super(Rarity.UNCOMMON, EnchantmentType.BREAKABLE, new EquipmentSlotType[]{EquipmentSlotType.OFFHAND});
+        super(Rarity.UNCOMMON, EnchantmentCategory.BREAKABLE, new EquipmentSlot[]{EquipmentSlot.OFFHAND});
         maxLevel = 2;
     }
 
@@ -30,7 +31,7 @@ public class PhalanxEnchantment extends EnchantmentCoFH {
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
 
-        return enable && (stack.getItem().isShield(stack, null) || supportsEnchantment(stack));
+        return enable && (stack.getItem().canPerformAction(stack, ToolActions.SHIELD_BLOCK) || supportsEnchantment(stack));
     }
 
 }

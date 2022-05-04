@@ -3,9 +3,10 @@ package cofh.ensorcellation.event;
 import cofh.ensorcellation.enchantment.override.MendingEnchantmentAlt;
 import cofh.ensorcellation.init.EnsorcConfig;
 import cofh.lib.util.helpers.XpHelper;
-import net.minecraft.entity.item.ExperienceOrbEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.event.entity.player.AnvilRepairEvent;
 import net.minecraftforge.event.entity.player.PlayerXpEvent;
@@ -15,7 +16,7 @@ import net.minecraftforge.fml.common.Mod;
 
 import static cofh.lib.util.Utils.getItemEnchantmentLevel;
 import static cofh.lib.util.constants.Constants.ID_ENSORCELLATION;
-import static net.minecraft.enchantment.Enchantments.MENDING;
+import static net.minecraft.world.item.enchantment.Enchantments.MENDING;
 
 @Mod.EventBusSubscriber (modid = ID_ENSORCELLATION)
 public class PreservationEvents {
@@ -101,8 +102,8 @@ public class PreservationEvents {
         if (!EnsorcConfig.enableMendingOverride) {
             return;
         }
-        PlayerEntity player = event.getPlayer();
-        ExperienceOrbEntity orb = event.getOrb();
+        Player player = event.getPlayer();
+        ExperienceOrb orb = event.getOrb();
 
         player.takeXpDelay = 2;
         player.take(orb, 1);
@@ -111,7 +112,7 @@ public class PreservationEvents {
         if (orb.value > 0) {
             player.giveExperiencePoints(orb.value);
         }
-        orb.remove();
+        orb.remove(Entity.RemovalReason.KILLED);
         event.setCanceled(true);
     }
 

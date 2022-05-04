@@ -2,13 +2,13 @@ package cofh.ensorcellation.enchantment;
 
 import cofh.core.init.CoreEnchantments;
 import cofh.lib.enchantment.EnchantmentCoFH;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.world.entity.EquipmentSlot;
 
 public class CurseMercyEnchantment extends EnchantmentCoFH {
 
     public CurseMercyEnchantment() {
 
-        super(Rarity.VERY_RARE, CoreEnchantments.Types.SWORD_OR_AXE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND});
+        super(Rarity.VERY_RARE, CoreEnchantments.Types.SWORD_OR_AXE, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
         treasureEnchantment = true;
     }
 

@@ -2,9 +2,9 @@ package cofh.ensorcellation.enchantment;
 
 import cofh.core.init.CoreEnchantments;
 import cofh.lib.enchantment.EnchantmentCoFH;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 
 public class SoulboundEnchantment extends EnchantmentCoFH {
 
@@ -12,7 +12,7 @@ public class SoulboundEnchantment extends EnchantmentCoFH {
 
     public SoulboundEnchantment() {
 
-        super(Rarity.UNCOMMON, CoreEnchantments.Types.ENCHANTABLE, EquipmentSlotType.values());
+        super(Rarity.UNCOMMON, CoreEnchantments.Types.ENCHANTABLE, EquipmentSlot.values());
         maxLevel = 3;
     }
 

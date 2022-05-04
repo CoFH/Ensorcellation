@@ -5,17 +5,18 @@ import cofh.ensorcellation.enchantment.FireRebukeEnchantment;
 import cofh.ensorcellation.enchantment.FrostRebukeEnchantment;
 import cofh.ensorcellation.enchantment.PhalanxEnchantment;
 import cofh.ensorcellation.enchantment.override.ThornsEnchantmentImp;
-import net.minecraft.enchantment.ThornsEnchantment;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.ThornsEnchantment;
+import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -26,9 +27,9 @@ import static cofh.lib.util.constants.Constants.*;
 import static cofh.lib.util.references.EnsorcIDs.ID_BULWARK;
 import static cofh.lib.util.references.EnsorcIDs.ID_PHALANX;
 import static cofh.lib.util.references.EnsorcReferences.*;
-import static net.minecraft.enchantment.Enchantments.THORNS;
-import static net.minecraft.entity.ai.attributes.AttributeModifier.Operation.ADDITION;
-import static net.minecraft.entity.ai.attributes.AttributeModifier.Operation.MULTIPLY_TOTAL;
+import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADDITION;
+import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.MULTIPLY_TOTAL;
+import static net.minecraft.world.item.enchantment.Enchantments.THORNS;
 
 @Mod.EventBusSubscriber (modid = ID_ENSORCELLATION)
 public class ShieldEnchEvents {
@@ -71,8 +72,8 @@ public class ShieldEnchEvents {
             }
             // BULWARK
             int encBulwark = getItemEnchantmentLevel(BULWARK, stack);
-            if (encBulwark > 0 && attacker instanceof PlayerEntity) {
-                PlayerEntity playerAttacker = (PlayerEntity) attacker;
+            if (encBulwark > 0 && attacker instanceof Player) {
+                Player playerAttacker = (Player) attacker;
                 if (playerAttacker.getRandom().nextFloat() < 0.5F) {
                     playerAttacker.getCooldowns().addCooldown(playerAttacker.getMainHandItem().getItem(), 100);
                     attacker.level.broadcastEntityEvent(attacker, (byte) 30);
@@ -90,8 +91,8 @@ public class ShieldEnchEvents {
         LivingEntity entity = event.getEntityLiving();
         ItemStack stack = entity.getUseItem();
 
-        ModifiableAttributeInstance knockbackResAttr = entity.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
-        ModifiableAttributeInstance moveSpeedAttr = entity.getAttribute(Attributes.MOVEMENT_SPEED);
+        AttributeInstance knockbackResAttr = entity.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
+        AttributeInstance moveSpeedAttr = entity.getAttribute(Attributes.MOVEMENT_SPEED);
 
         if (knockbackResAttr != null) {
             knockbackResAttr.removeModifier(UUID_ENCH_BULWARK_KNOCKBACK_RESISTANCE);
@@ -99,7 +100,7 @@ public class ShieldEnchEvents {
         if (moveSpeedAttr != null) {
             moveSpeedAttr.removeModifier(UUID_ENCH_PHALANX_MOVEMENT_SPEED);
         }
-        if (stack.getItem().isShield(stack, entity)) {
+        if (stack.getItem().canPerformAction(stack, ToolActions.SHIELD_BLOCK)) {
             // BULWARK
             int encBulwark = getItemEnchantmentLevel(BULWARK, stack);
             if (knockbackResAttr != null) {
@@ -121,18 +122,18 @@ public class ShieldEnchEvents {
     private static boolean canBlockDamageSource(LivingEntity living, DamageSource source) {
 
         Entity entity = source.getDirectEntity();
-        if (entity instanceof AbstractArrowEntity) {
-            AbstractArrowEntity arrow = (AbstractArrowEntity) entity;
+        if (entity instanceof AbstractArrow) {
+            AbstractArrow arrow = (AbstractArrow) entity;
             if (arrow.getPierceLevel() > 0) {
                 return false;
             }
         }
         if (!source.isBypassArmor() && living.isBlocking()) {
-            Vector3d vec3d2 = source.getSourcePosition();
+            Vec3 vec3d2 = source.getSourcePosition();
             if (vec3d2 != null) {
-                Vector3d vec3d = living.getViewVector(1.0F);
-                Vector3d vec3d1 = vec3d2.vectorTo(new Vector3d(living.getX(), living.getY(), living.getZ())).normalize();
-                vec3d1 = new Vector3d(vec3d1.x, 0.0D, vec3d1.z);
+                Vec3 vec3d = living.getViewVector(1.0F);
+                Vec3 vec3d1 = vec3d2.vectorTo(new Vec3(living.getX(), living.getY(), living.getZ())).normalize();
+                vec3d1 = new Vec3(vec3d1.x, 0.0D, vec3d1.z);
                 return vec3d1.dot(vec3d) < 0.0D;
             }
         }

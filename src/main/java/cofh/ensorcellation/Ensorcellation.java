@@ -4,7 +4,7 @@ import cofh.core.init.CoreItems;
 import cofh.ensorcellation.init.EnsorcConfig;
 import cofh.ensorcellation.init.EnsorcEnchantments;
 import cofh.lib.util.DeferredRegisterCoFH;
-import net.minecraft.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;

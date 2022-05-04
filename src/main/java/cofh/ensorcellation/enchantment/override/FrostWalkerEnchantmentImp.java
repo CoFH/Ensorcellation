@@ -2,20 +2,21 @@ package cofh.ensorcellation.enchantment.override;
 
 import cofh.lib.enchantment.EnchantmentOverride;
 import cofh.lib.util.helpers.MathHelper;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.FlowingFluidBlock;
-import net.minecraft.block.material.Material;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.HorseArmorItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.HorseArmorItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.ForgeEventFactory;
 
@@ -28,7 +29,7 @@ public class FrostWalkerEnchantmentImp extends EnchantmentOverride {
 
     public FrostWalkerEnchantmentImp() {
 
-        super(Rarity.RARE, EnchantmentType.ARMOR_FEET, new EquipmentSlotType[]{EquipmentSlotType.FEET});
+        super(Rarity.RARE, EnchantmentCategory.ARMOR_FEET, new EquipmentSlot[]{EquipmentSlot.FEET});
         maxLevel = 2;
         treasureEnchantment = true;
     }
@@ -61,7 +62,7 @@ public class FrostWalkerEnchantmentImp extends EnchantmentOverride {
     }
 
     // region HELPERS
-    public static void freezeNearby(LivingEntity living, World worldIn, BlockPos pos, int level) {
+    public static void freezeNearby(LivingEntity living, Level worldIn, BlockPos pos, int level) {
 
         if (!freezeLava) {
             return;
@@ -69,18 +70,18 @@ public class FrostWalkerEnchantmentImp extends EnchantmentOverride {
         if (living.isOnGround() && GLOSSED_MAGMA != null) {
             BlockState state = GLOSSED_MAGMA.defaultBlockState();
             float f = (float) Math.min(16, 2 + level);
-            BlockPos.Mutable mutable = new BlockPos.Mutable();
+            BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 
             for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-f, -1.0D, -f), pos.offset(f, -1.0D, f))) {
-                if (blockpos.closerThan(living.position(), f)) {
+                if (blockpos.closerToCenterThan(living.position(), f)) {
                     mutable.set(blockpos.getX(), blockpos.getY() + 1, blockpos.getZ());
                     BlockState blockstate1 = worldIn.getBlockState(mutable);
-                    if (blockstate1.isAir(worldIn, mutable)) {
+                    if (blockstate1.isAir()) {
                         BlockState blockstate2 = worldIn.getBlockState(blockpos);
-                        boolean isFull = blockstate2.getBlock() == Blocks.LAVA && blockstate2.getValue(FlowingFluidBlock.LEVEL) == 0;
-                        if (blockstate2.getMaterial() == Material.LAVA && isFull && state.canSurvive(worldIn, blockpos) && worldIn.isUnobstructed(state, blockpos, ISelectionContext.empty()) && !ForgeEventFactory.onBlockPlace(living, BlockSnapshot.create(worldIn.dimension(), worldIn, blockpos), net.minecraft.util.Direction.UP)) {
+                        boolean isFull = blockstate2.getBlock() == Blocks.LAVA && blockstate2.getValue(LiquidBlock.LEVEL) == 0;
+                        if (blockstate2.getMaterial() == Material.LAVA && isFull && state.canSurvive(worldIn, blockpos) && worldIn.isUnobstructed(state, blockpos, CollisionContext.empty()) && !ForgeEventFactory.onBlockPlace(living, BlockSnapshot.create(worldIn.dimension(), worldIn, blockpos), Direction.UP)) {
                             worldIn.setBlockAndUpdate(blockpos, state);
-                            worldIn.getBlockTicks().scheduleTick(blockpos, GLOSSED_MAGMA, MathHelper.nextInt(living.getRandom(), 60, 120));
+                            worldIn.scheduleTick(blockpos, GLOSSED_MAGMA, MathHelper.nextInt(living.getRandom(), 60, 120));
                         }
                     }
                 }

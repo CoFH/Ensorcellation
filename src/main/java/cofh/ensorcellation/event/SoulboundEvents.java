@@ -2,9 +2,9 @@ package cofh.ensorcellation.event;
 
 import cofh.ensorcellation.enchantment.SoulboundEnchantment;
 import cofh.lib.util.Utils;
-import net.minecraft.entity.item.ItemEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -16,7 +16,7 @@ import java.util.Iterator;
 import static cofh.lib.util.Utils.*;
 import static cofh.lib.util.constants.Constants.ID_ENSORCELLATION;
 import static cofh.lib.util.references.EnsorcReferences.SOULBOUND;
-import static net.minecraft.world.GameRules.RULE_KEEPINVENTORY;
+import static net.minecraft.world.level.GameRules.RULE_KEEPINVENTORY;
 
 @Mod.EventBusSubscriber (modid = ID_ENSORCELLATION)
 public class SoulboundEvents {
@@ -28,8 +28,8 @@ public class SoulboundEvents {
     @SubscribeEvent (priority = EventPriority.HIGH)
     public static void handlePlayerDropsEvent(LivingDropsEvent event) {
 
-        if (event.getEntity() instanceof PlayerEntity) {
-            PlayerEntity player = (PlayerEntity) event.getEntity();
+        if (event.getEntity() instanceof Player) {
+            Player player = (Player) event.getEntity();
             if (Utils.isFakePlayer(player) || player.level.getGameRules().getBoolean(RULE_KEEPINVENTORY)) {
                 return;
             }
@@ -51,8 +51,8 @@ public class SoulboundEvents {
         if (!event.isWasDeath()) {
             return;
         }
-        PlayerEntity player = event.getPlayer();
-        PlayerEntity oldPlayer = event.getOriginal();
+        Player player = event.getPlayer();
+        Player oldPlayer = event.getOriginal();
         if (Utils.isFakePlayer(player) || player.level.getGameRules().getBoolean(RULE_KEEPINVENTORY)) {
             return;
         }

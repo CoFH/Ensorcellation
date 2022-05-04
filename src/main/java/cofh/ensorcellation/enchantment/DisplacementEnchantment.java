@@ -2,26 +2,27 @@ package cofh.ensorcellation.enchantment;
 
 import cofh.lib.enchantment.EnchantmentCoFH;
 import cofh.lib.util.Utils;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.HorseArmorItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.HorseArmorItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraftforge.common.ToolActions;
 
 import java.util.Map;
 import java.util.Random;
 
 import static cofh.lib.util.constants.Constants.ARMOR_SLOTS;
 import static cofh.lib.util.references.EnsorcReferences.*;
-import static net.minecraft.enchantment.Enchantments.THORNS;
 
 public class DisplacementEnchantment extends EnchantmentCoFH {
 
@@ -30,7 +31,7 @@ public class DisplacementEnchantment extends EnchantmentCoFH {
 
     public DisplacementEnchantment() {
 
-        super(Rarity.RARE, EnchantmentType.ARMOR_CHEST, ARMOR_SLOTS);
+        super(Rarity.RARE, EnchantmentCategory.ARMOR_CHEST, ARMOR_SLOTS);
         maxLevel = 3;
     }
 
@@ -50,13 +51,13 @@ public class DisplacementEnchantment extends EnchantmentCoFH {
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
 
         Item item = stack.getItem();
-        return enable && (super.canApplyAtEnchantingTable(stack) || item instanceof HorseArmorItem || item.isShield(stack, null));
+        return enable && (super.canApplyAtEnchantingTable(stack) || item instanceof HorseArmorItem || item.canPerformAction(stack, ToolActions.SHIELD_BLOCK));
     }
 
     @Override
     public boolean checkCompatibility(Enchantment ench) {
 
-        return super.checkCompatibility(ench) && ench != THORNS && ench != FIRE_REBUKE && ench != FROST_REBUKE;
+        return super.checkCompatibility(ench) && ench != Enchantments.THORNS && ench != FIRE_REBUKE && ench != FROST_REBUKE;
     }
 
     // region HELPERS
@@ -66,7 +67,7 @@ public class DisplacementEnchantment extends EnchantmentCoFH {
         if (!(attacker instanceof LivingEntity)) {
             return;
         }
-        Map.Entry<EquipmentSlotType, ItemStack> stack = EnchantmentHelper.getRandomItemWith(DISPLACEMENT, user);
+        Map.Entry<EquipmentSlot, ItemStack> stack = EnchantmentHelper.getRandomItemWith(DISPLACEMENT, user);
         if (shouldHit(level, user.getRandom())) {
             onHit(user, attacker, level);
             if (stack != null) {
@@ -80,13 +81,13 @@ public class DisplacementEnchantment extends EnchantmentCoFH {
         if (!(attacker instanceof LivingEntity)) {
             return;
         }
-        if (user instanceof PlayerEntity || !(attacker instanceof PlayerEntity) || mobsAffectPlayers) {
+        if (user instanceof Player || !(attacker instanceof Player) || mobsAffectPlayers) {
             Random rand = user.getRandom();
             int radius = 16 * level;
             int bound = radius * 2 + 1;
             BlockPos pos = new BlockPos(attacker.getX(), attacker.getY(), attacker.getZ());
             BlockPos randPos = pos.offset(-radius + rand.nextInt(bound), rand.nextInt(8), -radius + rand.nextInt(bound));
-            if (attacker.level instanceof ServerWorld && attacker.canChangeDimensions() && Utils.teleportEntityTo(attacker, randPos)) {
+            if (attacker.level instanceof ServerLevel && attacker.canChangeDimensions() && Utils.teleportEntityTo(attacker, randPos)) {
                 for (int j = 0; j < 3 * level; ++j) {
                     Utils.spawnParticles(attacker.level, ParticleTypes.PORTAL, attacker.getX() + rand.nextDouble(), attacker.getY() + 1.0D + rand.nextDouble(), attacker.getZ() + rand.nextDouble(), 1, 0, 0, 0, 0);
                     Utils.spawnParticles(attacker.level, ParticleTypes.PORTAL, randPos.getX() + rand.nextDouble(), randPos.getY() + 1.0D + rand.nextDouble(), randPos.getZ() + rand.nextDouble(), 1, 0, 0, 0, 0);

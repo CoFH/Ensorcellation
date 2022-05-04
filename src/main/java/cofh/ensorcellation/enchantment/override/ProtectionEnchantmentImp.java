@@ -1,20 +1,20 @@
 package cofh.ensorcellation.enchantment.override;
 
 import cofh.lib.enchantment.EnchantmentOverride;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.HorseArmorItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.HorseArmorItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 public class ProtectionEnchantmentImp extends EnchantmentOverride {
 
     private final Type protectionType;
 
-    public ProtectionEnchantmentImp(Rarity rarityIn, Type protectionTypeIn, EquipmentSlotType[] slots) {
+    public ProtectionEnchantmentImp(Rarity rarityIn, Type protectionTypeIn, EquipmentSlot[] slots) {
 
-        super(rarityIn, protectionTypeIn == Type.FALL ? EnchantmentType.ARMOR_FEET : EnchantmentType.ARMOR, slots);
+        super(rarityIn, protectionTypeIn == Type.FALL ? EnchantmentCategory.ARMOR_FEET : EnchantmentCategory.ARMOR, slots);
         this.protectionType = protectionTypeIn;
 
         maxLevel = 4;

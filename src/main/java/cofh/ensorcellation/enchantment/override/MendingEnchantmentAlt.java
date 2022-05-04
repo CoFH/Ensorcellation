@@ -2,8 +2,8 @@ package cofh.ensorcellation.enchantment.override;
 
 import cofh.lib.enchantment.EnchantmentCoFH;
 import cofh.lib.enchantment.EnchantmentOverride;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 import static cofh.lib.util.constants.Constants.ID_ENSORCELLATION;
 
@@ -13,7 +13,7 @@ public class MendingEnchantmentAlt extends EnchantmentOverride {
 
     public MendingEnchantmentAlt() {
 
-        super(Rarity.RARE, EnchantmentType.BREAKABLE, EquipmentSlotType.values());
+        super(Rarity.RARE, EnchantmentCategory.BREAKABLE, EquipmentSlot.values());
         descriptionId = "enchantment." + ID_ENSORCELLATION + ".preservation";
         treasureEnchantment = true;
     }

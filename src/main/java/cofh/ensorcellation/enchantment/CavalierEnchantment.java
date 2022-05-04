@@ -2,7 +2,7 @@ package cofh.ensorcellation.enchantment;
 
 import cofh.core.init.CoreEnchantments;
 import cofh.lib.enchantment.EnchantmentCoFH;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.world.entity.EquipmentSlot;
 
 public class CavalierEnchantment extends EnchantmentCoFH {
 
@@ -10,7 +10,7 @@ public class CavalierEnchantment extends EnchantmentCoFH {
 
     public CavalierEnchantment() {
 
-        super(Rarity.UNCOMMON, CoreEnchantments.Types.SWORD_OR_AXE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND});
+        super(Rarity.UNCOMMON, CoreEnchantments.Types.SWORD_OR_AXE, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
         maxLevel = 4;
     }
 

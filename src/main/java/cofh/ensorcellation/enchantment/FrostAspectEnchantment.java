@@ -3,16 +3,16 @@ package cofh.ensorcellation.enchantment;
 import cofh.core.init.CoreEnchantments;
 import cofh.lib.enchantment.EnchantmentCoFH;
 import cofh.lib.util.Utils;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.monster.BlazeEntity;
-import net.minecraft.entity.monster.MagmaCubeEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.world.server.ServerWorld;
+import cofh.lib.util.references.CoreReferences;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Blaze;
+import net.minecraft.world.entity.monster.MagmaCube;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 
 import static cofh.lib.util.references.CoreReferences.CHILLED;
 
@@ -20,7 +20,7 @@ public class FrostAspectEnchantment extends EnchantmentCoFH {
 
     public FrostAspectEnchantment() {
 
-        super(Rarity.RARE, CoreEnchantments.Types.SWORD_OR_AXE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND});
+        super(Rarity.RARE, CoreEnchantments.Types.SWORD_OR_AXE, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
         maxLevel = 2;
     }
 
@@ -45,7 +45,7 @@ public class FrostAspectEnchantment extends EnchantmentCoFH {
     // region HELPERS
     public static boolean validTarget(Entity entity) {
 
-        return entity instanceof BlazeEntity || entity instanceof MagmaCubeEntity;
+        return entity instanceof Blaze || entity instanceof MagmaCube;
     }
 
     public static float getExtraDamage(int level) {
@@ -59,10 +59,10 @@ public class FrostAspectEnchantment extends EnchantmentCoFH {
         if (entity.isOnFire()) {
             entity.clearFire();
         }
-        entity.addEffect(new EffectInstance(CHILLED, i, level - 1, false, false));
-        if (entity.level instanceof ServerWorld) {
+        entity.addEffect(new MobEffectInstance(CHILLED, i, level - 1, false, false));
+        if (entity.level instanceof ServerLevel) {
             for (int j = 0; j < 4 * level; ++j) {
-                Utils.spawnParticles(entity.level, ParticleTypes.ITEM_SNOWBALL, entity.getX() + entity.level.random.nextDouble(), entity.getY() + 1.0D + entity.level.random.nextDouble(), entity.getZ() + entity.level.random.nextDouble(), 1, 0, 0, 0, 0);
+                Utils.spawnParticles(entity.level, CoreReferences.FROST_PARTICLE, entity.getX() + entity.level.random.nextDouble(), entity.getY() + 1.0D + entity.level.random.nextDouble(), entity.getZ() + entity.level.random.nextDouble(), 1, 0, 0, 0, 0);
             }
         }
     }

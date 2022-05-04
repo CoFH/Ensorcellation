@@ -1,8 +1,8 @@
 package cofh.ensorcellation.enchantment;
 
 import cofh.lib.enchantment.EnchantmentCoFH;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 public class AnglerEnchantment extends EnchantmentCoFH {
 
@@ -10,7 +10,7 @@ public class AnglerEnchantment extends EnchantmentCoFH {
 
     public AnglerEnchantment() {
 
-        super(Rarity.VERY_RARE, EnchantmentType.FISHING_ROD, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND});
+        super(Rarity.VERY_RARE, EnchantmentCategory.FISHING_ROD, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
         maxLevel = 2;
         treasureEnchantment = true;
     }

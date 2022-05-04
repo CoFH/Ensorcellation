@@ -1,23 +1,24 @@
 package cofh.ensorcellation.enchantment.override;
 
 import cofh.lib.enchantment.EnchantmentOverride;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.enchantment.ThornsEnchantment;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.HorseArmorItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.HorseArmorItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.enchantment.ThornsEnchantment;
+import net.minecraftforge.common.ToolActions;
 
 import java.util.Map;
 import java.util.Random;
 
 import static cofh.lib.util.constants.Constants.ARMOR_SLOTS;
-import static net.minecraft.enchantment.Enchantments.THORNS;
 
 public class ThornsEnchantmentImp extends EnchantmentOverride {
 
@@ -25,7 +26,7 @@ public class ThornsEnchantmentImp extends EnchantmentOverride {
 
     public ThornsEnchantmentImp() {
 
-        super(Rarity.VERY_RARE, EnchantmentType.ARMOR_CHEST, ARMOR_SLOTS);
+        super(Rarity.VERY_RARE, EnchantmentCategory.ARMOR_CHEST, ARMOR_SLOTS);
         maxLevel = 3;
     }
 
@@ -48,7 +49,7 @@ public class ThornsEnchantmentImp extends EnchantmentOverride {
         if (!enable) {
             return item instanceof ArmorItem || super.canEnchant(stack);
         }
-        return item instanceof ArmorItem || item instanceof HorseArmorItem || item.isShield(stack, null);
+        return item instanceof ArmorItem || item instanceof HorseArmorItem || item.canPerformAction(stack, ToolActions.SHIELD_BLOCK);
     }
 
     @Override
@@ -58,7 +59,7 @@ public class ThornsEnchantmentImp extends EnchantmentOverride {
             return super.canApplyAtEnchantingTable(stack);
         }
         Item item = stack.getItem();
-        return super.canApplyAtEnchantingTable(stack) || item instanceof HorseArmorItem || item.isShield(stack, null);
+        return super.canApplyAtEnchantingTable(stack) || item instanceof HorseArmorItem || item.canPerformAction(stack, ToolActions.SHIELD_BLOCK);
     }
 
     // region HELPERS
@@ -66,7 +67,7 @@ public class ThornsEnchantmentImp extends EnchantmentOverride {
     public void doPostHurt(LivingEntity user, Entity attacker, int level) {
 
         Random rand = user.getRandom();
-        Map.Entry<EquipmentSlotType, ItemStack> stack = EnchantmentHelper.getRandomItemWith(THORNS, user);
+        Map.Entry<EquipmentSlot, ItemStack> stack = EnchantmentHelper.getRandomItemWith(Enchantments.THORNS, user);
         if (shouldHit(level, rand)) {
             if (attacker != null) {
                 attacker.hurt(DamageSource.thorns(user), (float) ThornsEnchantment.getDamage(level, rand));

@@ -2,15 +2,15 @@ package cofh.ensorcellation.enchantment;
 
 import cofh.core.init.CoreEnchantments;
 import cofh.lib.enchantment.EnchantmentCoFH;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 
 public class ExcavatingEnchantment extends EnchantmentCoFH {
 
     public ExcavatingEnchantment() {
 
-        super(Rarity.RARE, CoreEnchantments.Types.PICKAXE_OR_SHOVEL, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND});
+        super(Rarity.RARE, CoreEnchantments.Types.PICKAXE_OR_SHOVEL, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
         treasureEnchantment = true;
     }
 

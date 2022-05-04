@@ -2,9 +2,9 @@ package cofh.ensorcellation.enchantment.override;
 
 import cofh.core.init.CoreEnchantments;
 import cofh.lib.enchantment.EnchantmentOverride;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 
 import static cofh.lib.util.references.EnsorcReferences.EXCAVATING;
 
@@ -12,7 +12,7 @@ public class LootingEnchantmentImp extends EnchantmentOverride {
 
     public LootingEnchantmentImp() {
 
-        super(Rarity.RARE, CoreEnchantments.Types.SWORD_OR_AXE, new EquipmentSlotType[]{EquipmentSlotType.MAINHAND});
+        super(Rarity.RARE, CoreEnchantments.Types.SWORD_OR_AXE, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
         maxLevel = 3;
     }
 
