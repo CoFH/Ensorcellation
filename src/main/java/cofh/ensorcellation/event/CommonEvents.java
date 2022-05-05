@@ -34,7 +34,6 @@ import net.minecraft.world.item.enchantment.FrostWalkerEnchantment;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.LootTables;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.util.FakePlayer;
