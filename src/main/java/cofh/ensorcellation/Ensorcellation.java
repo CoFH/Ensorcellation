@@ -1,8 +1,10 @@
 package cofh.ensorcellation;
 
 import cofh.core.init.CoreItems;
-import cofh.ensorcellation.init.EnsorcConfig;
+import cofh.ensorcellation.config.BaseEnchantmentConfig;
+import cofh.ensorcellation.config.OverrideEnchantmentConfig;
 import cofh.ensorcellation.init.EnsorcEnchantments;
+import cofh.lib.config.ConfigManager;
 import cofh.lib.util.DeferredRegisterCoFH;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -19,6 +21,7 @@ import static cofh.lib.util.constants.Constants.ID_ENSORCELLATION;
 public class Ensorcellation {
 
     public static final Logger LOG = LogManager.getLogger(ID_ENSORCELLATION);
+    public static final ConfigManager CONFIG_MANAGER = new ConfigManager();
 
     public static final DeferredRegisterCoFH<Enchantment> ENCHANTMENTS = DeferredRegisterCoFH.create(ForgeRegistries.ENCHANTMENTS, ID_ENSORCELLATION);
 
@@ -30,7 +33,9 @@ public class Ensorcellation {
 
         ENCHANTMENTS.register(modEventBus);
 
-        EnsorcConfig.register();
+        CONFIG_MANAGER.register(modEventBus)
+                .addServerConfig(new BaseEnchantmentConfig())
+                .addServerConfig(new OverrideEnchantmentConfig());
 
         EnsorcEnchantments.register();
 
@@ -40,6 +45,7 @@ public class Ensorcellation {
 
     private void commonSetup(final FMLCommonSetupEvent event) {
 
+        CONFIG_MANAGER.setupServer();
     }
 
 }
