@@ -432,7 +432,7 @@ public class CommonEvents {
         int encFool = getMaxEquippedEnchantmentLevel(player, CURSE_FOOL);
         if (encFool > 0) {
             orb.value = 0;
-            orb.remove(Entity.RemovalReason.KILLED);
+            orb.discard();
             event.setCanceled(true);
         }
     }

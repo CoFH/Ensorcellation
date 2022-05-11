@@ -3,7 +3,6 @@ package cofh.ensorcellation.event;
 import cofh.ensorcellation.config.OverrideEnchantmentConfig;
 import cofh.ensorcellation.enchantment.override.MendingEnchantmentAlt;
 import cofh.lib.util.helpers.XpHelper;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -112,7 +111,7 @@ public class PreservationEvents {
         if (orb.value > 0) {
             player.giveExperiencePoints(orb.value);
         }
-        orb.remove(Entity.RemovalReason.KILLED);
+        orb.discard();
         event.setCanceled(true);
     }
 
