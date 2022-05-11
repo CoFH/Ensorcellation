@@ -238,7 +238,7 @@ public class BaseEnchantmentConfig implements IBaseConfig {
         builder.push("Magic Edge");
         enableMagicEdge = builder
                 .comment("If TRUE, the Magic Edge Enchantment is available for various Weapons.")
-                .define("Enable", true);
+                .define("Enable", false);
         treasureMagicEdge = builder
                 .comment(treasure)
                 .define("Treasure", true);
@@ -356,7 +356,7 @@ public class BaseEnchantmentConfig implements IBaseConfig {
         builder.push("Pilfering");
         enablePilfering = builder
                 .comment("If TRUE, the Pilfering Enchantment is available for Fishing Rods.")
-                .define("Enable", true);
+                .define("Enable", false);
         treasurePilfering = builder
                 .comment(treasure)
                 .define("Treasure", true);
@@ -366,39 +366,39 @@ public class BaseEnchantmentConfig implements IBaseConfig {
         builder.pop();
 
         // HOES
-        builder.push("Furrowing");
-        enableFurrowing = builder
-                .comment("If TRUE, the Furrowing Enchantment is available for Hoes.")
-                .define("Enable", true);
-        treasureFurrowing = builder
-                .comment(treasure)
-                .define("Treasure", false);
-        levelFurrowing = builder
-                .comment(level)
-                .defineInRange("Max Level", 4, 1, MAX_ENCHANT_LEVEL);
-        builder.pop();
-
-        builder.push("Tilling");
-
-        enableTilling = builder
-                .comment("If TRUE, the Tilling Enchantment is available for Hoes.")
-                .define("Enable", true);
-        treasureTilling = builder
-                .comment(treasure)
-                .define("Treasure", true);
-        levelTilling = builder
-                .comment(level)
-                .defineInRange("Max Level", 4, 1, MAX_ENCHANT_LEVEL);
-        builder.pop();
-
-        builder.push("Weeding");
-        enableWeeding = builder
-                .comment("If TRUE, the Weeding Enchantment is available for Hoes.")
-                .define("Enable", false);
-        treasureWeeding = builder
-                .comment(treasure)
-                .define("Treasure", false);
-        builder.pop();
+        //        builder.push("Furrowing");
+        //        enableFurrowing = builder
+        //                .comment("If TRUE, the Furrowing Enchantment is available for Hoes.")
+        //                .define("Enable", true);
+        //        treasureFurrowing = builder
+        //                .comment(treasure)
+        //                .define("Treasure", false);
+        //        levelFurrowing = builder
+        //                .comment(level)
+        //                .defineInRange("Max Level", 4, 1, MAX_ENCHANT_LEVEL);
+        //        builder.pop();
+        //
+        //        builder.push("Tilling");
+        //
+        //        enableTilling = builder
+        //                .comment("If TRUE, the Tilling Enchantment is available for Hoes.")
+        //                .define("Enable", true);
+        //        treasureTilling = builder
+        //                .comment(treasure)
+        //                .define("Treasure", true);
+        //        levelTilling = builder
+        //                .comment(level)
+        //                .defineInRange("Max Level", 4, 1, MAX_ENCHANT_LEVEL);
+        //        builder.pop();
+        //
+        //        builder.push("Weeding");
+        //        enableWeeding = builder
+        //                .comment("If TRUE, the Weeding Enchantment is available for Hoes.")
+        //                .define("Enable", false);
+        //        treasureWeeding = builder
+        //                .comment(treasure)
+        //                .define("Treasure", false);
+        //        builder.pop();
 
         // SHIELDS
         builder.push("Bulwark");

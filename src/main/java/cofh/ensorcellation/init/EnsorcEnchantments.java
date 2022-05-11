@@ -64,17 +64,15 @@ public class EnsorcEnchantments {
         ENCHANTMENTS.register(ID_PILFERING, PilferingEnchantment::new);
 
         // HOES
-        ENCHANTMENTS.register(ID_FURROWING, FurrowingEnchantment::new);
-        ENCHANTMENTS.register(ID_TILLING, TillingEnchantment::new);
-        ENCHANTMENTS.register(ID_WEEDING, WeedingEnchantment::new);
+        //        ENCHANTMENTS.register(ID_FURROWING, FurrowingEnchantment::new);
+        //        ENCHANTMENTS.register(ID_TILLING, TillingEnchantment::new);
+        //        ENCHANTMENTS.register(ID_WEEDING, WeedingEnchantment::new);
 
         // SHIELDS
         ENCHANTMENTS.register(ID_BULWARK, BulwarkEnchantment::new);
         ENCHANTMENTS.register(ID_PHALANX, PhalanxEnchantment::new);
 
         // MISC
-        // TODO: Revisit
-        // ENCHANTMENTS.register(ID_HOLDING, HoldingEnchantment::new);
         ENCHANTMENTS.register(ID_SOULBOUND, SoulboundEnchantment::new);
 
         // CURSES
