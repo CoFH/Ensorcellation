@@ -29,23 +29,17 @@ public class Ensorcellation {
 
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        modEventBus.addListener(this::commonSetup);
-
         ENCHANTMENTS.register(modEventBus);
 
         CONFIG_MANAGER.register(modEventBus)
                 .addServerConfig(new BaseEnchantmentConfig())
                 .addServerConfig(new OverrideEnchantmentConfig());
+        CONFIG_MANAGER.setupServer();
 
         EnsorcEnchantments.register();
 
         CoreItems.registerHorseArmorOverrides();
         CoreItems.registerShieldOverride();
-    }
-
-    private void commonSetup(final FMLCommonSetupEvent event) {
-
-        CONFIG_MANAGER.setupServer();
     }
 
 }
