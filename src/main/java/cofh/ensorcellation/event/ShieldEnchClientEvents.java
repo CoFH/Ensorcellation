@@ -10,9 +10,9 @@ import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import static cofh.ensorcellation.init.EnsorcEnchantments.PHALANX;
 import static cofh.lib.util.Utils.getItemEnchantmentLevel;
-import static cofh.lib.util.constants.Constants.ID_ENSORCELLATION;
-import static cofh.lib.util.references.EnsorcReferences.PHALANX;
+import static cofh.lib.util.constants.ModIds.ID_ENSORCELLATION;
 
 @Mod.EventBusSubscriber (value = Dist.CLIENT, modid = ID_ENSORCELLATION)
 public class ShieldEnchClientEvents {
@@ -28,23 +28,23 @@ public class ShieldEnchClientEvents {
     @SubscribeEvent
     public static void handleFOVUpdateEvent(FOVModifierEvent event) {
 
-        Player entity = event.getEntity();
-        ItemStack stack = event.getEntity().getUseItem();
+        Player entity = event.getPlayer();
+        ItemStack stack = event.getPlayer().getUseItem();
 
         if (stack.getItem().canPerformAction(stack, ToolActions.SHIELD_BLOCK)) {
-            int encPhalanx = getItemEnchantmentLevel(PHALANX, stack);
+            int encPhalanx = getItemEnchantmentLevel(PHALANX.get(), stack);
             if (encPhalanx > 0) {
                 modPhalanx = encPhalanx * PhalanxEnchantment.SPEED / 2D;
                 hadPhalanx = true;
                 timePhalanx = entity.level.getGameTime();
             }
-            event.setNewfov((float) MathHelper.clamp(event.getNewfov() - modPhalanx, 1.0D, 2.5D));
+            event.setNewFov((float) MathHelper.clamp(event.getNewFov() - modPhalanx, 1.0D, 2.5D));
         } else if (hadPhalanx) {
             if (entity.level.getGameTime() - 20 > timePhalanx) {
                 hadPhalanx = false;
                 modPhalanx = 0;
             }
-            event.setNewfov((float) MathHelper.clamp(event.getNewfov() - modPhalanx, 1.0D, 2.5D));
+            event.setNewFov((float) MathHelper.clamp(event.getNewFov() - modPhalanx, 1.0D, 2.5D));
         }
     }
 

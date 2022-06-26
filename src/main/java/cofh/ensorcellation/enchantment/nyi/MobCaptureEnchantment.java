@@ -36,7 +36,7 @@
 //    public boolean canApplyAtEnchantingTable(ItemStack stack) {
 //
 //        Item item = stack.getItem();
-//        return enable && (item instanceof FishingRodItem || supportsEnchantment(stack));
+//        return enable && (item instanceof FishingRodItem);
 //    }
 //
 //}

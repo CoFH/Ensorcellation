@@ -32,7 +32,7 @@
 //    public boolean canApplyAtEnchantingTable(ItemStack stack) {
 //
 //        Item item = stack.getItem();
-//        return enable && (item.getToolTypes(stack).contains(ToolType.PICKAXE) || supportsEnchantment(stack));
+//        return enable && (item.getToolTypes(stack).contains(ToolType.PICKAXE));
 //    }
 //
 //    @Override

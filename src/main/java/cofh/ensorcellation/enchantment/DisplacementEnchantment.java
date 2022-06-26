@@ -5,6 +5,7 @@ import cofh.lib.util.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -19,10 +20,11 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.common.ToolActions;
 
 import java.util.Map;
-import java.util.Random;
 
-import static cofh.lib.util.constants.Constants.ARMOR_SLOTS;
-import static cofh.lib.util.references.EnsorcReferences.*;
+import static cofh.core.util.references.EnsorcIDs.ID_FIRE_REBUKE;
+import static cofh.core.util.references.EnsorcIDs.ID_FROST_REBUKE;
+import static cofh.ensorcellation.Ensorcellation.ENCHANTMENTS;
+import static cofh.lib.util.Constants.ARMOR_SLOTS;
 
 public class DisplacementEnchantment extends EnchantmentCoFH {
 
@@ -57,7 +59,7 @@ public class DisplacementEnchantment extends EnchantmentCoFH {
     @Override
     public boolean checkCompatibility(Enchantment ench) {
 
-        return super.checkCompatibility(ench) && ench != Enchantments.THORNS && ench != FIRE_REBUKE && ench != FROST_REBUKE;
+        return super.checkCompatibility(ench) && ench != Enchantments.THORNS && ench != ENCHANTMENTS.get(ID_FIRE_REBUKE) && ench != ENCHANTMENTS.get(ID_FROST_REBUKE);
     }
 
     // region HELPERS
@@ -67,7 +69,7 @@ public class DisplacementEnchantment extends EnchantmentCoFH {
         if (!(attacker instanceof LivingEntity)) {
             return;
         }
-        Map.Entry<EquipmentSlot, ItemStack> stack = EnchantmentHelper.getRandomItemWith(DISPLACEMENT, user);
+        Map.Entry<EquipmentSlot, ItemStack> stack = EnchantmentHelper.getRandomItemWith(this, user);
         if (shouldHit(level, user.getRandom())) {
             onHit(user, attacker, level);
             if (stack != null) {
@@ -82,7 +84,7 @@ public class DisplacementEnchantment extends EnchantmentCoFH {
             return;
         }
         if (user instanceof Player || !(attacker instanceof Player) || mobsAffectPlayers) {
-            Random rand = user.getRandom();
+            RandomSource rand = user.getRandom();
             int radius = 16 * level;
             int bound = radius * 2 + 1;
             BlockPos pos = new BlockPos(attacker.getX(), attacker.getY(), attacker.getZ());
@@ -96,7 +98,7 @@ public class DisplacementEnchantment extends EnchantmentCoFH {
         }
     }
 
-    public static boolean shouldHit(int level, Random rand) {
+    public static boolean shouldHit(int level, RandomSource rand) {
 
         return rand.nextInt(100) < chance * level;
     }

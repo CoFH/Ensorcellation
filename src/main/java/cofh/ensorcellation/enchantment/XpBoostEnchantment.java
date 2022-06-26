@@ -1,10 +1,9 @@
 package cofh.ensorcellation.enchantment;
 
 import cofh.lib.enchantment.EnchantmentCoFH;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
-
-import java.util.Random;
 
 public class XpBoostEnchantment extends EnchantmentCoFH {
 
@@ -29,7 +28,7 @@ public class XpBoostEnchantment extends EnchantmentCoFH {
     }
 
     // region HELPERS
-    public static int getExp(int baseExp, int level, Random rand) {
+    public static int getExp(int baseExp, int level, RandomSource rand) {
 
         return baseExp + level + rand.nextInt(1 + level * xp);
     }

@@ -1,6 +1,7 @@
 package cofh.ensorcellation.event;
 
 import cofh.ensorcellation.enchantment.SoulboundEnchantment;
+import cofh.lib.enchantment.EnchantmentCoFH;
 import cofh.lib.util.Utils;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -13,9 +14,9 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.Iterator;
 
+import static cofh.ensorcellation.init.EnsorcEnchantments.SOULBOUND;
 import static cofh.lib.util.Utils.*;
-import static cofh.lib.util.constants.Constants.ID_ENSORCELLATION;
-import static cofh.lib.util.references.EnsorcReferences.SOULBOUND;
+import static cofh.lib.util.constants.ModIds.ID_ENSORCELLATION;
 import static net.minecraft.world.level.GameRules.RULE_KEEPINVENTORY;
 
 @Mod.EventBusSubscriber (modid = ID_ENSORCELLATION)
@@ -36,7 +37,7 @@ public class SoulboundEvents {
             Iterator<ItemEntity> iter = event.getDrops().iterator();
             while (iter.hasNext()) {
                 ItemStack stack = iter.next().getItem();
-                if (getItemEnchantmentLevel(SOULBOUND, stack) > 0) {
+                if (getItemEnchantmentLevel(SOULBOUND.get(), stack) > 0) {
                     if (addToPlayerInventory(player, stack)) {
                         iter.remove();
                     }
@@ -56,19 +57,21 @@ public class SoulboundEvents {
         if (Utils.isFakePlayer(player) || player.level.getGameRules().getBoolean(RULE_KEEPINVENTORY)) {
             return;
         }
+        EnchantmentCoFH soulbound = SOULBOUND.get();
+
         for (int i = 0; i < oldPlayer.inventory.armor.size(); ++i) {
             ItemStack stack = oldPlayer.inventory.armor.get(i);
-            int encSoulbound = getItemEnchantmentLevel(SOULBOUND, stack);
+            int encSoulbound = getItemEnchantmentLevel(soulbound, stack);
             if (encSoulbound > 0) {
                 if (SoulboundEnchantment.permanent) {
                     if (encSoulbound > 1) {
-                        removeEnchantment(stack, SOULBOUND);
-                        addEnchantment(stack, SOULBOUND, 1);
+                        removeEnchantment(stack, soulbound);
+                        addEnchantment(stack, soulbound, 1);
                     }
                 } else if (player.level.random.nextInt(1 + encSoulbound) == 0) {
-                    removeEnchantment(stack, SOULBOUND);
+                    removeEnchantment(stack, soulbound);
                     if (encSoulbound > 1) {
-                        addEnchantment(stack, SOULBOUND, encSoulbound - 1);
+                        addEnchantment(stack, soulbound, encSoulbound - 1);
                     }
                 }
                 if (addToPlayerInventory(player, stack)) {
@@ -78,17 +81,17 @@ public class SoulboundEvents {
         }
         for (int i = 0; i < oldPlayer.inventory.items.size(); ++i) {
             ItemStack stack = oldPlayer.inventory.items.get(i);
-            int encSoulbound = getItemEnchantmentLevel(SOULBOUND, stack);
+            int encSoulbound = getItemEnchantmentLevel(soulbound, stack);
             if (encSoulbound > 0) {
                 if (SoulboundEnchantment.permanent) {
                     if (encSoulbound > 1) {
-                        removeEnchantment(stack, SOULBOUND);
-                        addEnchantment(stack, SOULBOUND, 1);
+                        removeEnchantment(stack, soulbound);
+                        addEnchantment(stack, soulbound, 1);
                     }
                 } else if (player.level.random.nextInt(1 + encSoulbound) == 0) {
-                    removeEnchantment(stack, SOULBOUND);
+                    removeEnchantment(stack, soulbound);
                     if (encSoulbound > 1) {
-                        addEnchantment(stack, SOULBOUND, encSoulbound - 1);
+                        addEnchantment(stack, soulbound, encSoulbound - 1);
                     }
                 }
                 if (addToPlayerInventory(player, stack)) {

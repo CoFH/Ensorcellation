@@ -52,12 +52,13 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.ArrayList;
 import java.util.List;
 
+import static cofh.core.util.references.EnsorcIDs.ID_REACH;
+import static cofh.core.util.references.EnsorcIDs.ID_VITALITY;
+import static cofh.ensorcellation.init.EnsorcEnchantments.*;
+import static cofh.lib.util.Constants.*;
 import static cofh.lib.util.Utils.getHeldEnchantmentLevel;
 import static cofh.lib.util.Utils.getMaxEquippedEnchantmentLevel;
-import static cofh.lib.util.constants.Constants.*;
-import static cofh.lib.util.references.EnsorcIDs.ID_REACH;
-import static cofh.lib.util.references.EnsorcIDs.ID_VITALITY;
-import static cofh.lib.util.references.EnsorcReferences.*;
+import static cofh.lib.util.constants.ModIds.ID_ENSORCELLATION;
 import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADDITION;
 import static net.minecraft.world.item.enchantment.Enchantments.FROST_WALKER;
 import static net.minecraft.world.level.block.Blocks.*;
@@ -81,7 +82,7 @@ public class CommonEvents {
         Entity attacker = source.getEntity();
         // MAGIC EDGE
         if (attacker instanceof LivingEntity) {
-            int encMagicEdge = getHeldEnchantmentLevel((LivingEntity) attacker, MAGIC_EDGE);
+            int encMagicEdge = getHeldEnchantmentLevel((LivingEntity) attacker, MAGIC_EDGE.get());
             if (encMagicEdge > 0 && !source.isMagic()) {
                 source.bypassArmor().setMagic();
             }
@@ -101,7 +102,7 @@ public class CommonEvents {
         if (attacker instanceof LivingEntity) {
             LivingEntity living = (LivingEntity) attacker;
             // CURSE OF MERCY
-            int encMercy = getHeldEnchantmentLevel(living, CURSE_MERCY);
+            int encMercy = getHeldEnchantmentLevel(living, CURSE_MERCY.get());
             if (encMercy > 0 && event.getAmount() > entity.getHealth()) {
                 event.setAmount(Math.max(0.0F, entity.getHealth() - 1.0F));
             }
@@ -120,7 +121,7 @@ public class CommonEvents {
         if (attacker instanceof LivingEntity) {
             LivingEntity living = (LivingEntity) attacker;
             // LEECH
-            int encLeech = getHeldEnchantmentLevel(living, LEECH);
+            int encLeech = getHeldEnchantmentLevel(living, LEECH.get());
             if (encLeech > 0) {
                 (living).heal(encLeech);
             }
@@ -141,7 +142,7 @@ public class CommonEvents {
         }
         Player player = (Player) attacker;
         // HUNTER
-        int encHunter = getHeldEnchantmentLevel(player, HUNTER);
+        int encHunter = getHeldEnchantmentLevel(player, HUNTER.get());
         if (encHunter > 0 && entity instanceof Animal) {
 
             LootTable table = entity.level.getServer().getLootTables().get(entity.getLootTable());
@@ -164,7 +165,7 @@ public class CommonEvents {
             }
         }
         // OUTLAW
-        int encDamageVillager = getHeldEnchantmentLevel(player, DAMAGE_VILLAGER);
+        int encDamageVillager = getHeldEnchantmentLevel(player, DAMAGE_VILLAGER.get());
         if (encDamageVillager > 0 && DamageVillagerEnchantment.validTarget(entity)) {
             int emeraldDrop = MathHelper.nextInt(0, encDamageVillager);
             if (emeraldDrop > 0) {
@@ -174,7 +175,7 @@ public class CommonEvents {
             }
         }
         // VORPAL
-        int encVorpal = getHeldEnchantmentLevel(player, VORPAL);
+        int encVorpal = getHeldEnchantmentLevel(player, VORPAL.get());
         if (encVorpal > 0) {
             ItemStack itemSkull = ItemStack.EMPTY;
             if (entity.level.random.nextInt(100) < VorpalEnchantment.headBase + VorpalEnchantment.headLevel * encVorpal) {
@@ -209,7 +210,7 @@ public class CommonEvents {
         LivingEntity entity = event.getEntityLiving();
 
         // REACH
-        int encReach = getMaxEquippedEnchantmentLevel(entity, REACH);
+        int encReach = getMaxEquippedEnchantmentLevel(entity, REACH.get());
         AttributeInstance reachAttr = entity.getAttribute(ForgeMod.REACH_DISTANCE.get());
         if (reachAttr != null) {
             reachAttr.removeModifier(UUID_ENCH_REACH_DISTANCE);
@@ -218,7 +219,7 @@ public class CommonEvents {
             }
         }
         // VITALITY
-        int encVitality = getMaxEquippedEnchantmentLevel(entity, VITALITY);
+        int encVitality = getMaxEquippedEnchantmentLevel(entity, VITALITY.get());
         AttributeInstance healthAttr = entity.getAttribute(Attributes.MAX_HEALTH);
         if (healthAttr != null) {
             healthAttr.removeModifier(UUID_ENCH_VITALITY_HEALTH);
@@ -257,14 +258,14 @@ public class CommonEvents {
 
         if (player != null) {
             // CURSE OF FOOLISHNESS
-            int encFool = getMaxEquippedEnchantmentLevel(player, CURSE_FOOL);
+            int encFool = getMaxEquippedEnchantmentLevel(player, CURSE_FOOL.get());
             if (encFool > 0) {
                 event.setDroppedExperience(0);
                 event.setCanceled(true);
                 return;
             }
             // EXP BOOST
-            int encExpBoost = getMaxEquippedEnchantmentLevel(player, XP_BOOST);
+            int encExpBoost = getMaxEquippedEnchantmentLevel(player, XP_BOOST.get());
             if (encExpBoost > 0) {
                 event.setDroppedExperience(XpBoostEnchantment.getExp(event.getDroppedExperience(), encExpBoost, player.level.random));
             }
@@ -286,26 +287,26 @@ public class CommonEvents {
         }
         LivingEntity living = (LivingEntity) attacker;
 
-        int encDamageEnder = getHeldEnchantmentLevel(living, DAMAGE_ENDER);
+        int encDamageEnder = getHeldEnchantmentLevel(living, DAMAGE_ENDER.get());
         if (encDamageEnder > 0 && DamageEnderEnchantment.validTarget(entity)) {
             event.setAmount(event.getAmount() + DamageEnderEnchantment.getExtraDamage(encDamageEnder));
         }
         // TODO: Revisit if Ravagers and Witches are reclassified in future.
-        int encDamageIllager = getHeldEnchantmentLevel(living, DAMAGE_ILLAGER);
+        int encDamageIllager = getHeldEnchantmentLevel(living, DAMAGE_ILLAGER.get());
         if (encDamageIllager > 0 && DamageIllagerEnchantment.validTarget(entity)) {
             event.setAmount(event.getAmount() + DamageIllagerEnchantment.getExtraDamage(encDamageIllager));
         }
-        int encDamageVillager = getHeldEnchantmentLevel(living, DAMAGE_VILLAGER);
+        int encDamageVillager = getHeldEnchantmentLevel(living, DAMAGE_VILLAGER.get());
         if (encDamageVillager > 0 && DamageVillagerEnchantment.validTarget(entity)) {
             event.setAmount(event.getAmount() + DamageVillagerEnchantment.getExtraDamage(encDamageVillager));
         }
         // CAVALIER
-        int encCavalier = getHeldEnchantmentLevel(living, CAVALIER);
+        int encCavalier = getHeldEnchantmentLevel(living, CAVALIER.get());
         if (encCavalier > 0 && living.getVehicle() != null) {
             event.setAmount(event.getAmount() * (1 + CavalierEnchantment.damageMult * MathHelper.nextInt(1, encCavalier)));
         }
         // FROST ASPECT
-        int encFrostAspect = getHeldEnchantmentLevel(living, FROST_ASPECT);
+        int encFrostAspect = getHeldEnchantmentLevel(living, FROST_ASPECT.get());
         if (encFrostAspect > 0) {
             FrostAspectEnchantment.onHit(entity, encFrostAspect);
             // Target check is for additional damage, not effect in general.
@@ -314,19 +315,19 @@ public class CommonEvents {
             }
         }
         // MAGIC EDGE
-        int encMagicEdge = getHeldEnchantmentLevel(living, MAGIC_EDGE);
+        int encMagicEdge = getHeldEnchantmentLevel(living, MAGIC_EDGE.get());
         if (encMagicEdge > 0 && source.isMagic()) {
             event.setAmount(event.getAmount() + MagicEdgeEnchantment.getExtraDamage(encMagicEdge));
             MagicEdgeEnchantment.onHit(entity, encMagicEdge);
         }
         // VORPAL
-        int encVorpal = getHeldEnchantmentLevel(living, VORPAL);
+        int encVorpal = getHeldEnchantmentLevel(living, VORPAL.get());
         if (encVorpal > 0 && entity.level.random.nextInt(100) < VorpalEnchantment.critBase + VorpalEnchantment.critLevel * encVorpal) {
             event.setAmount(event.getAmount() * VorpalEnchantment.critDamage);
             VorpalEnchantment.onHit(entity, encVorpal);
         }
         // INSTIGATING
-        int encInstigating = getHeldEnchantmentLevel(living, INSTIGATING);
+        int encInstigating = getHeldEnchantmentLevel(living, INSTIGATING.get());
         if (encInstigating > 0 && entity.getHealth() >= entity.getMaxHealth()) {
             event.setAmount(event.getAmount() * (1 + encInstigating));
         }
@@ -357,7 +358,7 @@ public class CommonEvents {
         FoodProperties food = event.getItem().getItem().getFoodProperties();
         if (food != null) {
             // GOURMAND
-            int encGourmand = getMaxEquippedEnchantmentLevel(entity, GOURMAND);
+            int encGourmand = getMaxEquippedEnchantmentLevel(entity, GOURMAND.get());
             if (encGourmand > 0 && food != null) {
                 int foodLevel = food.getNutrition();
                 float foodSaturation = food.getSaturationModifier();
@@ -384,7 +385,7 @@ public class CommonEvents {
         }
         Player player = (Player) angler;
         // ANGLER
-        int encAngler = getHeldEnchantmentLevel(player, ANGLER);
+        int encAngler = getHeldEnchantmentLevel(player, ANGLER.get());
         if (encAngler > 0) {
             ItemStack fishingRod = player.getMainHandItem();
 
@@ -416,7 +417,7 @@ public class CommonEvents {
             }
         }
         // EXP BOOST
-        int encExpBoost = getMaxEquippedEnchantmentLevel(player, XP_BOOST);
+        int encExpBoost = getMaxEquippedEnchantmentLevel(player, XP_BOOST.get());
         if (encExpBoost > 0) {
             hook.level.addFreshEntity(new ExperienceOrb(player.level, player.getX(), player.getY() + 0.5D, player.getZ() + 0.5D, XpBoostEnchantment.getExp(0, encExpBoost, player.level.random)));
         }
@@ -429,7 +430,7 @@ public class CommonEvents {
         ExperienceOrb orb = event.getOrb();
 
         // CURSE OF FOOLISHNESS
-        int encFool = getMaxEquippedEnchantmentLevel(player, CURSE_FOOL);
+        int encFool = getMaxEquippedEnchantmentLevel(player, CURSE_FOOL.get());
         if (encFool > 0) {
             orb.value = 0;
             orb.discard();
@@ -458,7 +459,7 @@ public class CommonEvents {
         if (entity instanceof Player && !PilferingEnchantment.allowPlayerStealing) {
             return;
         }
-        int encPilfer = getHeldEnchantmentLevel(player, PILFERING);
+        int encPilfer = getHeldEnchantmentLevel(player, PILFERING.get());
         if (encPilfer > 0 && entity instanceof LivingEntity) {
             LivingEntity living = (LivingEntity) entity;
             ItemStack armor = stealArmor(living);
@@ -487,13 +488,13 @@ public class CommonEvents {
         }
         if (event.getExpToDrop() > 0) {
             // CURSE OF FOOLISHNESS
-            int encFool = getMaxEquippedEnchantmentLevel(player, CURSE_FOOL);
+            int encFool = getMaxEquippedEnchantmentLevel(player, CURSE_FOOL.get());
             if (encFool > 0) {
                 event.setExpToDrop(0);
                 return;
             }
             // EXP BOOST
-            int encExpBoost = getMaxEquippedEnchantmentLevel(player, XP_BOOST);
+            int encExpBoost = getMaxEquippedEnchantmentLevel(player, XP_BOOST.get());
             if (encExpBoost > 0) {
                 event.setExpToDrop(XpBoostEnchantment.getExp(event.getExpToDrop(), encExpBoost, player.level.random));
             }
@@ -508,7 +509,7 @@ public class CommonEvents {
         }
         Player player = event.getPlayer();
         // AIR AFFINITY
-        int encAirAffinity = getMaxEquippedEnchantmentLevel(player, AIR_AFFINITY);
+        int encAirAffinity = getMaxEquippedEnchantmentLevel(player, AIR_AFFINITY.get());
         if (encAirAffinity > 0 && !player.isOnGround()) {
             event.setNewSpeed(Math.max(event.getNewSpeed(), event.getOriginalSpeed() * 5.0F));
         }

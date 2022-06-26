@@ -11,7 +11,7 @@ import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Endermite;
 import net.minecraft.world.entity.monster.Shulker;
 
-import static cofh.lib.util.references.CoreReferences.ENDERFERENCE;
+import static cofh.core.init.CoreMobEffects.ENDERFERENCE;
 
 public class DamageEnderEnchantment extends DamageEnchantmentCoFH {
 
@@ -24,14 +24,10 @@ public class DamageEnderEnchantment extends DamageEnchantmentCoFH {
     @Override
     public void doPostAttack(LivingEntity user, Entity target, int level) {
 
-        // Should never actually happen.
-        if (ENDERFERENCE == null) {
-            return;
-        }
         if (target instanceof LivingEntity) {
             LivingEntity living = (LivingEntity) target;
             int i = 100 + user.getRandom().nextInt(40 * level);
-            living.addEffect(new MobEffectInstance(ENDERFERENCE, i, 0, false, false));
+            living.addEffect(new MobEffectInstance(ENDERFERENCE.get(), i, 0, false, false));
         }
     }
 

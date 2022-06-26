@@ -3,7 +3,7 @@ package cofh.ensorcellation.enchantment;
 import cofh.core.init.CoreEnchantments;
 import cofh.lib.enchantment.EnchantmentCoFH;
 import cofh.lib.util.Utils;
-import cofh.lib.util.references.CoreReferences;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -14,7 +14,8 @@ import net.minecraft.world.entity.monster.MagmaCube;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 
-import static cofh.lib.util.references.CoreReferences.CHILLED;
+import static cofh.core.init.CoreMobEffects.CHILLED;
+import static cofh.core.init.CoreParticles.FROST;
 
 public class FrostAspectEnchantment extends EnchantmentCoFH {
 
@@ -59,10 +60,10 @@ public class FrostAspectEnchantment extends EnchantmentCoFH {
         if (entity.isOnFire()) {
             entity.clearFire();
         }
-        entity.addEffect(new MobEffectInstance(CHILLED, i, level - 1, false, false));
+        entity.addEffect(new MobEffectInstance(CHILLED.get(), i, level - 1, false, false));
         if (entity.level instanceof ServerLevel) {
             for (int j = 0; j < 4 * level; ++j) {
-                Utils.spawnParticles(entity.level, CoreReferences.FROST_PARTICLE, entity.getX() + entity.level.random.nextDouble(), entity.getY() + 1.0D + entity.level.random.nextDouble(), entity.getZ() + entity.level.random.nextDouble(), 1, 0, 0, 0, 0);
+                Utils.spawnParticles(entity.level, (SimpleParticleType) FROST.get(), entity.getX() + entity.level.random.nextDouble(), entity.getY() + 1.0D + entity.level.random.nextDouble(), entity.getZ() + entity.level.random.nextDouble(), 1, 0, 0, 0, 0);
             }
         }
     }

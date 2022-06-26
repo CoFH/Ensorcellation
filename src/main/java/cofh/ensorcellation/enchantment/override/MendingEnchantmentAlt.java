@@ -5,7 +5,7 @@ import cofh.lib.enchantment.EnchantmentOverride;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
-import static cofh.lib.util.constants.Constants.ID_ENSORCELLATION;
+import static cofh.lib.util.constants.ModIds.ID_ENSORCELLATION;
 
 public class MendingEnchantmentAlt extends EnchantmentOverride {
 

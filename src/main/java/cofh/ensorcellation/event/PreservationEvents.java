@@ -1,8 +1,8 @@
 package cofh.ensorcellation.event;
 
+import cofh.core.util.helpers.XpHelper;
 import cofh.ensorcellation.config.OverrideEnchantmentConfig;
 import cofh.ensorcellation.enchantment.override.MendingEnchantmentAlt;
-import cofh.lib.util.helpers.XpHelper;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -14,7 +14,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 import static cofh.lib.util.Utils.getItemEnchantmentLevel;
-import static cofh.lib.util.constants.Constants.ID_ENSORCELLATION;
+import static cofh.lib.util.constants.ModIds.ID_ENSORCELLATION;
 import static net.minecraft.world.item.enchantment.Enchantments.MENDING;
 
 @Mod.EventBusSubscriber (modid = ID_ENSORCELLATION)

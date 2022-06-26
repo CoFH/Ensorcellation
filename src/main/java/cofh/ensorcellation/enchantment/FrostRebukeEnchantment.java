@@ -2,8 +2,9 @@ package cofh.ensorcellation.enchantment;
 
 import cofh.lib.enchantment.EnchantmentCoFH;
 import cofh.lib.util.Utils;
-import cofh.lib.util.references.CoreReferences;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -19,11 +20,13 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.common.ToolActions;
 
 import java.util.Map;
-import java.util.Random;
 
-import static cofh.lib.util.constants.Constants.ARMOR_SLOTS;
-import static cofh.lib.util.references.CoreReferences.CHILLED;
-import static cofh.lib.util.references.EnsorcReferences.*;
+import static cofh.core.init.CoreMobEffects.CHILLED;
+import static cofh.core.init.CoreParticles.FROST;
+import static cofh.core.util.references.EnsorcIDs.ID_DISPLACEMENT;
+import static cofh.core.util.references.EnsorcIDs.ID_FIRE_REBUKE;
+import static cofh.ensorcellation.Ensorcellation.ENCHANTMENTS;
+import static cofh.lib.util.Constants.ARMOR_SLOTS;
 
 public class FrostRebukeEnchantment extends EnchantmentCoFH {
 
@@ -58,7 +61,7 @@ public class FrostRebukeEnchantment extends EnchantmentCoFH {
     @Override
     public boolean checkCompatibility(Enchantment ench) {
 
-        return super.checkCompatibility(ench) && ench != Enchantments.THORNS && ench != DISPLACEMENT && ench != FIRE_REBUKE;
+        return super.checkCompatibility(ench) && ench != Enchantments.THORNS && ench != ENCHANTMENTS.get(ID_DISPLACEMENT) && ench != ENCHANTMENTS.get(ID_FIRE_REBUKE);
     }
 
     // region HELPERS
@@ -68,7 +71,7 @@ public class FrostRebukeEnchantment extends EnchantmentCoFH {
         if (!(attacker instanceof LivingEntity)) {
             return;
         }
-        Map.Entry<EquipmentSlot, ItemStack> stack = EnchantmentHelper.getRandomItemWith(FROST_REBUKE, user);
+        Map.Entry<EquipmentSlot, ItemStack> stack = EnchantmentHelper.getRandomItemWith(this, user);
         if (shouldHit(level, user.getRandom())) {
             onHit(user, attacker, level);
             if (stack != null) {
@@ -85,20 +88,20 @@ public class FrostRebukeEnchantment extends EnchantmentCoFH {
         if (user instanceof Player || !(attacker instanceof Player) || mobsAffectPlayers) {
             ((LivingEntity) attacker).knockback(0.5F * level, user.getX() - attacker.getX(), user.getZ() - attacker.getZ());
         }
-        Random rand = user.getRandom();
+        RandomSource rand = user.getRandom();
         int i = 20 + 20 * rand.nextInt(3 * level);
         if (attacker.isOnFire()) {
             attacker.clearFire();
         }
-        ((LivingEntity) attacker).addEffect(new MobEffectInstance(CHILLED, i, level - 1, false, false));
+        ((LivingEntity) attacker).addEffect(new MobEffectInstance(CHILLED.get(), i, level - 1, false, false));
         if (attacker.level instanceof ServerLevel) {
             for (int j = 0; j < 3 * level; ++j) {
-                Utils.spawnParticles(attacker.level, CoreReferences.FROST_PARTICLE, attacker.getX() + rand.nextDouble(), attacker.getY() + 1.0D + rand.nextDouble(), attacker.getZ() + rand.nextDouble(), 1, 0, 0, 0, 0);
+                Utils.spawnParticles(attacker.level, (SimpleParticleType) FROST.get(), attacker.getX() + rand.nextDouble(), attacker.getY() + 1.0D + rand.nextDouble(), attacker.getZ() + rand.nextDouble(), 1, 0, 0, 0, 0);
             }
         }
     }
 
-    public static boolean shouldHit(int level, Random rand) {
+    public static boolean shouldHit(int level, RandomSource rand) {
 
         return rand.nextInt(100) < chance * level;
     }

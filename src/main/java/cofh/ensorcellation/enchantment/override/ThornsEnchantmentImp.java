@@ -1,6 +1,7 @@
 package cofh.ensorcellation.enchantment.override;
 
 import cofh.lib.enchantment.EnchantmentOverride;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -16,9 +17,8 @@ import net.minecraft.world.item.enchantment.ThornsEnchantment;
 import net.minecraftforge.common.ToolActions;
 
 import java.util.Map;
-import java.util.Random;
 
-import static cofh.lib.util.constants.Constants.ARMOR_SLOTS;
+import static cofh.lib.util.Constants.ARMOR_SLOTS;
 
 public class ThornsEnchantmentImp extends EnchantmentOverride {
 
@@ -66,7 +66,7 @@ public class ThornsEnchantmentImp extends EnchantmentOverride {
     @Override
     public void doPostHurt(LivingEntity user, Entity attacker, int level) {
 
-        Random rand = user.getRandom();
+        RandomSource rand = user.getRandom();
         Map.Entry<EquipmentSlot, ItemStack> stack = EnchantmentHelper.getRandomItemWith(Enchantments.THORNS, user);
         if (shouldHit(level, rand)) {
             if (attacker != null) {
@@ -81,7 +81,7 @@ public class ThornsEnchantmentImp extends EnchantmentOverride {
 
     }
 
-    public static boolean shouldHit(int level, Random rand) {
+    public static boolean shouldHit(int level, RandomSource rand) {
 
         return rand.nextInt(100) < chance * level;
     }

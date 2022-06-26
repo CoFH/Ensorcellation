@@ -18,9 +18,9 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import static cofh.ensorcellation.init.EnsorcEnchantments.*;
 import static cofh.lib.util.Utils.getItemEnchantmentLevel;
-import static cofh.lib.util.constants.Constants.ID_ENSORCELLATION;
-import static cofh.lib.util.references.EnsorcReferences.*;
+import static cofh.lib.util.constants.ModIds.ID_ENSORCELLATION;
 import static net.minecraft.world.item.enchantment.Enchantments.*;
 
 @Mod.EventBusSubscriber (modid = ID_ENSORCELLATION)
@@ -106,17 +106,17 @@ public class HorseEnchEvents {
                     attacker.hurt(DamageSource.thorns(entity), ThornsEnchantment.getDamage(encThorns, MathHelper.RANDOM));
                 }
                 // DISPLACEMENT
-                int encDisplacement = getItemEnchantmentLevel(DISPLACEMENT, armor);
+                int encDisplacement = getItemEnchantmentLevel(DISPLACEMENT.get(), armor);
                 if (DisplacementEnchantment.shouldHit(encDisplacement, entity.getRandom())) {
                     DisplacementEnchantment.onHit(entity, attacker, encDisplacement);
                 }
                 // FIRE REBUKE
-                int encFireRebuke = getItemEnchantmentLevel(FIRE_REBUKE, armor);
+                int encFireRebuke = getItemEnchantmentLevel(FIRE_REBUKE.get(), armor);
                 if (FireRebukeEnchantment.shouldHit(encFireRebuke, entity.getRandom())) {
                     FireRebukeEnchantment.onHit(entity, attacker, encFireRebuke);
                 }
                 // FROST REBUKE
-                int encFrostRebuke = getItemEnchantmentLevel(FROST_REBUKE, armor);
+                int encFrostRebuke = getItemEnchantmentLevel(FROST_REBUKE.get(), armor);
                 if (FrostRebukeEnchantment.shouldHit(encFrostRebuke, entity.getRandom())) {
                     FrostRebukeEnchantment.onHit(entity, attacker, encFrostRebuke);
                 }

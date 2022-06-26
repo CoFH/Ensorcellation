@@ -20,8 +20,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.ForgeEventFactory;
 
-import static cofh.lib.util.constants.Constants.ID_ENSORCELLATION;
-import static cofh.lib.util.references.CoreReferences.GLOSSED_MAGMA;
+import static cofh.core.init.CoreBlocks.GLOSSED_MAGMA;
+import static cofh.lib.util.constants.ModIds.ID_ENSORCELLATION;
 
 public class FrostWalkerEnchantmentImp extends EnchantmentOverride {
 
@@ -67,8 +67,8 @@ public class FrostWalkerEnchantmentImp extends EnchantmentOverride {
         if (!freezeLava) {
             return;
         }
-        if (living.isOnGround() && GLOSSED_MAGMA != null) {
-            BlockState state = GLOSSED_MAGMA.defaultBlockState();
+        if (living.isOnGround()) {
+            BlockState state = GLOSSED_MAGMA.get().defaultBlockState();
             float f = (float) Math.min(16, 2 + level);
             BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 
@@ -81,7 +81,7 @@ public class FrostWalkerEnchantmentImp extends EnchantmentOverride {
                         boolean isFull = blockstate2.getBlock() == Blocks.LAVA && blockstate2.getValue(LiquidBlock.LEVEL) == 0;
                         if (blockstate2.getMaterial() == Material.LAVA && isFull && state.canSurvive(worldIn, blockpos) && worldIn.isUnobstructed(state, blockpos, CollisionContext.empty()) && !ForgeEventFactory.onBlockPlace(living, BlockSnapshot.create(worldIn.dimension(), worldIn, blockpos), Direction.UP)) {
                             worldIn.setBlockAndUpdate(blockpos, state);
-                            worldIn.scheduleTick(blockpos, GLOSSED_MAGMA, MathHelper.nextInt(living.getRandom(), 60, 120));
+                            worldIn.scheduleTick(blockpos, GLOSSED_MAGMA.get(), MathHelper.nextInt(living.getRandom(), 60, 120));
                         }
                     }
                 }

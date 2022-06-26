@@ -1,10 +1,9 @@
 package cofh.ensorcellation;
 
-import cofh.core.init.CoreItems;
+import cofh.core.config.ConfigManager;
 import cofh.ensorcellation.config.BaseEnchantmentConfig;
 import cofh.ensorcellation.config.OverrideEnchantmentConfig;
 import cofh.ensorcellation.init.EnsorcEnchantments;
-import cofh.lib.config.ConfigManager;
 import cofh.lib.util.DeferredRegisterCoFH;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -14,7 +13,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static cofh.lib.util.constants.Constants.ID_ENSORCELLATION;
+import static cofh.lib.util.constants.ModIds.ID_ENSORCELLATION;
+import static cofh.lib.util.constants.ModIds.ID_MINECRAFT;
 
 @Mod (ID_ENSORCELLATION)
 public class Ensorcellation {
@@ -23,6 +23,7 @@ public class Ensorcellation {
     public static final ConfigManager CONFIG_MANAGER = new ConfigManager();
 
     public static final DeferredRegisterCoFH<Enchantment> ENCHANTMENTS = DeferredRegisterCoFH.create(ForgeRegistries.ENCHANTMENTS, ID_ENSORCELLATION);
+    public static final DeferredRegisterCoFH<Enchantment> OVERRIDES = DeferredRegisterCoFH.create(ForgeRegistries.ENCHANTMENTS, ID_MINECRAFT);
 
     public Ensorcellation() {
 
@@ -37,8 +38,8 @@ public class Ensorcellation {
 
         EnsorcEnchantments.register();
 
-        CoreItems.registerHorseArmorOverrides();
-        CoreItems.registerShieldOverride();
+        //        CoreItems.registerHorseArmorOverrides();
+        //        CoreItems.registerShieldOverride();
     }
 
 }
