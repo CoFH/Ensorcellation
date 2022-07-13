@@ -5,7 +5,7 @@ import cofh.lib.util.helpers.MathHelper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.FOVModifierEvent;
+import net.minecraftforge.client.event.ComputeFovModifierEvent;
 import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -26,7 +26,7 @@ public class ShieldEnchClientEvents {
     private static long timePhalanx;
 
     @SubscribeEvent
-    public static void handleFOVUpdateEvent(FOVModifierEvent event) {
+    public static void handleFOVUpdateEvent(ComputeFovModifierEvent event) {
 
         Player entity = event.getPlayer();
         ItemStack stack = event.getPlayer().getUseItem();
@@ -38,13 +38,13 @@ public class ShieldEnchClientEvents {
                 hadPhalanx = true;
                 timePhalanx = entity.level.getGameTime();
             }
-            event.setNewFov((float) MathHelper.clamp(event.getNewFov() - modPhalanx, 1.0D, 2.5D));
+            event.setNewFovModifier((float) MathHelper.clamp(event.getNewFovModifier() - modPhalanx, 1.0D, 2.5D));
         } else if (hadPhalanx) {
             if (entity.level.getGameTime() - 20 > timePhalanx) {
                 hadPhalanx = false;
                 modPhalanx = 0;
             }
-            event.setNewFov((float) MathHelper.clamp(event.getNewFov() - modPhalanx, 1.0D, 2.5D));
+            event.setNewFovModifier((float) MathHelper.clamp(event.getNewFovModifier() - modPhalanx, 1.0D, 2.5D));
         }
     }
 

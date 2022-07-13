@@ -38,7 +38,7 @@ public class HorseEnchEvents {
         if (event.isCanceled()) {
             return;
         }
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         DamageSource source = event.getSource();
         Entity attacker = source.getEntity();
 
@@ -61,7 +61,7 @@ public class HorseEnchEvents {
         if (event.isCanceled()) {
             return;
         }
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         DamageSource source = event.getSource();
         Entity attacker = source.getEntity();
 
@@ -125,12 +125,12 @@ public class HorseEnchEvents {
     }
 
     @SubscribeEvent
-    public static void handleLivingUpdateEvent(LivingEvent.LivingUpdateEvent event) {
+    public static void handleLivingUpdateEvent(LivingEvent.LivingTickEvent event) {
 
         if (event.isCanceled()) {
             return;
         }
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
 
         if (!(entity instanceof AbstractHorse)) {
             return;

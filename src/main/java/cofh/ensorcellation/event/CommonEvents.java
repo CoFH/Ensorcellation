@@ -39,12 +39,12 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.*;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent;
 import net.minecraftforge.event.entity.player.ItemFishedEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerXpEvent;
-import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -95,7 +95,7 @@ public class CommonEvents {
         if (event.isCanceled()) {
             return;
         }
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         DamageSource source = event.getSource();
         Entity attacker = source.getEntity();
 
@@ -134,7 +134,7 @@ public class CommonEvents {
         if (event.isCanceled()) {
             return;
         }
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         DamageSource source = event.getSource();
         Entity attacker = source.getEntity();
         if (!(attacker instanceof Player) || !event.isRecentlyHit()) {
@@ -207,7 +207,7 @@ public class CommonEvents {
     @SubscribeEvent
     public static void handleLivingEquipmentChangeEvent(LivingEquipmentChangeEvent event) {
 
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
 
         // REACH
         int encReach = getMaxEquippedEnchantmentLevel(entity, REACH.get());
@@ -278,7 +278,7 @@ public class CommonEvents {
         if (event.isCanceled()) {
             return;
         }
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         DamageSource source = event.getSource();
         Entity attacker = source.getEntity();
 
@@ -334,12 +334,12 @@ public class CommonEvents {
     }
 
     @SubscribeEvent
-    public static void handleLivingUpdateEvent(LivingUpdateEvent event) {
+    public static void handleLivingUpdateEvent(LivingTickEvent event) {
 
         if (event.isCanceled()) {
             return;
         }
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         // FROST WALKER
         int encFrostWalker = getMaxEquippedEnchantmentLevel(entity, FROST_WALKER);
         if (encFrostWalker > 0) {
@@ -351,7 +351,7 @@ public class CommonEvents {
     @SubscribeEvent
     public static void handleItemUseFinish(LivingEntityUseItemEvent.Finish event) {
 
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         if (!(entity instanceof Player) || entity instanceof FakePlayer) {
             return;
         }
@@ -426,7 +426,7 @@ public class CommonEvents {
     @SubscribeEvent (priority = EventPriority.HIGHEST)
     public static void handlePickupXpEvent(PlayerXpEvent.PickupXp event) {
 
-        Player player = event.getPlayer();
+        Player player = event.getEntity();
         ExperienceOrb orb = event.getOrb();
 
         // CURSE OF FOOLISHNESS
@@ -449,7 +449,7 @@ public class CommonEvents {
         if (!(event instanceof PlayerInteractEvent.RightClickItem || event instanceof PlayerInteractEvent.RightClickBlock || event instanceof PlayerInteractEvent.RightClickEmpty)) {
             return;
         }
-        Player player = event.getPlayer();
+        Player player = event.getEntity();
         if (player.fishing == null || Utils.isClientWorld(player.level)) {
             return;
         }
@@ -507,7 +507,7 @@ public class CommonEvents {
         if (event.isCanceled()) {
             return;
         }
-        Player player = event.getPlayer();
+        Player player = event.getEntity();
         // AIR AFFINITY
         int encAirAffinity = getMaxEquippedEnchantmentLevel(player, AIR_AFFINITY.get());
         if (encAirAffinity > 0 && !player.isOnGround()) {

@@ -46,7 +46,7 @@ public class ShieldEnchEvents {
         if (event.isCanceled()) {
             return;
         }
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         DamageSource source = event.getSource();
         Entity attacker = source.getEntity();
         ItemStack stack = entity.getUseItem();
@@ -85,12 +85,12 @@ public class ShieldEnchEvents {
     }
 
     @SubscribeEvent
-    public static void handleLivingUpdateEvent(LivingEvent.LivingUpdateEvent event) {
+    public static void handleLivingUpdateEvent(LivingEvent.LivingTickEvent event) {
 
         if (event.isCanceled()) {
             return;
         }
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         ItemStack stack = entity.getUseItem();
 
         AttributeInstance knockbackResAttr = entity.getAttribute(Attributes.KNOCKBACK_RESISTANCE);

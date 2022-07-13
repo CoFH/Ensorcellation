@@ -33,8 +33,8 @@ public class PreservationEvents {
         if (!OverrideEnchantmentConfig.enableMendingOverride) {
             return;
         }
-        ItemStack left = event.getItemInput();
-        ItemStack output = event.getItemResult();
+        ItemStack left = event.getLeft();
+        ItemStack output = event.getOutput();
 
         if (getItemEnchantmentLevel(MENDING, left) <= 0) {
             return;
@@ -101,7 +101,7 @@ public class PreservationEvents {
         if (!OverrideEnchantmentConfig.enableMendingOverride) {
             return;
         }
-        Player player = event.getPlayer();
+        Player player = event.getEntity();
         ExperienceOrb orb = event.getOrb();
 
         player.takeXpDelay = 2;

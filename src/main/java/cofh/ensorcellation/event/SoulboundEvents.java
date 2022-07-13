@@ -52,7 +52,7 @@ public class SoulboundEvents {
         if (!event.isWasDeath()) {
             return;
         }
-        Player player = event.getPlayer();
+        Player player = event.getEntity();
         Player oldPlayer = event.getOriginal();
         if (Utils.isFakePlayer(player) || player.level.getGameRules().getBoolean(RULE_KEEPINVENTORY)) {
             return;
