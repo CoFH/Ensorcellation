@@ -7,7 +7,7 @@ import cofh.lib.config.IBaseConfig;
 import cofh.lib.enchantment.EnchantmentCoFH;
 import net.minecraftforge.common.ForgeConfigSpec;
 
-import static cofh.lib.util.constants.Constants.MAX_ENCHANT_LEVEL;
+import static cofh.lib.util.Constants.MAX_ENCHANT_LEVEL;
 import static net.minecraft.world.item.enchantment.Enchantments.*;
 
 public class OverrideEnchantmentConfig implements IBaseConfig {

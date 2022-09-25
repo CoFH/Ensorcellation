@@ -20,7 +20,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.ForgeEventFactory;
 
-import static cofh.lib.util.constants.Constants.ID_ENSORCELLATION;
+import static cofh.lib.util.constants.ModIds.ID_ENSORCELLATION;
 import static cofh.lib.util.references.CoreReferences.GLOSSED_MAGMA;
 
 public class FrostWalkerEnchantmentImp extends EnchantmentOverride {

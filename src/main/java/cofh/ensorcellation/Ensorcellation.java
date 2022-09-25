@@ -14,7 +14,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static cofh.lib.util.constants.Constants.ID_ENSORCELLATION;
+import static cofh.lib.util.constants.ModIds.ID_ENSORCELLATION;
 
 @Mod (ID_ENSORCELLATION)
 public class Ensorcellation {

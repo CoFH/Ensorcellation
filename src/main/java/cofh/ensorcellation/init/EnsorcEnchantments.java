@@ -5,7 +5,7 @@ import cofh.ensorcellation.enchantment.override.*;
 
 import static cofh.ensorcellation.Ensorcellation.ENCHANTMENTS;
 import static cofh.ensorcellation.enchantment.override.ProtectionEnchantmentImp.Type.*;
-import static cofh.lib.util.constants.Constants.ARMOR_SLOTS;
+import static cofh.lib.util.Constants.ARMOR_SLOTS;
 import static cofh.lib.util.references.EnsorcIDs.*;
 import static net.minecraft.world.item.enchantment.Enchantment.Rarity.*;
 

@@ -5,6 +5,7 @@ import cofh.ensorcellation.enchantment.FireRebukeEnchantment;
 import cofh.ensorcellation.enchantment.FrostRebukeEnchantment;
 import cofh.ensorcellation.enchantment.PhalanxEnchantment;
 import cofh.ensorcellation.enchantment.override.ThornsEnchantmentImp;
+import cofh.lib.util.constants.ModIds;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,8 +23,9 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import static cofh.lib.util.Constants.UUID_ENCH_BULWARK_KNOCKBACK_RESISTANCE;
+import static cofh.lib.util.Constants.UUID_ENCH_PHALANX_MOVEMENT_SPEED;
 import static cofh.lib.util.Utils.getItemEnchantmentLevel;
-import static cofh.lib.util.constants.Constants.*;
 import static cofh.lib.util.references.EnsorcIDs.ID_BULWARK;
 import static cofh.lib.util.references.EnsorcIDs.ID_PHALANX;
 import static cofh.lib.util.references.EnsorcReferences.*;
@@ -31,7 +33,7 @@ import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operati
 import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.MULTIPLY_TOTAL;
 import static net.minecraft.world.item.enchantment.Enchantments.THORNS;
 
-@Mod.EventBusSubscriber (modid = ID_ENSORCELLATION)
+@Mod.EventBusSubscriber (modid = ModIds.ID_ENSORCELLATION)
 public class ShieldEnchEvents {
 
     private ShieldEnchEvents() {

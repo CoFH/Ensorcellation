@@ -3,6 +3,7 @@ package cofh.ensorcellation.event;
 import cofh.ensorcellation.enchantment.*;
 import cofh.ensorcellation.enchantment.override.FrostWalkerEnchantmentImp;
 import cofh.lib.util.Utils;
+import cofh.lib.util.constants.ModIds;
 import cofh.lib.util.constants.NBTTags;
 import cofh.lib.util.helpers.MathHelper;
 import net.minecraft.nbt.CompoundTag;
@@ -52,9 +53,9 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.ArrayList;
 import java.util.List;
 
+import static cofh.lib.util.Constants.*;
 import static cofh.lib.util.Utils.getHeldEnchantmentLevel;
 import static cofh.lib.util.Utils.getMaxEquippedEnchantmentLevel;
-import static cofh.lib.util.constants.Constants.*;
 import static cofh.lib.util.references.EnsorcIDs.ID_REACH;
 import static cofh.lib.util.references.EnsorcIDs.ID_VITALITY;
 import static cofh.lib.util.references.EnsorcReferences.*;
@@ -63,7 +64,7 @@ import static net.minecraft.world.item.enchantment.Enchantments.FROST_WALKER;
 import static net.minecraft.world.level.block.Blocks.*;
 import static net.minecraft.world.level.storage.loot.parameters.LootContextParams.*;
 
-@Mod.EventBusSubscriber (modid = ID_ENSORCELLATION)
+@Mod.EventBusSubscriber (modid = ModIds.ID_ENSORCELLATION)
 public class CommonEvents {
 
     private CommonEvents() {

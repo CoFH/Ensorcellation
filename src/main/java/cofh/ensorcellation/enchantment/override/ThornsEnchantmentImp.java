@@ -18,7 +18,7 @@ import net.minecraftforge.common.ToolActions;
 import java.util.Map;
 import java.util.Random;
 
-import static cofh.lib.util.constants.Constants.ARMOR_SLOTS;
+import static cofh.lib.util.Constants.ARMOR_SLOTS;
 
 public class ThornsEnchantmentImp extends EnchantmentOverride {
 

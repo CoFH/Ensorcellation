@@ -6,7 +6,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
-import static cofh.lib.util.helpers.ArcheryHelper.validBow;
+import static cofh.core.util.helpers.ArcheryHelper.validBow;
 import static cofh.lib.util.references.EnsorcReferences.VOLLEY;
 
 public class TrueshotEnchantment extends EnchantmentCoFH {
