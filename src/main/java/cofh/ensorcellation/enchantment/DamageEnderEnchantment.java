@@ -11,7 +11,7 @@ import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Endermite;
 import net.minecraft.world.entity.monster.Shulker;
 
-import static cofh.lib.util.references.CoreReferences.ENDERFERENCE;
+import static cofh.core.util.references.CoreReferences.ENDERFERENCE;
 
 public class DamageEnderEnchantment extends DamageEnchantmentCoFH {
 

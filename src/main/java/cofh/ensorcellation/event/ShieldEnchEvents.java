@@ -23,12 +23,12 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import static cofh.core.util.references.EnsorcIDs.ID_BULWARK;
+import static cofh.core.util.references.EnsorcIDs.ID_PHALANX;
+import static cofh.core.util.references.EnsorcReferences.*;
 import static cofh.lib.util.Constants.UUID_ENCH_BULWARK_KNOCKBACK_RESISTANCE;
 import static cofh.lib.util.Constants.UUID_ENCH_PHALANX_MOVEMENT_SPEED;
 import static cofh.lib.util.Utils.getItemEnchantmentLevel;
-import static cofh.lib.util.references.EnsorcIDs.ID_BULWARK;
-import static cofh.lib.util.references.EnsorcIDs.ID_PHALANX;
-import static cofh.lib.util.references.EnsorcReferences.*;
 import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADDITION;
 import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.MULTIPLY_TOTAL;
 import static net.minecraft.world.item.enchantment.Enchantments.THORNS;

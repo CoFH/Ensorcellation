@@ -13,9 +13,9 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.Iterator;
 
+import static cofh.core.util.references.EnsorcReferences.SOULBOUND;
 import static cofh.lib.util.Utils.*;
 import static cofh.lib.util.constants.ModIds.ID_ENSORCELLATION;
-import static cofh.lib.util.references.EnsorcReferences.SOULBOUND;
 import static net.minecraft.world.level.GameRules.RULE_KEEPINVENTORY;
 
 @Mod.EventBusSubscriber (modid = ID_ENSORCELLATION)

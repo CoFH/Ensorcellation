@@ -1,8 +1,8 @@
 package cofh.ensorcellation.enchantment;
 
+import cofh.core.util.references.CoreReferences;
 import cofh.lib.enchantment.EnchantmentCoFH;
 import cofh.lib.util.Utils;
-import cofh.lib.util.references.CoreReferences;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -21,9 +21,9 @@ import net.minecraftforge.common.ToolActions;
 import java.util.Map;
 import java.util.Random;
 
+import static cofh.core.util.references.CoreReferences.CHILLED;
+import static cofh.core.util.references.EnsorcReferences.*;
 import static cofh.lib.util.Constants.ARMOR_SLOTS;
-import static cofh.lib.util.references.CoreReferences.CHILLED;
-import static cofh.lib.util.references.EnsorcReferences.*;
 
 public class FrostRebukeEnchantment extends EnchantmentCoFH {
 

@@ -5,7 +5,7 @@ import cofh.lib.enchantment.EnchantmentCoFH;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.Enchantment;
 
-import static cofh.lib.util.references.EnsorcReferences.TILLING;
+import static cofh.core.util.references.EnsorcReferences.TILLING;
 
 public class FurrowingEnchantment extends EnchantmentCoFH {
 

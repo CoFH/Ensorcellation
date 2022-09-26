@@ -1,9 +1,9 @@
 package cofh.ensorcellation.enchantment;
 
 import cofh.core.init.CoreEnchantments;
+import cofh.core.util.references.CoreReferences;
 import cofh.lib.enchantment.EnchantmentCoFH;
 import cofh.lib.util.Utils;
-import cofh.lib.util.references.CoreReferences;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -14,7 +14,7 @@ import net.minecraft.world.entity.monster.MagmaCube;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 
-import static cofh.lib.util.references.CoreReferences.CHILLED;
+import static cofh.core.util.references.CoreReferences.CHILLED;
 
 public class FrostAspectEnchantment extends EnchantmentCoFH {
 

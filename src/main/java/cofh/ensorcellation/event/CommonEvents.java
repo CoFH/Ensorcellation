@@ -53,12 +53,12 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.ArrayList;
 import java.util.List;
 
+import static cofh.core.util.references.EnsorcIDs.ID_REACH;
+import static cofh.core.util.references.EnsorcIDs.ID_VITALITY;
+import static cofh.core.util.references.EnsorcReferences.*;
 import static cofh.lib.util.Constants.*;
 import static cofh.lib.util.Utils.getHeldEnchantmentLevel;
 import static cofh.lib.util.Utils.getMaxEquippedEnchantmentLevel;
-import static cofh.lib.util.references.EnsorcIDs.ID_REACH;
-import static cofh.lib.util.references.EnsorcIDs.ID_VITALITY;
-import static cofh.lib.util.references.EnsorcReferences.*;
 import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADDITION;
 import static net.minecraft.world.item.enchantment.Enchantments.FROST_WALKER;
 import static net.minecraft.world.level.block.Blocks.*;

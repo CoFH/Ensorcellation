@@ -7,7 +7,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 import static cofh.core.util.helpers.ArcheryHelper.validBow;
-import static cofh.lib.util.references.EnsorcReferences.TRUESHOT;
+import static cofh.core.util.references.EnsorcReferences.TRUESHOT;
 
 public class VolleyEnchantment extends EnchantmentCoFH {
 

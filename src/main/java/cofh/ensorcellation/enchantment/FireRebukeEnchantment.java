@@ -23,8 +23,8 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
+import static cofh.core.util.references.EnsorcReferences.*;
 import static cofh.lib.util.Constants.ARMOR_SLOTS;
-import static cofh.lib.util.references.EnsorcReferences.*;
 
 public class FireRebukeEnchantment extends EnchantmentCoFH {
 
