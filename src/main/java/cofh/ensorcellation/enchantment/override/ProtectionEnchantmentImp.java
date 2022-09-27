@@ -67,8 +67,7 @@ public class ProtectionEnchantmentImp extends EnchantmentOverride {
     @Override
     public boolean checkCompatibility(Enchantment ench) {
 
-        if (ench instanceof ProtectionEnchantmentImp) {
-            ProtectionEnchantmentImp enchProtection = (ProtectionEnchantmentImp) ench;
+        if (ench instanceof ProtectionEnchantmentImp enchProtection) {
             if (this.protectionType == enchProtection.protectionType) {
                 return false;
             } else {

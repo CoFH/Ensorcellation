@@ -21,7 +21,9 @@ import net.minecraftforge.common.ToolActions;
 import java.util.Map;
 import java.util.Random;
 
-import static cofh.core.util.references.EnsorcReferences.*;
+import static cofh.core.util.references.EnsorcIDs.ID_FIRE_REBUKE;
+import static cofh.core.util.references.EnsorcIDs.ID_FROST_REBUKE;
+import static cofh.ensorcellation.Ensorcellation.ENCHANTMENTS;
 import static cofh.lib.util.Constants.ARMOR_SLOTS;
 
 public class DisplacementEnchantment extends EnchantmentCoFH {
@@ -57,7 +59,7 @@ public class DisplacementEnchantment extends EnchantmentCoFH {
     @Override
     public boolean checkCompatibility(Enchantment ench) {
 
-        return super.checkCompatibility(ench) && ench != Enchantments.THORNS && ench != FIRE_REBUKE && ench != FROST_REBUKE;
+        return super.checkCompatibility(ench) && ench != Enchantments.THORNS && ench != ENCHANTMENTS.get(ID_FIRE_REBUKE) && ench != ENCHANTMENTS.get(ID_FROST_REBUKE);
     }
 
     // region HELPERS
@@ -67,7 +69,7 @@ public class DisplacementEnchantment extends EnchantmentCoFH {
         if (!(attacker instanceof LivingEntity)) {
             return;
         }
-        Map.Entry<EquipmentSlot, ItemStack> stack = EnchantmentHelper.getRandomItemWith(DISPLACEMENT, user);
+        Map.Entry<EquipmentSlot, ItemStack> stack = EnchantmentHelper.getRandomItemWith(this, user);
         if (shouldHit(level, user.getRandom())) {
             onHit(user, attacker, level);
             if (stack != null) {

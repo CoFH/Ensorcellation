@@ -30,7 +30,7 @@ public class QuickdrawEnchantment extends EnchantmentCoFH {
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
 
-        return enable && (stack.canApplyAtEnchantingTable(this) || validBow(stack) || supportsEnchantment(stack));
+        return enable && (stack.canApplyAtEnchantingTable(this) || validBow(stack));
     }
 
 }

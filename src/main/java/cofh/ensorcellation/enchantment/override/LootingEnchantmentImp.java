@@ -6,7 +6,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 
-import static cofh.core.util.references.EnsorcReferences.EXCAVATING;
+import static cofh.ensorcellation.init.EnsorcEnchantments.EXCAVATING;
 
 public class LootingEnchantmentImp extends EnchantmentOverride {
 
@@ -31,7 +31,7 @@ public class LootingEnchantmentImp extends EnchantmentOverride {
     @Override
     public boolean checkCompatibility(Enchantment ench) {
 
-        return super.checkCompatibility(ench) && ench != Enchantments.SILK_TOUCH && ench != EXCAVATING;
+        return super.checkCompatibility(ench) && ench != Enchantments.SILK_TOUCH && ench != EXCAVATING.get();
     }
 
 }

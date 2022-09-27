@@ -1,11 +1,14 @@
 package cofh.ensorcellation.config;
 
+import cofh.core.config.IBaseConfig;
 import cofh.ensorcellation.enchantment.*;
-import cofh.lib.config.IBaseConfig;
 import cofh.lib.enchantment.EnchantmentCoFH;
 import net.minecraftforge.common.ForgeConfigSpec;
 
-import static cofh.core.util.references.EnsorcReferences.*;
+import java.util.function.Supplier;
+
+import static cofh.core.util.references.EnsorcIDs.*;
+import static cofh.ensorcellation.Ensorcellation.ENCHANTMENTS;
 import static cofh.lib.util.Constants.MAX_ENCHANT_LEVEL;
 
 public class BaseEnchantmentConfig implements IBaseConfig {
@@ -460,105 +463,105 @@ public class BaseEnchantmentConfig implements IBaseConfig {
         // These should NEVER actually be null, but who knows in a multi-mod setup. ¯\_(ツ)_/¯
 
         // ARMOR
-        if (PROTECTION_MAGIC instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) PROTECTION_MAGIC).setEnable(enableProtectionMagic.get());
-            ((EnchantmentCoFH) PROTECTION_MAGIC).setTreasureEnchantment(treasureProtectionMagic.get());
-            ((EnchantmentCoFH) PROTECTION_MAGIC).setMaxLevel(levelProtectionMagic.get());
+        if (ENCHANTMENTS.get(ID_PROTECTION_MAGIC) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableProtectionMagic.get());
+            enc.setTreasureEnchantment(treasureProtectionMagic.get());
+            enc.setMaxLevel(levelProtectionMagic.get());
         }
-        if (DISPLACEMENT instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) DISPLACEMENT).setEnable(enableDisplacement.get());
-            ((EnchantmentCoFH) DISPLACEMENT).setTreasureEnchantment(treasureDisplacement.get());
-            ((EnchantmentCoFH) DISPLACEMENT).setMaxLevel(levelDisplacement.get());
+        if (ENCHANTMENTS.get(ID_DISPLACEMENT) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableDisplacement.get());
+            enc.setTreasureEnchantment(treasureDisplacement.get());
+            enc.setMaxLevel(levelDisplacement.get());
             DisplacementEnchantment.chance = chanceDisplacement.get();
             DisplacementEnchantment.mobsAffectPlayers = allowMobsDisplacement.get();
         }
-        if (FIRE_REBUKE instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) FIRE_REBUKE).setEnable(enableFireRebuke.get());
-            ((EnchantmentCoFH) FIRE_REBUKE).setTreasureEnchantment(treasureFireRebuke.get());
-            ((EnchantmentCoFH) FIRE_REBUKE).setMaxLevel(levelFireRebuke.get());
+        if (ENCHANTMENTS.get(ID_FIRE_REBUKE) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableFireRebuke.get());
+            enc.setTreasureEnchantment(treasureFireRebuke.get());
+            enc.setMaxLevel(levelFireRebuke.get());
             FireRebukeEnchantment.chance = chanceFireRebuke.get();
             FireRebukeEnchantment.mobsAffectPlayers = allowMobsFireRebuke.get();
         }
-        if (FROST_REBUKE instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) FROST_REBUKE).setEnable(enableFrostRebuke.get());
-            ((EnchantmentCoFH) FROST_REBUKE).setTreasureEnchantment(treasureFrostRebuke.get());
-            ((EnchantmentCoFH) FROST_REBUKE).setMaxLevel(levelFrostRebuke.get());
+        if (ENCHANTMENTS.get(ID_FROST_REBUKE) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableFrostRebuke.get());
+            enc.setTreasureEnchantment(treasureFrostRebuke.get());
+            enc.setMaxLevel(levelFrostRebuke.get());
             FrostRebukeEnchantment.chance = chanceFrostRebuke.get();
             FrostRebukeEnchantment.mobsAffectPlayers = allowMobsFrostRebuke.get();
         }
         // HELMET
-        if (AIR_AFFINITY instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) AIR_AFFINITY).setEnable(enableAirAffinity.get());
-            ((EnchantmentCoFH) AIR_AFFINITY).setTreasureEnchantment(treasureAirAffinity.get());
+        if (ENCHANTMENTS.get(ID_AIR_AFFINITY) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableAirAffinity.get());
+            enc.setTreasureEnchantment(treasureAirAffinity.get());
         }
-        if (XP_BOOST instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) XP_BOOST).setEnable(enableXpBoost.get());
-            ((EnchantmentCoFH) XP_BOOST).setTreasureEnchantment(treasureXpBoost.get());
-            ((EnchantmentCoFH) XP_BOOST).setMaxLevel(levelXpBoost.get());
+        if (ENCHANTMENTS.get(ID_XP_BOOST) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableXpBoost.get());
+            enc.setTreasureEnchantment(treasureXpBoost.get());
+            enc.setMaxLevel(levelXpBoost.get());
             XpBoostEnchantment.xp = amountXpBoost.get();
         }
-        if (GOURMAND instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) GOURMAND).setEnable(enableGourmand.get());
-            ((EnchantmentCoFH) GOURMAND).setTreasureEnchantment(treasureGourmand.get());
-            ((EnchantmentCoFH) GOURMAND).setMaxLevel(levelGourmand.get());
+        if (ENCHANTMENTS.get(ID_GOURMAND) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableGourmand.get());
+            enc.setTreasureEnchantment(treasureGourmand.get());
+            enc.setMaxLevel(levelGourmand.get());
         }
         // CHESTPLATE
-        if (REACH instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) REACH).setEnable(enableReach.get());
-            ((EnchantmentCoFH) REACH).setTreasureEnchantment(treasureReach.get());
-            ((EnchantmentCoFH) REACH).setMaxLevel(levelReach.get());
+        if (ENCHANTMENTS.get(ID_REACH) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableReach.get());
+            enc.setTreasureEnchantment(treasureReach.get());
+            enc.setMaxLevel(levelReach.get());
         }
-        if (VITALITY instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) VITALITY).setEnable(enableVitality.get());
-            ((EnchantmentCoFH) VITALITY).setTreasureEnchantment(treasureVitality.get());
-            ((EnchantmentCoFH) VITALITY).setMaxLevel(levelVitality.get());
+        if (ENCHANTMENTS.get(ID_VITALITY) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableVitality.get());
+            enc.setTreasureEnchantment(treasureVitality.get());
+            enc.setMaxLevel(levelVitality.get());
             VitalityEnchantment.health = healthLevelVitality.get();
         }
         // WEAPONS
-        if (DAMAGE_ENDER instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) DAMAGE_ENDER).setEnable(enableDamageEnder.get());
-            ((EnchantmentCoFH) DAMAGE_ENDER).setTreasureEnchantment(treasureDamageEnder.get());
-            ((EnchantmentCoFH) DAMAGE_ENDER).setMaxLevel(levelDamageEnder.get());
+        if (ENCHANTMENTS.get(ID_DAMAGE_ENDER) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableDamageEnder.get());
+            enc.setTreasureEnchantment(treasureDamageEnder.get());
+            enc.setMaxLevel(levelDamageEnder.get());
         }
-        if (DAMAGE_ILLAGER instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) DAMAGE_ILLAGER).setEnable(enableDamageIllager.get());
-            ((EnchantmentCoFH) DAMAGE_ILLAGER).setTreasureEnchantment(treasureDamageIllager.get());
-            ((EnchantmentCoFH) DAMAGE_ILLAGER).setMaxLevel(levelDamageIllager.get());
+        if (ENCHANTMENTS.get(ID_DAMAGE_ILLAGER) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableDamageIllager.get());
+            enc.setTreasureEnchantment(treasureDamageIllager.get());
+            enc.setMaxLevel(levelDamageIllager.get());
         }
-        if (DAMAGE_VILLAGER instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) DAMAGE_VILLAGER).setEnable(enableDamageVillager.get());
-            ((EnchantmentCoFH) DAMAGE_VILLAGER).setTreasureEnchantment(treasureDamageVillager.get());
-            ((EnchantmentCoFH) DAMAGE_VILLAGER).setMaxLevel(levelDamageVillager.get());
+        if (ENCHANTMENTS.get(ID_DAMAGE_VILLAGER) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableDamageVillager.get());
+            enc.setTreasureEnchantment(treasureDamageVillager.get());
+            enc.setMaxLevel(levelDamageVillager.get());
             DamageVillagerEnchantment.enableEmeraldDrops = dropsDamageVillager.get();
         }
-        if (CAVALIER instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) CAVALIER).setEnable(enableCavalier.get());
-            ((EnchantmentCoFH) CAVALIER).setTreasureEnchantment(treasureCavalier.get());
-            ((EnchantmentCoFH) CAVALIER).setMaxLevel(levelCavalier.get());
+        if (ENCHANTMENTS.get(ID_CAVALIER) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableCavalier.get());
+            enc.setTreasureEnchantment(treasureCavalier.get());
+            enc.setMaxLevel(levelCavalier.get());
         }
-        if (FROST_ASPECT instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) FROST_ASPECT).setEnable(enableFrostAspect.get());
-            ((EnchantmentCoFH) FROST_ASPECT).setTreasureEnchantment(treasureFrostAspect.get());
-            ((EnchantmentCoFH) FROST_ASPECT).setMaxLevel(levelFrostAspect.get());
+        if (ENCHANTMENTS.get(ID_FROST_ASPECT) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableFrostAspect.get());
+            enc.setTreasureEnchantment(treasureFrostAspect.get());
+            enc.setMaxLevel(levelFrostAspect.get());
         }
-        if (INSTIGATING instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) INSTIGATING).setEnable(enableInstigating.get());
-            ((EnchantmentCoFH) INSTIGATING).setTreasureEnchantment(treasureInstigating.get());
+        if (ENCHANTMENTS.get(ID_INSTIGATING) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableInstigating.get());
+            enc.setTreasureEnchantment(treasureInstigating.get());
         }
-        if (LEECH instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) LEECH).setEnable(enableLeech.get());
-            ((EnchantmentCoFH) LEECH).setTreasureEnchantment(treasureLeech.get());
-            ((EnchantmentCoFH) LEECH).setMaxLevel(levelLeech.get());
+        if (ENCHANTMENTS.get(ID_LEECH) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableLeech.get());
+            enc.setTreasureEnchantment(treasureLeech.get());
+            enc.setMaxLevel(levelLeech.get());
         }
-        if (MAGIC_EDGE instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) MAGIC_EDGE).setEnable(enableMagicEdge.get());
-            ((EnchantmentCoFH) MAGIC_EDGE).setTreasureEnchantment(treasureMagicEdge.get());
-            ((EnchantmentCoFH) MAGIC_EDGE).setMaxLevel(levelMagicEdge.get());
+        if (ENCHANTMENTS.get(ID_MAGIC_EDGE) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableMagicEdge.get());
+            enc.setTreasureEnchantment(treasureMagicEdge.get());
+            enc.setMaxLevel(levelMagicEdge.get());
         }
-        if (VORPAL instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) VORPAL).setEnable(enableVorpal.get());
-            ((EnchantmentCoFH) VORPAL).setTreasureEnchantment(treasureVorpal.get());
-            ((EnchantmentCoFH) VORPAL).setMaxLevel(levelVorpal.get());
+        if (ENCHANTMENTS.get(ID_VORPAL) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableVorpal.get());
+            enc.setTreasureEnchantment(treasureVorpal.get());
+            enc.setMaxLevel(levelVorpal.get());
             VorpalEnchantment.critBase = critBaseVorpal.get();
             VorpalEnchantment.critLevel = critLevelVorpal.get();
             VorpalEnchantment.critDamage = critDamageVorpal.get();
@@ -566,235 +569,235 @@ public class BaseEnchantmentConfig implements IBaseConfig {
             VorpalEnchantment.headLevel = headLevelVorpal.get();
         }
         // TOOLS
-        if (EXCAVATING instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) EXCAVATING).setEnable(enableExcavating.get());
-            ((EnchantmentCoFH) EXCAVATING).setTreasureEnchantment(treasureExcavating.get());
+        if (ENCHANTMENTS.get(ID_EXCAVATING) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableExcavating.get());
+            enc.setTreasureEnchantment(treasureExcavating.get());
             //            ((EnchantmentCoFH) EXCAVATING).setMaxLevel(levelExcavating.get());
         }
         // BOWS
-        if (HUNTER instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) HUNTER).setEnable(enableHunter.get());
-            ((EnchantmentCoFH) HUNTER).setTreasureEnchantment(treasureHunter.get());
-            ((EnchantmentCoFH) HUNTER).setMaxLevel(levelHunter.get());
+        if (ENCHANTMENTS.get(ID_HUNTER) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableHunter.get());
+            enc.setTreasureEnchantment(treasureHunter.get());
+            enc.setMaxLevel(levelHunter.get());
             HunterEnchantment.chance = chanceHunter.get();
         }
-        if (QUICK_DRAW instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) QUICK_DRAW).setEnable(enableQuickDraw.get());
-            ((EnchantmentCoFH) QUICK_DRAW).setTreasureEnchantment(treasureQuickDraw.get());
-            ((EnchantmentCoFH) QUICK_DRAW).setMaxLevel(levelQuickDraw.get());
+        if (ENCHANTMENTS.get(ID_QUICK_DRAW) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableQuickDraw.get());
+            enc.setTreasureEnchantment(treasureQuickDraw.get());
+            enc.setMaxLevel(levelQuickDraw.get());
         }
-        if (TRUESHOT instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) TRUESHOT).setEnable(enableTrueshot.get());
-            ((EnchantmentCoFH) TRUESHOT).setTreasureEnchantment(treasureTrueshot.get());
-            ((EnchantmentCoFH) TRUESHOT).setMaxLevel(levelTrueshot.get());
+        if (ENCHANTMENTS.get(ID_TRUESHOT) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableTrueshot.get());
+            enc.setTreasureEnchantment(treasureTrueshot.get());
+            enc.setMaxLevel(levelTrueshot.get());
         }
-        if (VOLLEY instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) VOLLEY).setEnable(enableVolley.get());
-            ((EnchantmentCoFH) VOLLEY).setTreasureEnchantment(treasureVolley.get());
+        if (ENCHANTMENTS.get(ID_VOLLEY) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableVolley.get());
+            enc.setTreasureEnchantment(treasureVolley.get());
         }
         // FISHING RODS
-        if (ANGLER instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) ANGLER).setEnable(enableAngler.get());
-            ((EnchantmentCoFH) ANGLER).setTreasureEnchantment(treasureAngler.get());
-            ((EnchantmentCoFH) ANGLER).setMaxLevel(levelAngler.get());
+        if (ENCHANTMENTS.get(ID_ANGLER) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableAngler.get());
+            enc.setTreasureEnchantment(treasureAngler.get());
+            enc.setMaxLevel(levelAngler.get());
             AnglerEnchantment.chance = chanceAngler.get();
         }
-        if (PILFERING instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) PILFERING).setEnable(enablePilfering.get());
-            ((EnchantmentCoFH) PILFERING).setTreasureEnchantment(treasurePilfering.get());
+        if (ENCHANTMENTS.get(ID_PILFERING) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enablePilfering.get());
+            enc.setTreasureEnchantment(treasurePilfering.get());
             PilferingEnchantment.allowPlayerStealing = playerStealPilfering.get();
         }
         // HOES
-        if (FURROWING instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) FURROWING).setEnable(enableFurrowing.get());
-            ((EnchantmentCoFH) FURROWING).setTreasureEnchantment(treasureFurrowing.get());
-            ((EnchantmentCoFH) FURROWING).setMaxLevel(levelFurrowing.get());
+        if (ENCHANTMENTS.get(ID_FURROWING) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableFurrowing.get());
+            enc.setTreasureEnchantment(treasureFurrowing.get());
+            enc.setMaxLevel(levelFurrowing.get());
         }
-        if (TILLING instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) TILLING).setEnable(enableTilling.get());
-            ((EnchantmentCoFH) TILLING).setTreasureEnchantment(treasureTilling.get());
-            ((EnchantmentCoFH) TILLING).setMaxLevel(levelTilling.get());
+        if (ENCHANTMENTS.get(ID_TILLING) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableTilling.get());
+            enc.setTreasureEnchantment(treasureTilling.get());
+            enc.setMaxLevel(levelTilling.get());
         }
-        if (WEEDING instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) WEEDING).setEnable(enableWeeding.get());
-            ((EnchantmentCoFH) WEEDING).setTreasureEnchantment(treasureWeeding.get());
+        if (ENCHANTMENTS.get(ID_WEEDING) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableWeeding.get());
+            enc.setTreasureEnchantment(treasureWeeding.get());
         }
         // SHIELDS
-        if (BULWARK instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) BULWARK).setEnable(enableBulwark.get());
-            ((EnchantmentCoFH) BULWARK).setTreasureEnchantment(treasureBulwark.get());
+        if (ENCHANTMENTS.get(ID_BULWARK) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableBulwark.get());
+            enc.setTreasureEnchantment(treasureBulwark.get());
         }
-        if (PHALANX instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) PHALANX).setEnable(enablePhalanx.get());
-            ((EnchantmentCoFH) PHALANX).setTreasureEnchantment(treasurePhalanx.get());
-            ((EnchantmentCoFH) PHALANX).setMaxLevel(levelPhalanx.get());
+        if (ENCHANTMENTS.get(ID_PHALANX) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enablePhalanx.get());
+            enc.setTreasureEnchantment(treasurePhalanx.get());
+            enc.setMaxLevel(levelPhalanx.get());
         }
         // MISC
-        if (SOULBOUND instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) SOULBOUND).setEnable(enableSoulbound.get());
-            ((EnchantmentCoFH) SOULBOUND).setTreasureEnchantment(treasureSoulbound.get());
-            ((EnchantmentCoFH) SOULBOUND).setMaxLevel(levelSoulbound.get());
+        if (ENCHANTMENTS.get(ID_SOULBOUND) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableSoulbound.get());
+            enc.setTreasureEnchantment(treasureSoulbound.get());
+            enc.setMaxLevel(levelSoulbound.get());
             SoulboundEnchantment.permanent = permanentSoulbound.get();
         }
         // CURSES
-        if (CURSE_FOOL instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) CURSE_FOOL).setEnable(enableCurseFool.get());
+        if (ENCHANTMENTS.get(ID_CURSE_FOOL) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableCurseFool.get());
         }
-        if (CURSE_MERCY instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) CURSE_MERCY).setEnable(enableCurseMercy.get());
+        if (ENCHANTMENTS.get(ID_CURSE_MERCY) instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableCurseMercy.get());
         }
     }
 
     // region CONFIG VARIABLES
 
     // ARMOR
-    private ForgeConfigSpec.BooleanValue enableProtectionMagic;
-    private ForgeConfigSpec.BooleanValue treasureProtectionMagic;
-    private ForgeConfigSpec.IntValue levelProtectionMagic;
+    private Supplier<Boolean> enableProtectionMagic;
+    private Supplier<Boolean> treasureProtectionMagic;
+    private Supplier<Integer> levelProtectionMagic;
 
-    private ForgeConfigSpec.BooleanValue enableDisplacement;
-    private ForgeConfigSpec.BooleanValue treasureDisplacement;
-    private ForgeConfigSpec.IntValue levelDisplacement;
-    private ForgeConfigSpec.IntValue chanceDisplacement;
-    private ForgeConfigSpec.BooleanValue allowMobsDisplacement;
+    private Supplier<Boolean> enableDisplacement;
+    private Supplier<Boolean> treasureDisplacement;
+    private Supplier<Integer> levelDisplacement;
+    private Supplier<Integer> chanceDisplacement;
+    private Supplier<Boolean> allowMobsDisplacement;
 
-    private ForgeConfigSpec.BooleanValue enableFireRebuke;
-    private ForgeConfigSpec.BooleanValue treasureFireRebuke;
-    private ForgeConfigSpec.IntValue levelFireRebuke;
-    private ForgeConfigSpec.IntValue chanceFireRebuke;
-    private ForgeConfigSpec.BooleanValue allowMobsFireRebuke;
+    private Supplier<Boolean> enableFireRebuke;
+    private Supplier<Boolean> treasureFireRebuke;
+    private Supplier<Integer> levelFireRebuke;
+    private Supplier<Integer> chanceFireRebuke;
+    private Supplier<Boolean> allowMobsFireRebuke;
 
-    private ForgeConfigSpec.BooleanValue enableFrostRebuke;
-    private ForgeConfigSpec.BooleanValue treasureFrostRebuke;
-    private ForgeConfigSpec.IntValue levelFrostRebuke;
-    private ForgeConfigSpec.IntValue chanceFrostRebuke;
-    private ForgeConfigSpec.BooleanValue allowMobsFrostRebuke;
+    private Supplier<Boolean> enableFrostRebuke;
+    private Supplier<Boolean> treasureFrostRebuke;
+    private Supplier<Integer> levelFrostRebuke;
+    private Supplier<Integer> chanceFrostRebuke;
+    private Supplier<Boolean> allowMobsFrostRebuke;
 
     // HELMET
-    private ForgeConfigSpec.BooleanValue enableAirAffinity;
-    private ForgeConfigSpec.BooleanValue treasureAirAffinity;
+    private Supplier<Boolean> enableAirAffinity;
+    private Supplier<Boolean> treasureAirAffinity;
 
-    private ForgeConfigSpec.BooleanValue enableXpBoost;
-    private ForgeConfigSpec.BooleanValue treasureXpBoost;
-    private ForgeConfigSpec.IntValue levelXpBoost;
-    private ForgeConfigSpec.IntValue amountXpBoost;
+    private Supplier<Boolean> enableXpBoost;
+    private Supplier<Boolean> treasureXpBoost;
+    private Supplier<Integer> levelXpBoost;
+    private Supplier<Integer> amountXpBoost;
 
-    private ForgeConfigSpec.BooleanValue enableGourmand;
-    private ForgeConfigSpec.BooleanValue treasureGourmand;
-    private ForgeConfigSpec.IntValue levelGourmand;
+    private Supplier<Boolean> enableGourmand;
+    private Supplier<Boolean> treasureGourmand;
+    private Supplier<Integer> levelGourmand;
 
     // CHESTPLATE
-    private ForgeConfigSpec.BooleanValue enableReach;
-    private ForgeConfigSpec.BooleanValue treasureReach;
-    private ForgeConfigSpec.IntValue levelReach;
+    private Supplier<Boolean> enableReach;
+    private Supplier<Boolean> treasureReach;
+    private Supplier<Integer> levelReach;
 
-    private ForgeConfigSpec.BooleanValue enableVitality;
-    private ForgeConfigSpec.BooleanValue treasureVitality;
-    private ForgeConfigSpec.IntValue levelVitality;
-    private ForgeConfigSpec.IntValue healthLevelVitality;
+    private Supplier<Boolean> enableVitality;
+    private Supplier<Boolean> treasureVitality;
+    private Supplier<Integer> levelVitality;
+    private Supplier<Integer> healthLevelVitality;
 
     // WEAPONS
-    private ForgeConfigSpec.BooleanValue enableDamageEnder;
-    private ForgeConfigSpec.BooleanValue treasureDamageEnder;
-    private ForgeConfigSpec.IntValue levelDamageEnder;
+    private Supplier<Boolean> enableDamageEnder;
+    private Supplier<Boolean> treasureDamageEnder;
+    private Supplier<Integer> levelDamageEnder;
 
-    private ForgeConfigSpec.BooleanValue enableDamageIllager;
-    private ForgeConfigSpec.BooleanValue treasureDamageIllager;
-    private ForgeConfigSpec.IntValue levelDamageIllager;
+    private Supplier<Boolean> enableDamageIllager;
+    private Supplier<Boolean> treasureDamageIllager;
+    private Supplier<Integer> levelDamageIllager;
 
-    private ForgeConfigSpec.BooleanValue enableDamageVillager;
-    private ForgeConfigSpec.BooleanValue treasureDamageVillager;
-    private ForgeConfigSpec.IntValue levelDamageVillager;
-    private ForgeConfigSpec.BooleanValue dropsDamageVillager;
+    private Supplier<Boolean> enableDamageVillager;
+    private Supplier<Boolean> treasureDamageVillager;
+    private Supplier<Integer> levelDamageVillager;
+    private Supplier<Boolean> dropsDamageVillager;
 
-    private ForgeConfigSpec.BooleanValue enableCavalier;
-    private ForgeConfigSpec.BooleanValue treasureCavalier;
-    private ForgeConfigSpec.IntValue levelCavalier;
+    private Supplier<Boolean> enableCavalier;
+    private Supplier<Boolean> treasureCavalier;
+    private Supplier<Integer> levelCavalier;
 
-    private ForgeConfigSpec.BooleanValue enableFrostAspect;
-    private ForgeConfigSpec.BooleanValue treasureFrostAspect;
-    private ForgeConfigSpec.IntValue levelFrostAspect;
+    private Supplier<Boolean> enableFrostAspect;
+    private Supplier<Boolean> treasureFrostAspect;
+    private Supplier<Integer> levelFrostAspect;
 
-    private ForgeConfigSpec.BooleanValue enableInstigating;
-    private ForgeConfigSpec.BooleanValue treasureInstigating;
+    private Supplier<Boolean> enableInstigating;
+    private Supplier<Boolean> treasureInstigating;
 
-    private ForgeConfigSpec.BooleanValue enableLeech;
-    private ForgeConfigSpec.BooleanValue treasureLeech;
-    private ForgeConfigSpec.IntValue levelLeech;
+    private Supplier<Boolean> enableLeech;
+    private Supplier<Boolean> treasureLeech;
+    private Supplier<Integer> levelLeech;
 
-    private ForgeConfigSpec.BooleanValue enableMagicEdge;
-    private ForgeConfigSpec.BooleanValue treasureMagicEdge;
-    private ForgeConfigSpec.IntValue levelMagicEdge;
+    private Supplier<Boolean> enableMagicEdge;
+    private Supplier<Boolean> treasureMagicEdge;
+    private Supplier<Integer> levelMagicEdge;
 
-    private ForgeConfigSpec.BooleanValue enableVorpal;
-    private ForgeConfigSpec.BooleanValue treasureVorpal;
-    private ForgeConfigSpec.IntValue levelVorpal;
-    private ForgeConfigSpec.IntValue critBaseVorpal;
-    private ForgeConfigSpec.IntValue critLevelVorpal;
-    private ForgeConfigSpec.IntValue critDamageVorpal;
-    private ForgeConfigSpec.IntValue headBaseVorpal;
-    private ForgeConfigSpec.IntValue headLevelVorpal;
+    private Supplier<Boolean> enableVorpal;
+    private Supplier<Boolean> treasureVorpal;
+    private Supplier<Integer> levelVorpal;
+    private Supplier<Integer> critBaseVorpal;
+    private Supplier<Integer> critLevelVorpal;
+    private Supplier<Integer> critDamageVorpal;
+    private Supplier<Integer> headBaseVorpal;
+    private Supplier<Integer> headLevelVorpal;
 
     // TOOLS
-    private ForgeConfigSpec.BooleanValue enableExcavating;
-    private ForgeConfigSpec.BooleanValue treasureExcavating;
+    private Supplier<Boolean> enableExcavating;
+    private Supplier<Boolean> treasureExcavating;
 
     // BOWS
-    private ForgeConfigSpec.BooleanValue enableHunter;
-    private ForgeConfigSpec.BooleanValue treasureHunter;
-    private ForgeConfigSpec.IntValue levelHunter;
-    private ForgeConfigSpec.IntValue chanceHunter;
+    private Supplier<Boolean> enableHunter;
+    private Supplier<Boolean> treasureHunter;
+    private Supplier<Integer> levelHunter;
+    private Supplier<Integer> chanceHunter;
 
-    private ForgeConfigSpec.BooleanValue enableQuickDraw;
-    private ForgeConfigSpec.BooleanValue treasureQuickDraw;
-    private ForgeConfigSpec.IntValue levelQuickDraw;
+    private Supplier<Boolean> enableQuickDraw;
+    private Supplier<Boolean> treasureQuickDraw;
+    private Supplier<Integer> levelQuickDraw;
 
-    private ForgeConfigSpec.BooleanValue enableTrueshot;
-    private ForgeConfigSpec.BooleanValue treasureTrueshot;
-    private ForgeConfigSpec.IntValue levelTrueshot;
+    private Supplier<Boolean> enableTrueshot;
+    private Supplier<Boolean> treasureTrueshot;
+    private Supplier<Integer> levelTrueshot;
 
-    private ForgeConfigSpec.BooleanValue enableVolley;
-    private ForgeConfigSpec.BooleanValue treasureVolley;
+    private Supplier<Boolean> enableVolley;
+    private Supplier<Boolean> treasureVolley;
 
     // FISHING RODS
-    private ForgeConfigSpec.BooleanValue enableAngler;
-    private ForgeConfigSpec.BooleanValue treasureAngler;
-    private ForgeConfigSpec.IntValue levelAngler;
-    private ForgeConfigSpec.IntValue chanceAngler;
+    private Supplier<Boolean> enableAngler;
+    private Supplier<Boolean> treasureAngler;
+    private Supplier<Integer> levelAngler;
+    private Supplier<Integer> chanceAngler;
 
-    private ForgeConfigSpec.BooleanValue enablePilfering;
-    private ForgeConfigSpec.BooleanValue treasurePilfering;
-    private ForgeConfigSpec.BooleanValue playerStealPilfering;
+    private Supplier<Boolean> enablePilfering;
+    private Supplier<Boolean> treasurePilfering;
+    private Supplier<Boolean> playerStealPilfering;
 
     // HOES
-    private ForgeConfigSpec.BooleanValue enableFurrowing;
-    private ForgeConfigSpec.BooleanValue treasureFurrowing;
-    private ForgeConfigSpec.IntValue levelFurrowing;
+    private Supplier<Boolean> enableFurrowing;
+    private Supplier<Boolean> treasureFurrowing;
+    private Supplier<Integer> levelFurrowing;
 
-    private ForgeConfigSpec.BooleanValue enableTilling;
-    private ForgeConfigSpec.BooleanValue treasureTilling;
-    private ForgeConfigSpec.IntValue levelTilling;
+    private Supplier<Boolean> enableTilling;
+    private Supplier<Boolean> treasureTilling;
+    private Supplier<Integer> levelTilling;
 
-    private ForgeConfigSpec.BooleanValue enableWeeding;
-    private ForgeConfigSpec.BooleanValue treasureWeeding;
+    private Supplier<Boolean> enableWeeding;
+    private Supplier<Boolean> treasureWeeding;
 
     // SHIELDS
-    private ForgeConfigSpec.BooleanValue enableBulwark;
-    private ForgeConfigSpec.BooleanValue treasureBulwark;
+    private Supplier<Boolean> enableBulwark;
+    private Supplier<Boolean> treasureBulwark;
 
-    private ForgeConfigSpec.BooleanValue enablePhalanx;
-    private ForgeConfigSpec.BooleanValue treasurePhalanx;
-    private ForgeConfigSpec.IntValue levelPhalanx;
+    private Supplier<Boolean> enablePhalanx;
+    private Supplier<Boolean> treasurePhalanx;
+    private Supplier<Integer> levelPhalanx;
 
     // MISC
-    private ForgeConfigSpec.BooleanValue enableSoulbound;
-    private ForgeConfigSpec.BooleanValue treasureSoulbound;
-    private ForgeConfigSpec.IntValue levelSoulbound;
-    private ForgeConfigSpec.BooleanValue permanentSoulbound;
+    private Supplier<Boolean> enableSoulbound;
+    private Supplier<Boolean> treasureSoulbound;
+    private Supplier<Integer> levelSoulbound;
+    private Supplier<Boolean> permanentSoulbound;
 
     // CURSES
-    private ForgeConfigSpec.BooleanValue enableCurseFool;
+    private Supplier<Boolean> enableCurseFool;
 
-    private ForgeConfigSpec.BooleanValue enableCurseMercy;
+    private Supplier<Boolean> enableCurseMercy;
     // endregion
 }

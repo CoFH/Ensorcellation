@@ -23,7 +23,9 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
-import static cofh.core.util.references.EnsorcReferences.*;
+import static cofh.core.util.references.EnsorcIDs.ID_DISPLACEMENT;
+import static cofh.core.util.references.EnsorcIDs.ID_FROST_REBUKE;
+import static cofh.ensorcellation.Ensorcellation.ENCHANTMENTS;
 import static cofh.lib.util.Constants.ARMOR_SLOTS;
 
 public class FireRebukeEnchantment extends EnchantmentCoFH {
@@ -61,7 +63,7 @@ public class FireRebukeEnchantment extends EnchantmentCoFH {
     @Override
     public boolean checkCompatibility(Enchantment ench) {
 
-        return super.checkCompatibility(ench) && ench != Enchantments.THORNS && ench != DISPLACEMENT && ench != FROST_REBUKE;
+        return super.checkCompatibility(ench) && ench != Enchantments.THORNS && ench != ENCHANTMENTS.get(ID_DISPLACEMENT) && ench != ENCHANTMENTS.get(ID_FROST_REBUKE);
     }
 
     // region HELPERS
@@ -71,7 +73,7 @@ public class FireRebukeEnchantment extends EnchantmentCoFH {
         if (!(attacker instanceof LivingEntity)) {
             return;
         }
-        Map.Entry<EquipmentSlot, ItemStack> stack = EnchantmentHelper.getRandomItemWith(FIRE_REBUKE, user);
+        Map.Entry<EquipmentSlot, ItemStack> stack = EnchantmentHelper.getRandomItemWith(this, user);
         if (shouldHit(level, user.getRandom())) {
             onHit(user, attacker, level);
             if (stack != null) {

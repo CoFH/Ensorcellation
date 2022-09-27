@@ -7,7 +7,8 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 import static cofh.core.util.helpers.ArcheryHelper.validBow;
-import static cofh.core.util.references.EnsorcReferences.TRUESHOT;
+import static cofh.core.util.references.EnsorcIDs.ID_TRUESHOT;
+import static cofh.ensorcellation.Ensorcellation.ENCHANTMENTS;
 
 public class VolleyEnchantment extends EnchantmentCoFH {
 
@@ -31,13 +32,13 @@ public class VolleyEnchantment extends EnchantmentCoFH {
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
 
-        return enable && (validBow(stack) || supportsEnchantment(stack));
+        return enable && (validBow(stack));
     }
 
     @Override
     public boolean checkCompatibility(Enchantment ench) {
 
-        return super.checkCompatibility(ench) && ench != TRUESHOT;
+        return super.checkCompatibility(ench) && ench != ENCHANTMENTS.get(ID_TRUESHOT);
     }
 
 }

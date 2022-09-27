@@ -22,7 +22,7 @@ public class BulwarkEnchantment extends EnchantmentCoFH {
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack) {
 
-        return enable && (stack.getItem().canPerformAction(stack, ToolActions.SHIELD_BLOCK) || supportsEnchantment(stack));
+        return enable && (stack.getItem().canPerformAction(stack, ToolActions.SHIELD_BLOCK));
     }
 
 }

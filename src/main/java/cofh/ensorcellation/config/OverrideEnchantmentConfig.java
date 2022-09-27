@@ -1,11 +1,13 @@
 package cofh.ensorcellation.config;
 
+import cofh.core.config.IBaseConfig;
 import cofh.ensorcellation.enchantment.override.FrostWalkerEnchantmentImp;
 import cofh.ensorcellation.enchantment.override.MendingEnchantmentAlt;
 import cofh.ensorcellation.enchantment.override.ThornsEnchantmentImp;
-import cofh.lib.config.IBaseConfig;
 import cofh.lib.enchantment.EnchantmentCoFH;
 import net.minecraftforge.common.ForgeConfigSpec;
+
+import java.util.function.Supplier;
 
 import static cofh.lib.util.Constants.MAX_ENCHANT_LEVEL;
 import static net.minecraft.world.item.enchantment.Enchantments.*;
@@ -138,52 +140,52 @@ public class OverrideEnchantmentConfig implements IBaseConfig {
     public void refresh() {
 
         // These should not cast incorrectly, but who knows in a multi-mod setup. ¯\_(ツ)_/¯
-        if (ALL_DAMAGE_PROTECTION instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) ALL_DAMAGE_PROTECTION).setEnable(enableProtection.get());
-            ((EnchantmentCoFH) ALL_DAMAGE_PROTECTION).setMaxLevel(levelProtection.get());
+        if (ALL_DAMAGE_PROTECTION instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableProtection.get());
+            enc.setMaxLevel(levelProtection.get());
         }
-        if (BLAST_PROTECTION instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) BLAST_PROTECTION).setEnable(enableProtectionBlast.get());
-            ((EnchantmentCoFH) BLAST_PROTECTION).setMaxLevel(levelProtectionBlast.get());
+        if (BLAST_PROTECTION instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableProtectionBlast.get());
+            enc.setMaxLevel(levelProtectionBlast.get());
         }
-        if (FALL_PROTECTION instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) FALL_PROTECTION).setEnable(enableProtectionFall.get());
-            ((EnchantmentCoFH) FALL_PROTECTION).setMaxLevel(levelProtectionFall.get());
+        if (FALL_PROTECTION instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableProtectionFall.get());
+            enc.setMaxLevel(levelProtectionFall.get());
         }
-        if (FIRE_PROTECTION instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) FIRE_PROTECTION).setEnable(enableProtectionFire.get());
-            ((EnchantmentCoFH) FIRE_PROTECTION).setMaxLevel(levelProtectionFire.get());
+        if (FIRE_PROTECTION instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableProtectionFire.get());
+            enc.setMaxLevel(levelProtectionFire.get());
         }
-        if (PROJECTILE_PROTECTION instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) PROJECTILE_PROTECTION).setEnable(enableProtectionProjectile.get());
-            ((EnchantmentCoFH) PROJECTILE_PROTECTION).setMaxLevel(levelProtectionProjectile.get());
+        if (PROJECTILE_PROTECTION instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableProtectionProjectile.get());
+            enc.setMaxLevel(levelProtectionProjectile.get());
         }
-        if (FIRE_ASPECT instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) FIRE_ASPECT).setEnable(enableFireAspect.get());
-            ((EnchantmentCoFH) FIRE_ASPECT).setMaxLevel(levelFireAspect.get());
+        if (FIRE_ASPECT instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableFireAspect.get());
+            enc.setMaxLevel(levelFireAspect.get());
         }
-        if (FROST_WALKER instanceof FrostWalkerEnchantmentImp) {
-            ((EnchantmentCoFH) FROST_WALKER).setEnable(enableFrostWalker.get());
-            ((EnchantmentCoFH) FROST_WALKER).setTreasureEnchantment(treasureFrostWalker.get());
-            ((EnchantmentCoFH) FROST_WALKER).setMaxLevel(levelFrostWalker.get());
-            ((FrostWalkerEnchantmentImp) FROST_WALKER).setFreezeLava(enableFreezeLava.get());
+        if (FROST_WALKER instanceof FrostWalkerEnchantmentImp enc) {
+            enc.setEnable(enableFrostWalker.get());
+            enc.setTreasureEnchantment(treasureFrostWalker.get());
+            enc.setMaxLevel(levelFrostWalker.get());
+            enc.setFreezeLava(enableFreezeLava.get());
         }
-        if (KNOCKBACK instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) KNOCKBACK).setEnable(enableKnockback.get());
-            ((EnchantmentCoFH) KNOCKBACK).setMaxLevel(levelKnockback.get());
+        if (KNOCKBACK instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableKnockback.get());
+            enc.setMaxLevel(levelKnockback.get());
         }
-        if (MOB_LOOTING instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) MOB_LOOTING).setEnable(enableLooting.get());
-            ((EnchantmentCoFH) MOB_LOOTING).setMaxLevel(levelLooting.get());
+        if (MOB_LOOTING instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableLooting.get());
+            enc.setMaxLevel(levelLooting.get());
         }
-        if (THORNS instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) THORNS).setEnable(enableThorns.get());
-            ((EnchantmentCoFH) THORNS).setMaxLevel(levelThorns.get());
+        if (THORNS instanceof EnchantmentCoFH enc) {
+            enc.setEnable(enableThorns.get());
+            enc.setMaxLevel(levelThorns.get());
             ThornsEnchantmentImp.chance = chanceThorns.get();
         }
-        if (MENDING instanceof EnchantmentCoFH) {
-            ((EnchantmentCoFH) MENDING).setEnable(alternateMending.get());
-            ((EnchantmentCoFH) MENDING).setTreasureEnchantment(treasureMending.get());
+        if (MENDING instanceof EnchantmentCoFH enc) {
+            enc.setEnable(alternateMending.get());
+            enc.setTreasureEnchantment(treasureMending.get());
             MendingEnchantmentAlt.anvilDamage = damageMending.get() / 100F;
         }
     }
@@ -193,41 +195,41 @@ public class OverrideEnchantmentConfig implements IBaseConfig {
     // endregion
 
     // region CONFIG VARIABLES
-    private ForgeConfigSpec.BooleanValue enableProtection;
-    private ForgeConfigSpec.IntValue levelProtection;
+    private Supplier<Boolean> enableProtection;
+    private Supplier<Integer> levelProtection;
 
-    private ForgeConfigSpec.BooleanValue enableProtectionBlast;
-    private ForgeConfigSpec.IntValue levelProtectionBlast;
+    private Supplier<Boolean> enableProtectionBlast;
+    private Supplier<Integer> levelProtectionBlast;
 
-    private ForgeConfigSpec.BooleanValue enableProtectionFall;
-    private ForgeConfigSpec.IntValue levelProtectionFall;
+    private Supplier<Boolean> enableProtectionFall;
+    private Supplier<Integer> levelProtectionFall;
 
-    private ForgeConfigSpec.BooleanValue enableProtectionFire;
-    private ForgeConfigSpec.IntValue levelProtectionFire;
+    private Supplier<Boolean> enableProtectionFire;
+    private Supplier<Integer> levelProtectionFire;
 
-    private ForgeConfigSpec.BooleanValue enableProtectionProjectile;
-    private ForgeConfigSpec.IntValue levelProtectionProjectile;
+    private Supplier<Boolean> enableProtectionProjectile;
+    private Supplier<Integer> levelProtectionProjectile;
 
-    private ForgeConfigSpec.BooleanValue enableFireAspect;
-    private ForgeConfigSpec.IntValue levelFireAspect;
+    private Supplier<Boolean> enableFireAspect;
+    private Supplier<Integer> levelFireAspect;
 
-    private ForgeConfigSpec.BooleanValue enableFrostWalker;
-    private ForgeConfigSpec.BooleanValue treasureFrostWalker;
-    private ForgeConfigSpec.IntValue levelFrostWalker;
-    private ForgeConfigSpec.BooleanValue enableFreezeLava;
+    private Supplier<Boolean> enableFrostWalker;
+    private Supplier<Boolean> treasureFrostWalker;
+    private Supplier<Integer> levelFrostWalker;
+    private Supplier<Boolean> enableFreezeLava;
 
-    private ForgeConfigSpec.BooleanValue enableKnockback;
-    private ForgeConfigSpec.IntValue levelKnockback;
+    private Supplier<Boolean> enableKnockback;
+    private Supplier<Integer> levelKnockback;
 
-    private ForgeConfigSpec.BooleanValue enableLooting;
-    private ForgeConfigSpec.IntValue levelLooting;
+    private Supplier<Boolean> enableLooting;
+    private Supplier<Integer> levelLooting;
 
-    private ForgeConfigSpec.BooleanValue enableThorns;
-    private ForgeConfigSpec.IntValue levelThorns;
-    private ForgeConfigSpec.IntValue chanceThorns;
+    private Supplier<Boolean> enableThorns;
+    private Supplier<Integer> levelThorns;
+    private Supplier<Integer> chanceThorns;
 
-    private ForgeConfigSpec.BooleanValue alternateMending;
-    private ForgeConfigSpec.BooleanValue treasureMending;
-    private ForgeConfigSpec.IntValue damageMending;
+    private Supplier<Boolean> alternateMending;
+    private Supplier<Boolean> treasureMending;
+    private Supplier<Integer> damageMending;
     // endregion
 }

@@ -10,7 +10,7 @@ import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
-import static cofh.core.util.references.EnsorcReferences.PHALANX;
+import static cofh.ensorcellation.init.EnsorcEnchantments.PHALANX;
 import static cofh.lib.util.Utils.getItemEnchantmentLevel;
 import static cofh.lib.util.constants.ModIds.ID_ENSORCELLATION;
 
@@ -32,7 +32,7 @@ public class ShieldEnchClientEvents {
         ItemStack stack = event.getEntity().getUseItem();
 
         if (stack.getItem().canPerformAction(stack, ToolActions.SHIELD_BLOCK)) {
-            int encPhalanx = getItemEnchantmentLevel(PHALANX, stack);
+            int encPhalanx = getItemEnchantmentLevel(PHALANX.get(), stack);
             if (encPhalanx > 0) {
                 modPhalanx = encPhalanx * PhalanxEnchantment.SPEED / 2D;
                 hadPhalanx = true;

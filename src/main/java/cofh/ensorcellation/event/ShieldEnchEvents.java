@@ -25,7 +25,7 @@ import net.minecraftforge.fml.common.Mod;
 
 import static cofh.core.util.references.EnsorcIDs.ID_BULWARK;
 import static cofh.core.util.references.EnsorcIDs.ID_PHALANX;
-import static cofh.core.util.references.EnsorcReferences.*;
+import static cofh.ensorcellation.init.EnsorcEnchantments.*;
 import static cofh.lib.util.Constants.UUID_ENCH_BULWARK_KNOCKBACK_RESISTANCE;
 import static cofh.lib.util.Constants.UUID_ENCH_PHALANX_MOVEMENT_SPEED;
 import static cofh.lib.util.Utils.getItemEnchantmentLevel;
@@ -58,22 +58,22 @@ public class ShieldEnchEvents {
                 attacker.hurt(DamageSource.thorns(entity), ThornsEnchantment.getDamage(encThorns, entity.getRandom()));
             }
             // DISPLACEMENT
-            int encDisplacement = getItemEnchantmentLevel(DISPLACEMENT, stack);
+            int encDisplacement = getItemEnchantmentLevel(DISPLACEMENT.get(), stack);
             if (DisplacementEnchantment.shouldHit(encDisplacement, entity.getRandom())) {
                 DisplacementEnchantment.onHit(entity, attacker, encDisplacement);
             }
             // FIRE REBUKE
-            int encFireRebuke = getItemEnchantmentLevel(FIRE_REBUKE, stack);
+            int encFireRebuke = getItemEnchantmentLevel(FIRE_REBUKE.get(), stack);
             if (FireRebukeEnchantment.shouldHit(encFireRebuke, entity.getRandom())) {
                 FireRebukeEnchantment.onHit(entity, attacker, encFireRebuke);
             }
             // FROST REBUKE
-            int encFrostRebuke = getItemEnchantmentLevel(FROST_REBUKE, stack);
+            int encFrostRebuke = getItemEnchantmentLevel(FROST_REBUKE.get(), stack);
             if (FrostRebukeEnchantment.shouldHit(encFrostRebuke, entity.getRandom())) {
                 FrostRebukeEnchantment.onHit(entity, attacker, encFrostRebuke);
             }
             // BULWARK
-            int encBulwark = getItemEnchantmentLevel(BULWARK, stack);
+            int encBulwark = getItemEnchantmentLevel(BULWARK.get(), stack);
             if (encBulwark > 0 && attacker instanceof Player) {
                 Player playerAttacker = (Player) attacker;
                 if (playerAttacker.getRandom().nextFloat() < 0.5F) {
@@ -104,14 +104,14 @@ public class ShieldEnchEvents {
         }
         if (stack.getItem().canPerformAction(stack, ToolActions.SHIELD_BLOCK)) {
             // BULWARK
-            int encBulwark = getItemEnchantmentLevel(BULWARK, stack);
+            int encBulwark = getItemEnchantmentLevel(BULWARK.get(), stack);
             if (knockbackResAttr != null) {
                 if (encBulwark > 0) {
                     knockbackResAttr.addTransientModifier(new AttributeModifier(UUID_ENCH_BULWARK_KNOCKBACK_RESISTANCE, ID_BULWARK, 1.0D, ADDITION));
                 }
             }
             // PHALANX
-            int encPhalanx = getItemEnchantmentLevel(PHALANX, stack);
+            int encPhalanx = getItemEnchantmentLevel(PHALANX.get(), stack);
             if (moveSpeedAttr != null) {
                 if (encPhalanx > 0) {
                     moveSpeedAttr.addTransientModifier(new AttributeModifier(UUID_ENCH_PHALANX_MOVEMENT_SPEED, ID_PHALANX, PhalanxEnchantment.SPEED * encPhalanx, MULTIPLY_TOTAL));
