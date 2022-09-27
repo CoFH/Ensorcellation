@@ -29,8 +29,7 @@ public class SoulboundEvents {
     @SubscribeEvent (priority = EventPriority.HIGH)
     public static void handlePlayerDropsEvent(LivingDropsEvent event) {
 
-        if (event.getEntity() instanceof Player) {
-            Player player = (Player) event.getEntity();
+        if (event.getEntity() instanceof Player player) {
             if (Utils.isFakePlayer(player) || player.level.getGameRules().getBoolean(RULE_KEEPINVENTORY)) {
                 return;
             }
