@@ -32,8 +32,8 @@
   "enchantment.ensorcellation.excavating": "Excavating",
   "enchantment.ensorcellation.excavating.desc": "Harvests additional blocks in a radius.",
 
-  "enchantment.ensorcellation.exp_boost": "Insight",
-  "enchantment.ensorcellation.exp_boost.desc": "Increases experience gain when using the item.",
+  "enchantment.ensorcellation.xp_boost": "Insight",
+  "enchantment.ensorcellation.xp_boost.desc": "Increases experience gain when using the item.",
 
   "enchantment.ensorcellation.fire_rebuke": "Flaming Rebuke",
   "enchantment.ensorcellation.fire_rebuke.desc": "Sets attackers on fire while knocking them away.",
