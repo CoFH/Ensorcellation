@@ -30,6 +30,7 @@ public class Ensorcellation {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ENCHANTMENTS.register(modEventBus);
+        OVERRIDES.register(modEventBus);
 
         CONFIG_MANAGER.register(modEventBus)
                 .addServerConfig(new BaseEnchantmentConfig())

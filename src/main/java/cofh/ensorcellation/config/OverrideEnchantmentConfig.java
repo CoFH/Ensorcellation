@@ -184,6 +184,7 @@ public class OverrideEnchantmentConfig implements IBaseConfig {
             ThornsEnchantmentImp.chance = chanceThorns.get();
         }
         if (MENDING instanceof EnchantmentCoFH enc) {
+            enableMendingOverride = alternateMending.get();
             enc.setEnable(alternateMending.get());
             enc.setTreasureEnchantment(treasureMending.get());
             MendingEnchantmentAlt.anvilDamage = damageMending.get() / 100F;
