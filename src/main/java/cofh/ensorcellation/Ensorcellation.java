@@ -1,6 +1,7 @@
 package cofh.ensorcellation;
 
 import cofh.core.config.ConfigManager;
+import cofh.core.event.CoreClientEvents;
 import cofh.core.init.CoreItems;
 import cofh.ensorcellation.config.BaseEnchantmentConfig;
 import cofh.ensorcellation.config.OverrideEnchantmentConfig;
@@ -9,6 +10,7 @@ import cofh.lib.util.DeferredRegisterCoFH;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
@@ -30,6 +32,8 @@ public class Ensorcellation {
 
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        modEventBus.addListener(this::clientSetup);
+
         ENCHANTMENTS.register(modEventBus);
         OVERRIDES.register(modEventBus);
 
@@ -44,4 +48,10 @@ public class Ensorcellation {
         CoreItems.registerShieldOverride();
     }
 
+    // region INITIALIZATION
+    private void clientSetup(final FMLClientSetupEvent event) {
+
+        event.enqueueWork(() -> CoreClientEvents.addNamespace(ID_ENSORCELLATION));
+    }
+    // endregion
 }
