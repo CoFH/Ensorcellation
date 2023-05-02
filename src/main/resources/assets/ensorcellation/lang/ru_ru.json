@@ -3,7 +3,7 @@
   "enchantment.ensorcellation.air_affinity.desc": "Убирает замедление копания при полёте.",
 
   "enchantment.ensorcellation.angler": "Награда рыболова",
-  "enchantment.ensorcellation.angler.desc": "Дает шанс поймать дополнительные предметы при рыбалке.",
+  "enchantment.ensorcellation.angler.desc": "Даёт шанс поймать дополнительные предметы при рыбалке.",
 
   "enchantment.ensorcellation.bulwark": "Оплот",
   "enchantment.ensorcellation.bulwark.desc": "Защищает владельца от отбрасывания и может вывести из строя оружие атакующего.",
@@ -32,8 +32,8 @@
   "enchantment.ensorcellation.excavating": "Раскопка",
   "enchantment.ensorcellation.excavating.desc": "Увеличивает радиус добычи.",
 
-  "enchantment.ensorcellation.exp_boost": "Проницательность",
-  "enchantment.ensorcellation.exp_boost.desc": "Увеличивает количество получаемого опыта при использовании предмета.",
+  "enchantment.ensorcellation.xp_boost": "Проницательность",
+  "enchantment.ensorcellation.xp_boost.desc": "Увеличивает количество получаемого опыта при использовании предмета.",
 
   "enchantment.ensorcellation.fire_rebuke": "Пламенный упрёк",
   "enchantment.ensorcellation.fire_rebuke.desc": "Поджигает нападающих, одновременно отбрасывая их.",
