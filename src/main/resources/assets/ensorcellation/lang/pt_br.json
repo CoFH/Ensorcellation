@@ -1,0 +1,112 @@
+{
+  "enchantment.ensorcellation.air_affinity": "Afinidade Aérea",
+  "enchantment.ensorcellation.air_affinity.desc": "remove a penalidade em velocidade de mineração quando não se esta no chão.",
+
+  "enchantment.ensorcellation.angler": "Recompensa do Pescador",
+  "enchantment.ensorcellation.angler.desc": "Providencia uma chance de pegar itens extras ao pescar.",
+
+  "enchantment.ensorcellation.bulwark": "Baluarte",
+  "enchantment.ensorcellation.bulwark.desc": "previne o usuário de ser repelido e pode desabilitar a arma de um atacante.",
+
+  "enchantment.ensorcellation.cavalier": "Cavalheiro",
+  "enchantment.ensorcellation.cavalier.desc": "Aumenta seu dano ao estar montado em algo.",
+
+  "enchantment.ensorcellation.curse_fool": "Maldição da Toice",
+  "enchantment.ensorcellation.curse_fool.desc": "Previne ganhos de experiência ao usar o item.",
+
+  "enchantment.ensorcellation.curse_mercy": "Maldição da Misericórdia",
+  "enchantment.ensorcellation.curse_mercy.desc": "Impede uma arma de causar um dano letal.",
+
+  "enchantment.ensorcellation.damage_ender": "Disrupção do Fim",
+  "enchantment.ensorcellation.damage_ender.desc": "Aumenta dano causado a monstros do Fim (Ender) e inibe teletransporte.",
+
+  "enchantment.ensorcellation.damage_illager": "Vigilante",
+  "enchantment.ensorcellation.damage_illager.desc": "Aumenta dano causado a Illagers.",
+
+  "enchantment.ensorcellation.damage_villager": "Fora-da-Lei",
+  "enchantment.ensorcellation.damage_villager.desc": "Aumenta dano causado a Aldeões.",
+
+  "enchantment.ensorcellation.displacement": "Deslocamento",
+  "enchantment.ensorcellation.displacement.desc": "Aleatoriamente teleporta atacantes para longe.",
+
+  "enchantment.ensorcellation.excavating": "Excavação",
+  "enchantment.ensorcellation.excavating.desc": "Quebra blocos adicionais em um raio.",
+
+  "enchantment.ensorcellation.exp_boost": "Introspecção",
+  "enchantment.ensorcellation.exp_boost.desc": "Aumenta ganhos de experiência ao usar o item.",
+
+  "enchantment.ensorcellation.fire_rebuke": "Retribuição Flamejante",
+  "enchantment.ensorcellation.fire_rebuke.desc": "Atea fogo aos atacantes e os repele.",
+
+  "enchantment.ensorcellation.frost_aspect": "Aspecto Congelante",
+  "enchantment.ensorcellation.frost_aspect.desc": "Desacelera e enfraquece o alvo.",
+
+  "enchantment.ensorcellation.frost_rebuke": "Retribuição Congelante",
+  "enchantment.ensorcellation.frost_rebuke.desc": "Desacelera e Enfraquece atacantese os repele.",
+
+  "enchantment.ensorcellation.frost_walker": "Pé Frio",
+  "enchantment.ensorcellation.frost_walker.desc": "Congela qualquer superfice líquida, permitindo a passagem.",
+
+  "enchantment.ensorcellation.furrowing": "Sulcador",
+  "enchantment.ensorcellation.furrowing.desc": "Ara blocos adicionais em uma linha.",
+
+  "enchantment.ensorcellation.gourmand": "Guloso",
+  "enchantment.ensorcellation.gourmand.desc": "Comida te nutre e te satisfaz mais quando consumida.",
+
+  "enchantment.ensorcellation.hunter": "Recompensa do Caçador",
+  "enchantment.ensorcellation.hunter.desc": "Providencia uma chance de espólios adicionais de animais mortos.",
+
+  "enchantment.ensorcellation.instigating": "Instigante",
+  "enchantment.ensorcellation.instigating.desc": "Causa dano adicional se o alvo estiver com a vida cheia.",
+
+  "enchantment.ensorcellation.leech": "Sanguessuga",
+  "enchantment.ensorcellation.leech.desc": "Restaura vida quando um monstro é morto.",
+
+  "enchantment.ensorcellation.magic_edge": "Lamina Mágica",
+  "enchantment.ensorcellation.magic_edge.desc": "Levemente aumenta o dano causado e o transforma em dano mágico.",
+
+  "enchantment.ensorcellation.magic_protection": "Proteção Mágica",
+  "enchantment.ensorcellation.magic_protection.desc": "Reduz o dano levado de fontes mágicas.",
+
+  "enchantment.ensorcellation.phalanx": "Falange",
+  "enchantment.ensorcellation.phalanx.desc": "Permite que o usuário se mova mais rápido ao usar um escudo.",
+
+  "enchantment.ensorcellation.pilfering": "Furto",
+  "enchantment.ensorcellation.pilfering.desc": "Talvez roube uma peça de armadura de alvos atingidos.",
+
+  "enchantment.ensorcellation.preservation": "Preservação",
+  "enchantment.ensorcellation.preservation.desc": "Remove o custo incrementante em XP ao reparar um item.",
+
+  "enchantment.ensorcellation.quick_draw": "Saque Rápido",
+  "enchantment.ensorcellation.quick_draw.desc": "Diminui o tempo necessário para sacar um arco completamente.",
+
+  "enchantment.ensorcellation.reach": "Alcançe",
+  "enchantment.ensorcellation.reach.desc": "Aumenta a distância máxima de interação com blocos do usuário.",
+
+  "enchantment.ensorcellation.smashing": "Despedaçar",
+  "enchantment.ensorcellation.smashing.desc": "Minérios coletados serão despedaçados em pedaços, aumentando os espólios.",
+
+  "enchantment.ensorcellation.smelting": "Fundição",
+  "enchantment.ensorcellation.smelting.desc": "Blocos coletados irão ser cozidos automaticamente, como se fosse por uma fornalha.",
+
+  "enchantment.ensorcellation.soulbound": "Atralado a Alma",
+  "enchantment.ensorcellation.soulbound.desc": "O Item permaneçerá com seu dono após uma infeliz morte.",
+
+  "enchantment.ensorcellation.tilling": "Lavrador",
+  "enchantment.ensorcellation.tilling.desc": "Ara blocos adicionais em um raio.",
+
+  "enchantment.ensorcellation.trueshot": "Tiro Certeiro",
+  "enchantment.ensorcellation.trueshot.desc": "Aumenta a precisão e velocidade de flechas, e permite que elas atravessem inimigos.",
+
+  "enchantment.ensorcellation.vitality": "Vitalidade",
+  "enchantment.ensorcellation.vitality.desc": "Aumenta a vida máxima do usuário.",
+
+  "enchantment.ensorcellation.volley": "Rajada",
+  "enchantment.ensorcellation.volley.desc": "Três flechas são atiradas em formato de arco. Somente uma flecha é consumida.",
+
+  "enchantment.ensorcellation.vorpal": "Vorpal",
+  "enchantment.ensorcellation.vorpal.desc": "Aleatoriamente causa ataques poderosos e decapitações.",
+
+  "enchantment.ensorcellation.weeding": "Capinar",
+  "enchantment.ensorcellation.weeding.desc": "Quebra plantas próximas ao arar blocos."
+}
