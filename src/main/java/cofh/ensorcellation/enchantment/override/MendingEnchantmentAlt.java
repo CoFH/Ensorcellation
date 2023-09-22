@@ -20,7 +20,7 @@ public class MendingEnchantmentAlt extends EnchantmentOverride {
     @Override
     public String getDescriptionId() {
 
-        return isEnabled() ? "enchantment.ensorcellation.preservation" : "enchantment.minecraft.mending";
+        return enable ? "enchantment.ensorcellation.preservation" : "enchantment.minecraft.mending";
     }
 
     @Override

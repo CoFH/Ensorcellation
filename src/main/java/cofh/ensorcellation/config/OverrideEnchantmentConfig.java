@@ -68,9 +68,9 @@ public class OverrideEnchantmentConfig implements IBaseConfig {
         builder.pop();
 
         builder.push("Fire Aspect");
-        enableFireAspect = builder
-                .comment("If TRUE, the Fire Aspect Enchantment is replaced with a more configurable version which works on more items, such as Axes.")
-                .define("Enable", true);
+        //        enableFireAspect = builder
+        //                .comment("If TRUE, the Fire Aspect Enchantment is replaced with a more configurable version which works on more items, such as Axes.")
+        //                .define("Enable", true);
         levelFireAspect = builder
                 .comment(level)
                 .defineInRange("Max Level", 2, 1, MAX_ENCHANT_LEVEL);
@@ -92,18 +92,18 @@ public class OverrideEnchantmentConfig implements IBaseConfig {
         builder.pop();
 
         builder.push("Knockback");
-        enableKnockback = builder
-                .comment("If TRUE, the Knockback Enchantment is replaced with a more configurable version which works on more items, such as Axes.")
-                .define("Enable", true);
+        //        enableKnockback = builder
+        //                .comment("If TRUE, the Knockback Enchantment is replaced with a more configurable version which works on more items, such as Axes.")
+        //                .define("Enable", true);
         levelKnockback = builder
                 .comment(level)
                 .defineInRange("Max Level", 2, 1, MAX_ENCHANT_LEVEL);
         builder.pop();
 
         builder.push("Looting");
-        enableLooting = builder
-                .comment("If TRUE, the Looting Enchantment is replaced with a more configurable version which works on more items, such as Axes.")
-                .define("Enable", true);
+        //        enableLooting = builder
+        //                .comment("If TRUE, the Looting Enchantment is replaced with a more configurable version which works on more items, such as Axes.")
+        //                .define("Enable", true);
         levelLooting = builder
                 .comment(level)
                 .defineInRange("Max Level", 3, 1, MAX_ENCHANT_LEVEL);
@@ -161,7 +161,6 @@ public class OverrideEnchantmentConfig implements IBaseConfig {
             enc.setMaxLevel(levelProtectionProjectile.get());
         }
         if (FIRE_ASPECT instanceof EnchantmentCoFH enc) {
-            enc.setEnable(enableFireAspect.get());
             enc.setMaxLevel(levelFireAspect.get());
         }
         if (FROST_WALKER instanceof FrostWalkerEnchantmentImp enc) {
@@ -171,11 +170,9 @@ public class OverrideEnchantmentConfig implements IBaseConfig {
             enc.setFreezeLava(enableFreezeLava.get());
         }
         if (KNOCKBACK instanceof EnchantmentCoFH enc) {
-            enc.setEnable(enableKnockback.get());
             enc.setMaxLevel(levelKnockback.get());
         }
         if (MOB_LOOTING instanceof EnchantmentCoFH enc) {
-            enc.setEnable(enableLooting.get());
             enc.setMaxLevel(levelLooting.get());
         }
         if (THORNS instanceof EnchantmentCoFH enc) {
@@ -211,7 +208,6 @@ public class OverrideEnchantmentConfig implements IBaseConfig {
     private Supplier<Boolean> enableProtectionProjectile;
     private Supplier<Integer> levelProtectionProjectile;
 
-    private Supplier<Boolean> enableFireAspect;
     private Supplier<Integer> levelFireAspect;
 
     private Supplier<Boolean> enableFrostWalker;
@@ -219,10 +215,8 @@ public class OverrideEnchantmentConfig implements IBaseConfig {
     private Supplier<Integer> levelFrostWalker;
     private Supplier<Boolean> enableFreezeLava;
 
-    private Supplier<Boolean> enableKnockback;
     private Supplier<Integer> levelKnockback;
 
-    private Supplier<Boolean> enableLooting;
     private Supplier<Integer> levelLooting;
 
     private Supplier<Boolean> enableThorns;
