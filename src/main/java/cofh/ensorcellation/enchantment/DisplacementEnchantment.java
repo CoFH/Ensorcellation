@@ -87,7 +87,7 @@ public class DisplacementEnchantment extends EnchantmentCoFH {
             RandomSource rand = user.getRandom();
             int radius = 16 * level;
             int bound = radius * 2 + 1;
-            BlockPos pos = new BlockPos(attacker.getX(), attacker.getY(), attacker.getZ());
+            BlockPos pos = new BlockPos((int) attacker.getX(), (int) attacker.getY(), (int) attacker.getZ());
             BlockPos randPos = pos.offset(-radius + rand.nextInt(bound), rand.nextInt(8), -radius + rand.nextInt(bound));
             if (attacker.level instanceof ServerLevel && attacker.canChangeDimensions() && Utils.teleportEntityTo(attacker, randPos)) {
                 for (int j = 0; j < 3 * level; ++j) {

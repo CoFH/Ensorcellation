@@ -32,9 +32,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.FrostWalkerEnchantment;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
-import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.TickEvent;
@@ -62,6 +63,7 @@ import static cofh.lib.util.constants.ModIds.ID_ENSORCELLATION;
 import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADDITION;
 import static net.minecraft.world.item.enchantment.Enchantments.FROST_WALKER;
 import static net.minecraft.world.level.block.Blocks.*;
+import static net.minecraft.world.level.storage.loot.parameters.LootContextParamSets.FISHING;
 import static net.minecraft.world.level.storage.loot.parameters.LootContextParams.*;
 
 @Mod.EventBusSubscriber (modid = ID_ENSORCELLATION)
@@ -83,8 +85,9 @@ public class CommonEvents {
         // MAGIC EDGE
         if (attacker instanceof LivingEntity) {
             int encMagicEdge = getHeldEnchantmentLevel((LivingEntity) attacker, MAGIC_EDGE.get());
-            if (encMagicEdge > 0 && !source.isMagic()) {
-                source.bypassArmor().setMagic();
+            if (encMagicEdge > 0 && source != attacker.damageSources().magic()) {
+                event.setCanceled(true);
+                ForgeHooks.onLivingAttack(event.getEntity(), attacker.level.damageSources().magic(), event.getAmount());
             }
         }
     }
@@ -137,27 +140,27 @@ public class CommonEvents {
         LivingEntity entity = event.getEntity();
         DamageSource source = event.getSource();
         Entity attacker = source.getEntity();
-        if (!(attacker instanceof Player) || !event.isRecentlyHit()) {
+        if (!(attacker instanceof Player player) || !event.isRecentlyHit()) {
             return;
         }
-        Player player = (Player) attacker;
         // HUNTER
         int encHunter = getHeldEnchantmentLevel(player, HUNTER.get());
         if (encHunter > 0 && entity instanceof Animal) {
 
-            LootTable table = entity.level.getServer().getLootTables().get(entity.getLootTable());
-            LootContext.Builder contextBuilder = (new LootContext.Builder((ServerLevel) entity.level))
-                    .withRandom(entity.level.random)
+            LootParams lootparams = (new LootParams.Builder((ServerLevel) player.level))
                     .withParameter(THIS_ENTITY, entity)
                     .withParameter(ORIGIN, entity.position())
                     .withParameter(DAMAGE_SOURCE, source)
+                    .withParameter(LAST_DAMAGE_PLAYER, player)
                     .withOptionalParameter(KILLER_ENTITY, source.getEntity())
-                    .withOptionalParameter(DIRECT_KILLER_ENTITY, source.getDirectEntity());
-            contextBuilder = contextBuilder.withParameter(LAST_DAMAGE_PLAYER, player).withLuck(player.getLuck());
+                    .withOptionalParameter(DIRECT_KILLER_ENTITY, source.getDirectEntity())
+                    .withLuck(player.getLuck())
+                    .create(LootContextParamSets.ENTITY);
+            LootTable table = entity.getServer().getLootData().getLootTable(entity.getLootTable());
 
             for (int i = 0; i < encHunter; ++i) {
                 if (player.getRandom().nextInt(100) < HunterEnchantment.chance) {
-                    for (ItemStack stack : table.getRandomItems(contextBuilder.create(LootContextParamSets.ENTITY))) {
+                    for (ItemStack stack : table.getRandomItems(lootparams)) {
                         ItemEntity drop = new ItemEntity(entity.level, entity.getX(), entity.getY(), entity.getZ(), stack);
                         event.getDrops().add(drop);
                     }
@@ -211,7 +214,7 @@ public class CommonEvents {
 
         // REACH
         int encReach = getMaxEquippedEnchantmentLevel(entity, REACH.get());
-        AttributeInstance reachAttr = entity.getAttribute(ForgeMod.REACH_DISTANCE.get());
+        AttributeInstance reachAttr = entity.getAttribute(ForgeMod.BLOCK_REACH.get());
         if (reachAttr != null) {
             reachAttr.removeModifier(UUID_ENCH_REACH_DISTANCE);
             if (encReach > 0) {
@@ -227,25 +230,6 @@ public class CommonEvents {
                 healthAttr.addTransientModifier(new AttributeModifier(UUID_ENCH_VITALITY_HEALTH, ID_VITALITY, encVitality * VitalityEnchantment.health, ADDITION));
             }
         }
-        // Shield must be ACTIVE; see handleLivingUpdateEvent in ShieldEnchEvents.
-        //        // BULWARK
-        //        int encBulwark = getMaxEquippedEnchantmentLevel(BULWARK, entity);
-        //        ModifiableAttributeInstance knockbackResAttr = entity.getAttribute(Attributes.KNOCKBACK_RESISTANCE);
-        //        if (knockbackResAttr != null) {
-        //            knockbackResAttr.removeModifier(UUID_ENCH_BULWARK_KNOCKBACK_RESISTANCE);
-        //            if (encBulwark > 0) {
-        //                knockbackResAttr.applyNonPersistentModifier(new AttributeModifier(UUID_ENCH_BULWARK_KNOCKBACK_RESISTANCE, ID_REACH, 1.0D, ADDITION));
-        //            }
-        //        }
-        //        // PHALANX
-        //        int encPhalanx = getMaxEquippedEnchantmentLevel(PHALANX, entity);
-        //        ModifiableAttributeInstance moveSpeedAttr = entity.getAttribute(Attributes.MOVEMENT_SPEED);
-        //        if (moveSpeedAttr != null) {
-        //            moveSpeedAttr.removeModifier(UUID_ENCH_PHALANX_MOVEMENT_SPEED);
-        //            if (encPhalanx > 0) {
-        //                moveSpeedAttr.applyNonPersistentModifier(new AttributeModifier(UUID_ENCH_PHALANX_MOVEMENT_SPEED, ID_PHALANX, PhalanxEnchantment.SPEED * encPhalanx, MULTIPLY_TOTAL));
-        //            }
-        //        }
     }
 
     @SubscribeEvent
@@ -316,7 +300,7 @@ public class CommonEvents {
         }
         // MAGIC EDGE
         int encMagicEdge = getHeldEnchantmentLevel(living, MAGIC_EDGE.get());
-        if (encMagicEdge > 0 && source.isMagic()) {
+        if (encMagicEdge > 0 && source == attacker.damageSources().magic()) {
             event.setAmount(event.getAmount() + MagicEdgeEnchantment.getExtraDamage(encMagicEdge));
             MagicEdgeEnchantment.onHit(entity, encMagicEdge);
         }
@@ -380,27 +364,27 @@ public class CommonEvents {
         }
         FishingHook hook = event.getHookEntity();
         Entity angler = hook.getOwner();
-        if (!(angler instanceof Player)) {
+        if (!(angler instanceof Player player)) {
             return;
         }
-        Player player = (Player) angler;
         // ANGLER
         int encAngler = getHeldEnchantmentLevel(player, ANGLER.get());
         if (encAngler > 0) {
             ItemStack fishingRod = player.getMainHandItem();
 
-            LootContext.Builder contextBuilder = (new LootContext.Builder((ServerLevel) hook.level))
+            LootParams lootparams = (new LootParams.Builder((ServerLevel) hook.level))
                     .withParameter(ORIGIN, hook.position())
                     .withParameter(TOOL, fishingRod)
-                    .withRandom(hook.level.random)
-                    .withLuck((float) hook.luck + player.getLuck());
-            contextBuilder.withParameter(KILLER_ENTITY, player).withParameter(THIS_ENTITY, hook);
-            LootTable table = hook.level.getServer().getLootTables().get(BuiltInLootTables.FISHING);
+                    .withParameter(THIS_ENTITY, hook)
+                    .withParameter(KILLER_ENTITY, hook.getOwner())
+                    .withLuck((float) hook.luck + player.getLuck())
+                    .create(FISHING);
+            LootTable table = hook.level.getServer().getLootData().getLootTable(BuiltInLootTables.FISHING);
             List<ItemStack> list = new ArrayList<>();
 
             for (int i = 0; i < encAngler; ++i) {
                 if (player.getRandom().nextInt(100) < AnglerEnchantment.chance) {
-                    list.addAll(table.getRandomItems(contextBuilder.create(LootContextParamSets.FISHING)));
+                    list.addAll(table.getRandomItems(lootparams));
                 }
             }
             for (ItemStack stack : list) {
@@ -467,7 +451,7 @@ public class CommonEvents {
                 return;
             }
             ItemEntity armorEntity = new ItemEntity(living.level, living.getX(), living.getY() + 0.5D, living.getZ(), armor);
-            armorEntity.setOwner(player.getUUID());
+            armorEntity.setThrower(player.getUUID());
             armorEntity.setPickUpDelay(5);
             armorEntity.level.addFreshEntity(armorEntity);
             armorEntity.setPos(player.getX(), player.getY(), player.getZ());
@@ -510,7 +494,7 @@ public class CommonEvents {
         Player player = event.getEntity();
         // AIR AFFINITY
         int encAirAffinity = getMaxEquippedEnchantmentLevel(player, AIR_AFFINITY.get());
-        if (encAirAffinity > 0 && !player.isOnGround()) {
+        if (encAirAffinity > 0 && !player.onGround()) {
             event.setNewSpeed(Math.max(event.getNewSpeed(), event.getOriginalSpeed() * 5.0F));
         }
     }

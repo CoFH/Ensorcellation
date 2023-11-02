@@ -1,6 +1,7 @@
 package cofh.ensorcellation.enchantment.override;
 
 import cofh.lib.enchantment.EnchantmentOverride;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.HorseArmorItem;
@@ -23,20 +24,20 @@ public class ProtectionEnchantmentImp extends EnchantmentOverride {
     @Override
     public int getDamageProtection(int level, DamageSource source) {
 
-        if (level <= 0 || source.isBypassInvul()) {
+        if (level <= 0 || source.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
             return 0;
         } else if (this.protectionType == Type.ALL) {
             return level;
-        } else if (this.protectionType == Type.FALL && source == DamageSource.FALL) {
+        } else if (this.protectionType == Type.FALL && source.is(DamageTypeTags.IS_FALL)) {
             return level * 3;
-        } else if (this.protectionType == Type.FIRE && source.isFire()) {
+        } else if (this.protectionType == Type.FIRE && source.is(DamageTypeTags.IS_FIRE)) {
             return level * 2;
-        } else if (this.protectionType == Type.EXPLOSION && source.isExplosion()) {
+        } else if (this.protectionType == Type.EXPLOSION && source.is(DamageTypeTags.IS_EXPLOSION)) {
             return level * 2;
-        } else if (this.protectionType == Type.MAGIC && source.isMagic()) {
+        } else if (this.protectionType == Type.MAGIC && source.is(DamageTypeTags.WITCH_RESISTANT_TO)) {
             return level * 2;
         } else {
-            return this.protectionType == Type.PROJECTILE && source.isProjectile() ? level * 2 : 0;
+            return this.protectionType == Type.PROJECTILE && source.is(DamageTypeTags.IS_PROJECTILE) ? level * 2 : 0;
         }
     }
 

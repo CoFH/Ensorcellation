@@ -15,7 +15,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraftforge.common.util.BlockSnapshot;
 import net.minecraftforge.event.ForgeEventFactory;
@@ -67,19 +66,19 @@ public class FrostWalkerEnchantmentImp extends EnchantmentOverride {
         if (!freezeLava) {
             return;
         }
-        if (living.isOnGround()) {
+        if (living.onGround()) {
             BlockState state = GLOSSED_MAGMA.get().defaultBlockState();
-            float f = (float) Math.min(16, 2 + level);
+            int i = Math.min(16, 2 + level);
             BlockPos.MutableBlockPos mutable = new BlockPos.MutableBlockPos();
 
-            for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-f, -1.0D, -f), pos.offset(f, -1.0D, f))) {
-                if (blockpos.closerToCenterThan(living.position(), f)) {
+            for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-i, -1, -i), pos.offset(i, -1, i))) {
+                if (blockpos.closerToCenterThan(living.position(), i)) {
                     mutable.set(blockpos.getX(), blockpos.getY() + 1, blockpos.getZ());
                     BlockState blockstate1 = worldIn.getBlockState(mutable);
                     if (blockstate1.isAir()) {
                         BlockState blockstate2 = worldIn.getBlockState(blockpos);
                         boolean isFull = blockstate2.getBlock() == Blocks.LAVA && blockstate2.getValue(LiquidBlock.LEVEL) == 0;
-                        if (blockstate2.getMaterial() == Material.LAVA && isFull && state.canSurvive(worldIn, blockpos) && worldIn.isUnobstructed(state, blockpos, CollisionContext.empty()) && !ForgeEventFactory.onBlockPlace(living, BlockSnapshot.create(worldIn.dimension(), worldIn, blockpos), Direction.UP)) {
+                        if (isFull && state.canSurvive(worldIn, blockpos) && worldIn.isUnobstructed(state, blockpos, CollisionContext.empty()) && !ForgeEventFactory.onBlockPlace(living, BlockSnapshot.create(worldIn.dimension(), worldIn, blockpos), Direction.UP)) {
                             worldIn.setBlockAndUpdate(blockpos, state);
                             worldIn.scheduleTick(blockpos, GLOSSED_MAGMA.get(), MathHelper.nextInt(living.getRandom(), 60, 120));
                         }

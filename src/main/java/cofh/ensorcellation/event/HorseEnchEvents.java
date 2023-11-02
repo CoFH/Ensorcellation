@@ -49,7 +49,7 @@ public class HorseEnchEvents {
         if (!armor.isEmpty()) {
             // FROST WALKER
             int encFrostWalker = getItemEnchantmentLevel(FROST_WALKER, armor);
-            if (event.getSource().equals(DamageSource.HOT_FLOOR) && encFrostWalker > 0) {
+            if (event.getSource().equals(entity.damageSources().hotFloor()) && encFrostWalker > 0) {
                 event.setCanceled(true);
             }
         }
@@ -103,7 +103,7 @@ public class HorseEnchEvents {
                 // THORNS
                 int encThorns = getItemEnchantmentLevel(THORNS, armor);
                 if (ThornsEnchantment.shouldHit(encThorns, entity.getRandom())) {
-                    attacker.hurt(DamageSource.thorns(entity), ThornsEnchantment.getDamage(encThorns, MathHelper.RANDOM));
+                    attacker.hurt(entity.damageSources().thorns(entity), ThornsEnchantment.getDamage(encThorns, MathHelper.RANDOM));
                 }
                 // DISPLACEMENT
                 int encDisplacement = getItemEnchantmentLevel(DISPLACEMENT.get(), armor);

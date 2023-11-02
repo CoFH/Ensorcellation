@@ -5,6 +5,7 @@ import cofh.ensorcellation.enchantment.FireRebukeEnchantment;
 import cofh.ensorcellation.enchantment.FrostRebukeEnchantment;
 import cofh.ensorcellation.enchantment.PhalanxEnchantment;
 import cofh.ensorcellation.enchantment.override.ThornsEnchantmentImp;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -55,7 +56,7 @@ public class ShieldEnchEvents {
             // THORNS
             int encThorns = getItemEnchantmentLevel(THORNS, stack);
             if (ThornsEnchantmentImp.shouldHit(encThorns, entity.getRandom())) {
-                attacker.hurt(DamageSource.thorns(entity), ThornsEnchantment.getDamage(encThorns, entity.getRandom()));
+                attacker.hurt(entity.damageSources().thorns(entity), ThornsEnchantment.getDamage(encThorns, entity.getRandom()));
             }
             // DISPLACEMENT
             int encDisplacement = getItemEnchantmentLevel(DISPLACEMENT.get(), stack);
@@ -130,7 +131,7 @@ public class ShieldEnchEvents {
                 return false;
             }
         }
-        if (!source.isBypassArmor() && living.isBlocking()) {
+        if (!source.is(DamageTypeTags.BYPASSES_SHIELD) && living.isBlocking()) {
             Vec3 vec3d2 = source.getSourcePosition();
             if (vec3d2 != null) {
                 Vec3 vec3d = living.getViewVector(1.0F);

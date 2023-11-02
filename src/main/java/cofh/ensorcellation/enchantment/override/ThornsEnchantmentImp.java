@@ -2,7 +2,6 @@ package cofh.ensorcellation.enchantment.override;
 
 import cofh.lib.enchantment.EnchantmentOverride;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -70,7 +69,7 @@ public class ThornsEnchantmentImp extends EnchantmentOverride {
         Map.Entry<EquipmentSlot, ItemStack> stack = EnchantmentHelper.getRandomItemWith(Enchantments.THORNS, user);
         if (shouldHit(level, rand)) {
             if (attacker != null) {
-                attacker.hurt(DamageSource.thorns(user), (float) ThornsEnchantment.getDamage(level, rand));
+                attacker.hurt(user.damageSources().thorns(user), (float) ThornsEnchantment.getDamage(level, rand));
             }
             if (stack != null) {
                 (stack.getValue()).hurtAndBreak(3, user, (entity) -> entity.broadcastBreakEvent(stack.getKey()));
