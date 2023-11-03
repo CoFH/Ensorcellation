@@ -1,6 +1,8 @@
 package cofh.ensorcellation.init;
 
 import cofh.ensorcellation.enchantment.*;
+import cofh.ensorcellation.enchantment.curse.CurseFoolEnchant;
+import cofh.ensorcellation.enchantment.curse.CurseMercyEnchantment;
 import cofh.ensorcellation.enchantment.override.*;
 import cofh.lib.enchantment.EnchantmentCoFH;
 import net.minecraftforge.registries.RegistryObject;

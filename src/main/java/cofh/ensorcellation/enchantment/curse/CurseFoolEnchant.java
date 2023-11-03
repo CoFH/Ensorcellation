@@ -1,14 +1,14 @@
-package cofh.ensorcellation.enchantment;
+package cofh.ensorcellation.enchantment.curse;
 
-import cofh.core.init.CoreEnchantments;
 import cofh.lib.enchantment.EnchantmentCoFH;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
-public class CurseMercyEnchantment extends EnchantmentCoFH {
+public class CurseFoolEnchant extends EnchantmentCoFH {
 
-    public CurseMercyEnchantment() {
+    public CurseFoolEnchant() {
 
-        super(Rarity.VERY_RARE, CoreEnchantments.Types.SWORD_OR_AXE, new EquipmentSlot[]{EquipmentSlot.MAINHAND});
+        super(Rarity.VERY_RARE, EnchantmentCategory.ARMOR_HEAD, new EquipmentSlot[]{EquipmentSlot.HEAD});
         treasureEnchantment = true;
     }
 
