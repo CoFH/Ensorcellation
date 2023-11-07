@@ -1,7 +1,8 @@
 {
-    "pack": {
-        "description": "CoFH - Ensorcellation Resources",
-        "pack_format": 10,
-        "_comment": ""
-    }
+  "pack": {
+    "description": {
+      "translate": "pack.ensorcellation.description"
+    },
+    "pack_format": 15
+  }
 }
