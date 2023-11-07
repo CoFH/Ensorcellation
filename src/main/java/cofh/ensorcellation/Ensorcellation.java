@@ -1,10 +1,10 @@
 package cofh.ensorcellation;
 
-import cofh.core.config.ConfigManager;
-import cofh.core.event.CoreClientEvents;
-import cofh.ensorcellation.config.BaseEnchantmentConfig;
-import cofh.ensorcellation.config.OverrideEnchantmentConfig;
-import cofh.ensorcellation.init.EnsorcEnchantments;
+import cofh.core.client.event.CoreClientEvents;
+import cofh.core.common.config.ConfigManager;
+import cofh.ensorcellation.common.config.BaseEnchantmentConfig;
+import cofh.ensorcellation.common.config.OverrideEnchantmentConfig;
+import cofh.ensorcellation.init.registries.ModEnchantments;
 import cofh.lib.util.DeferredRegisterCoFH;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -41,7 +41,7 @@ public class Ensorcellation {
                 .addServerConfig(new OverrideEnchantmentConfig());
         CONFIG_MANAGER.setupServer();
 
-        EnsorcEnchantments.register();
+        ModEnchantments.register();
 
         //        CoreItems.registerHorseArmorOverrides();
         //        CoreItems.registerShieldOverride();
