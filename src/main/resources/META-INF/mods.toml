@@ -22,7 +22,7 @@ Suitable for both lightly and heavily modded worlds.
 [[dependencies.ensorcellation]]
 modId = "minecraft"
 mandatory = true
-versionRange = "[${mc_version},)"
+versionRange = "1.20.1"
 ordering = "AFTER"
 side = "BOTH"
 
