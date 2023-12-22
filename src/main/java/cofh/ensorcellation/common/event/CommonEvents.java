@@ -35,7 +35,6 @@ import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.TickEvent;
@@ -56,10 +55,12 @@ import java.util.List;
 import static cofh.core.util.references.EnsorcIDs.ID_REACH;
 import static cofh.core.util.references.EnsorcIDs.ID_VITALITY;
 import static cofh.ensorcellation.init.registries.ModEnchantments.*;
+import static cofh.lib.init.tags.DamageTypeTagsCoFH.IS_MAGIC;
 import static cofh.lib.util.Constants.*;
 import static cofh.lib.util.Utils.getHeldEnchantmentLevel;
 import static cofh.lib.util.Utils.getMaxEquippedEnchantmentLevel;
 import static cofh.lib.util.constants.ModIds.ID_ENSORCELLATION;
+import static net.minecraft.world.damagesource.DamageTypes.MAGIC;
 import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADDITION;
 import static net.minecraft.world.item.enchantment.Enchantments.FROST_WALKER;
 import static net.minecraft.world.level.block.Blocks.*;
@@ -85,9 +86,9 @@ public class CommonEvents {
         // MAGIC EDGE
         if (attacker instanceof LivingEntity) {
             int encMagicEdge = getHeldEnchantmentLevel((LivingEntity) attacker, MAGIC_EDGE.get());
-            if (encMagicEdge > 0 && source != attacker.damageSources().magic()) {
+            if (encMagicEdge > 0 && !source.is(IS_MAGIC)) {
                 event.setCanceled(true);
-                ForgeHooks.onLivingAttack(event.getEntity(), attacker.level.damageSources().magic(), event.getAmount());
+                event.getEntity().hurt(attacker.damageSources().source(MAGIC, attacker), event.getAmount());
             }
         }
     }
@@ -300,7 +301,7 @@ public class CommonEvents {
         }
         // MAGIC EDGE
         int encMagicEdge = getHeldEnchantmentLevel(living, MAGIC_EDGE.get());
-        if (encMagicEdge > 0 && source == attacker.damageSources().magic()) {
+        if (encMagicEdge > 0 && source.is(IS_MAGIC)) {
             event.setAmount(event.getAmount() + MagicEdgeEnchantment.getExtraDamage(encMagicEdge));
             MagicEdgeEnchantment.onHit(entity, encMagicEdge);
         }
