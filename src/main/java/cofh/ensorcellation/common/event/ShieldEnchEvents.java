@@ -4,7 +4,6 @@ import cofh.ensorcellation.common.enchantment.DisplacementEnchantment;
 import cofh.ensorcellation.common.enchantment.FireRebukeEnchantment;
 import cofh.ensorcellation.common.enchantment.FrostRebukeEnchantment;
 import cofh.ensorcellation.common.enchantment.PhalanxEnchantment;
-import cofh.ensorcellation.common.enchantment.override.ThornsEnchantmentImp;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -55,7 +54,7 @@ public class ShieldEnchEvents {
         if (canBlockDamageSource(entity, source) && attacker != null) {
             // THORNS
             int encThorns = getItemEnchantmentLevel(THORNS, stack);
-            if (ThornsEnchantmentImp.shouldHit(encThorns, entity.getRandom())) {
+            if (ThornsEnchantment.shouldHit(encThorns, entity.getRandom())) {
                 attacker.hurt(entity.damageSources().thorns(entity), ThornsEnchantment.getDamage(encThorns, entity.getRandom()));
             }
             // DISPLACEMENT

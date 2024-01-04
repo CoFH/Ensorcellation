@@ -1,4 +1,4 @@
-package cofh.ensorcellation.common.enchantment.override;
+package cofh.ensorcellation.common.enchantment.nyi;
 
 import cofh.lib.common.enchantment.EnchantmentOverride;
 import net.minecraft.world.entity.EquipmentSlot;

@@ -1,7 +1,6 @@
 package cofh.ensorcellation.common.event;
 
 import cofh.ensorcellation.common.enchantment.*;
-import cofh.ensorcellation.common.enchantment.override.FrostWalkerEnchantmentImp;
 import cofh.lib.util.Utils;
 import cofh.lib.util.constants.NBTTags;
 import cofh.lib.util.helpers.MathHelper;
@@ -24,13 +23,14 @@ import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.monster.WitherSkeleton;
 import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
+import net.minecraft.world.entity.monster.piglin.Piglin;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.food.FoodData;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.enchantment.FrostWalkerEnchantment;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -39,7 +39,6 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.*;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingTickEvent;
 import net.minecraftforge.event.entity.player.ItemFishedEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -62,7 +61,6 @@ import static cofh.lib.util.Utils.getMaxEquippedEnchantmentLevel;
 import static cofh.lib.util.constants.ModIds.ID_ENSORCELLATION;
 import static net.minecraft.world.damagesource.DamageTypes.MAGIC;
 import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADDITION;
-import static net.minecraft.world.item.enchantment.Enchantments.FROST_WALKER;
 import static net.minecraft.world.level.block.Blocks.*;
 import static net.minecraft.world.level.storage.loot.parameters.LootContextParamSets.FISHING;
 import static net.minecraft.world.level.storage.loot.parameters.LootContextParams.*;
@@ -197,6 +195,8 @@ public class CommonEvents {
                     itemSkull = new ItemStack(ZOMBIE_HEAD);
                 } else if (entity instanceof Creeper) {
                     itemSkull = new ItemStack(CREEPER_HEAD);
+                } else if (entity instanceof AbstractPiglin) {
+                    itemSkull = new ItemStack(PIGLIN_HEAD);
                 }
             }
             if (itemSkull.isEmpty()) {
@@ -315,21 +315,6 @@ public class CommonEvents {
         int encInstigating = getHeldEnchantmentLevel(living, INSTIGATING.get());
         if (encInstigating > 0 && entity.getHealth() >= entity.getMaxHealth()) {
             event.setAmount(event.getAmount() * (1 + encInstigating));
-        }
-    }
-
-    @SubscribeEvent
-    public static void handleLivingUpdateEvent(LivingTickEvent event) {
-
-        if (event.isCanceled()) {
-            return;
-        }
-        LivingEntity entity = event.getEntity();
-        // FROST WALKER
-        int encFrostWalker = getMaxEquippedEnchantmentLevel(entity, FROST_WALKER);
-        if (encFrostWalker > 0) {
-            FrostWalkerEnchantment.onEntityMoved(entity, entity.level, entity.blockPosition(), encFrostWalker);
-            FrostWalkerEnchantmentImp.freezeNearby(entity, entity.level, entity.blockPosition(), encFrostWalker);
         }
     }
 

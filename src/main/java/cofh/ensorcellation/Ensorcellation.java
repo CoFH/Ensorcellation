@@ -42,9 +42,6 @@ public class Ensorcellation {
         CONFIG_MANAGER.setupServer();
 
         ModEnchantments.register();
-
-        //        CoreItems.registerHorseArmorOverrides();
-        //        CoreItems.registerShieldOverride();
     }
 
     // region INITIALIZATION

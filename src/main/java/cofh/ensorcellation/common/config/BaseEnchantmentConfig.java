@@ -140,7 +140,7 @@ public class BaseEnchantmentConfig implements IBaseConfig {
 
         builder.push("Vitality");
         enableVitality = builder
-                .comment("If TRUE, the Vitality Enchantment is available for Chestplates.")
+                .comment("If TRUE, the Vitality Enchantment is available for Chestplates and Horse Armor.")
                 .define("Enable", true);
         treasureVitality = builder
                 .comment(treasure)

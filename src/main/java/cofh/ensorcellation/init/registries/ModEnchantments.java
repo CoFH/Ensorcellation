@@ -3,16 +3,13 @@ package cofh.ensorcellation.init.registries;
 import cofh.ensorcellation.common.enchantment.*;
 import cofh.ensorcellation.common.enchantment.curse.CurseFoolEnchant;
 import cofh.ensorcellation.common.enchantment.curse.CurseMercyEnchantment;
-import cofh.ensorcellation.common.enchantment.override.*;
 import cofh.lib.common.enchantment.EnchantmentCoFH;
 import net.minecraftforge.registries.RegistryObject;
 
 import static cofh.core.util.references.EnsorcIDs.*;
 import static cofh.ensorcellation.Ensorcellation.ENCHANTMENTS;
-import static cofh.ensorcellation.Ensorcellation.OVERRIDES;
-import static cofh.ensorcellation.common.enchantment.override.ProtectionEnchantmentImp.Type.*;
 import static cofh.lib.util.Constants.ARMOR_SLOTS;
-import static net.minecraft.world.item.enchantment.Enchantment.Rarity.*;
+import static net.minecraft.world.item.enchantment.Enchantment.Rarity.UNCOMMON;
 
 public class ModEnchantments {
 
@@ -22,23 +19,9 @@ public class ModEnchantments {
 
     public static void register() {
 
-        OVERRIDES.register(ID_PROTECTION, () -> new ProtectionEnchantmentImp(COMMON, ALL, ARMOR_SLOTS));
-        OVERRIDES.register(ID_PROTECTION_BLAST, () -> new ProtectionEnchantmentImp(RARE, EXPLOSION, ARMOR_SLOTS));
-        OVERRIDES.register(ID_PROTECTION_FALL, () -> new ProtectionEnchantmentImp(UNCOMMON, FALL, ARMOR_SLOTS));
-        OVERRIDES.register(ID_PROTECTION_FIRE, () -> new ProtectionEnchantmentImp(UNCOMMON, FIRE, ARMOR_SLOTS));
-        OVERRIDES.register(ID_PROTECTION_PROJECTILE, () -> new ProtectionEnchantmentImp(UNCOMMON, PROJECTILE, ARMOR_SLOTS));
-
-        OVERRIDES.register(ID_FIRE_ASPECT, FireAspectEnchantmentImp::new);
-        OVERRIDES.register(ID_FROST_WALKER, FrostWalkerEnchantmentImp::new);
-        OVERRIDES.register(ID_KNOCKBACK, KnockbackEnchantmentImp::new);
-        OVERRIDES.register(ID_LOOTING, LootingEnchantmentImp::new);
-        OVERRIDES.register(ID_THORNS, ThornsEnchantmentImp::new);
-
-        OVERRIDES.register(ID_MENDING, MendingEnchantmentAlt::new);
-
     }
 
-    public static final RegistryObject<EnchantmentCoFH> PROTECTION_MAGIC = ENCHANTMENTS.register(ID_PROTECTION_MAGIC, () -> new ProtectionEnchantmentImp(UNCOMMON, MAGIC, ARMOR_SLOTS));
+    public static final RegistryObject<EnchantmentCoFH> PROTECTION_MAGIC = ENCHANTMENTS.register(ID_PROTECTION_MAGIC, () -> new ProtectionEnchantmentMagic(UNCOMMON, ARMOR_SLOTS));
     public static final RegistryObject<EnchantmentCoFH> DISPLACEMENT = ENCHANTMENTS.register(ID_DISPLACEMENT, DisplacementEnchantment::new);
     public static final RegistryObject<EnchantmentCoFH> FIRE_REBUKE = ENCHANTMENTS.register(ID_FIRE_REBUKE, FireRebukeEnchantment::new);
     public static final RegistryObject<EnchantmentCoFH> FROST_REBUKE = ENCHANTMENTS.register(ID_FROST_REBUKE, FrostRebukeEnchantment::new);

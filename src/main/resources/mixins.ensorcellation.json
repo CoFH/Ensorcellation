@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "cofh.ensorcellation.mixin",
+  "refmap": "mixins.ensorcellation.refmap.json",
+  "target": "@env(DEFAULT)",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "FrostWalkerEnchantmentMixin",
+    "ThornsEnchantmentMixin"
+  ]
+}

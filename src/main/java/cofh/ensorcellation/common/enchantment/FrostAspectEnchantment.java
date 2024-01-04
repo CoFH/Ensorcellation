@@ -3,7 +3,6 @@ package cofh.ensorcellation.common.enchantment;
 import cofh.core.init.CoreEnchantments;
 import cofh.lib.common.enchantment.EnchantmentCoFH;
 import cofh.lib.util.Utils;
-import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -63,7 +62,7 @@ public class FrostAspectEnchantment extends EnchantmentCoFH {
         entity.addEffect(new MobEffectInstance(CHILLED.get(), i, level - 1, false, false));
         if (entity.level instanceof ServerLevel) {
             for (int j = 0; j < 4 * level; ++j) {
-                Utils.spawnParticles(entity.level, (SimpleParticleType) FROST.get(), entity.getX() + entity.level.random.nextDouble(), entity.getY() + 1.0D + entity.level.random.nextDouble(), entity.getZ() + entity.level.random.nextDouble(), 1, 0, 0, 0, 0);
+                Utils.spawnParticles(entity.level, FROST.get(), entity.getX() + entity.level.random.nextDouble(), entity.getY() + 1.0D + entity.level.random.nextDouble(), entity.getZ() + entity.level.random.nextDouble(), 1, 0, 0, 0, 0);
             }
         }
     }
